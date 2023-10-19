@@ -2,11 +2,9 @@ import React, { useState } from 'react'
 import { Image, ImageBackground, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native'
 import BackPageButton from '../../../components/buttons/backPageButton'
 import ButtonTwo from '../../../components/buttons/buttonTwo'
-import { useLinkTo } from '@react-navigation/native'
 
 const RegisterWithEmail = () => {
 
-    const linkTo = useLinkTo();
     const [password, setPassword] = useState("");
 
     return (

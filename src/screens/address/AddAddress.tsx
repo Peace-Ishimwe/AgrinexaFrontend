@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Image, ImageBackground, Pressable, SafeAreaView, Text, TextInput, View } from 'react-native'
+import React from 'react'
+import { ImageBackground, SafeAreaView, Text, TextInput, View } from 'react-native'
 import BackPageButton from '../../components/buttons/backPageButton'
 import ButtonTwo from '../../components/buttons/buttonTwo'
 import styled from 'styled-components/native'
@@ -12,7 +12,6 @@ const StyledScrollView = styled.ScrollView.attrs(() => ({
 
 const AddAddress = () => {
 
-    const [password, setPassword] = useState("");
 
     return (
         <SafeAreaView className='bg-white h-[100vh] flex justify-between'>
