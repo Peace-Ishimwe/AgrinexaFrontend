@@ -13,11 +13,12 @@ import RegisterWithEmail from '../screens/(auth)/register/RegisterWithEmail';
 import VerificationCode from '../screens/(auth)/verification/VerificationCode';
 import ResetPassword from '../screens/(auth)/reset-password/ResetPassword';
 import Login from '../screens/(auth)/login/Login';
+import AddAddress from '../screens/address/AddAddress';
 
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName='login' screenOptions={{ headerShown: false }} >
+      <stack.Navigator initialRouteName='addaddress' screenOptions={{ headerShown: false }} >
         <stack.Screen name="welcome" component={Welcome} />
         <stack.Screen name="onBoarding" component={OnBoarding} />
         <stack.Screen name="personalize" component={PersonalizeExperience} />
@@ -27,6 +28,7 @@ const RootNavigator = () => {
         <stack.Screen name='verificationCode' component={VerificationCode} />
         <stack.Screen name='resetpassword' component={ResetPassword} />
         <stack.Screen name='login' component={Login} />
+        <stack.Screen name='addaddress' component={AddAddress} />
       </stack.Navigator>
     </NavigationContainer>
   );
