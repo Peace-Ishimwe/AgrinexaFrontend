@@ -20,7 +20,7 @@ const ContactUs = () => {
                 </ImageBackground>
                 <View className='mt-[5vh]'>
                     <View className='w-fit ml-[10vw] flex flex-row items-center'>
-                        <View className='h-16 w-16 border-[1px] border-black'>
+                        <View className='h-16 w-16'>
                             <Image className='w-full h-full' source={require("../../assets/Socialicons/WhatsApp.png")} />
                         </View>
                         <Text className='text-[#111719] text-[18px] ml-4 font-semibold'>
@@ -28,56 +28,56 @@ const ContactUs = () => {
                         </Text>
                     </View>
                     <View className='w-fit ml-[10vw] flex flex-row items-center'>
-                        <View className='h-16 w-16 border-[1px] border-black'>
-                            <Image className='w-full h-full' source={require("../../assets/Socialicons/Google.png")} />
+                        <View className='h-16 w-16 flex items-center justify-center'>
+                            <Image className='w-10 h-10' source={require("../../assets/Socialicons/Google.png")} />
                         </View>
                         <Text className='text-[#111719] text-[18px] ml-4 font-semibold'>
                             agrinexa.farm.com
                         </Text>
                     </View>
                     <View className='w-fit ml-[10vw] flex flex-row items-center'>
-                        <View className='h-16 w-16 border-[1px] border-black'>
-                            <Image className='w-full h-full' source={require("../../assets/Socialicons/Slack.png")} />
+                        <View className='h-16 w-16 flex items-center justify-center'>
+                            <Image className='w-10 h-10' source={require("../../assets/Socialicons/Slack.png")} />
                         </View>
                         <Text className='text-[#111719] text-[18px] ml-4 font-semibold'>
                             agrinexa.farm.com
                         </Text>
                     </View>
                     <View className='w-fit ml-[10vw] flex flex-row items-center'>
-                        <View className='h-16 w-16 border-[1px] border-black'>
-                            <Image className='w-full h-full' source={require("../../assets/Socialicons/Google.png")} />
+                        <View className='h-16 w-16 flex items-center justify-center'>
+                            <Image className='w-10 h-10' source={require("../../assets/Socialicons/Google.png")} />
                         </View>
                         <Text className='text-[#111719] text-[18px] ml-4 font-semibold'>
                             agrinexa
                         </Text>
                     </View>
                     <View className='w-fit ml-[10vw] flex flex-row items-center'>
-                        <View className='h-16 w-16 border-[1px] border-black'>
-                            <Image className='w-full h-full' source={require("../../assets/Socialicons/Instagram.png")} />
+                        <View className='h-16 w-16 flex items-center justify-center'>
+                            <Image className='w-10 h-10' source={require("../../assets/Socialicons/Instagram.png")} />
                         </View>
                         <Text className='text-[#111719] text-[18px] ml-4 font-semibold'>
                             agrinexa
                         </Text>
                     </View>
                     <View className='w-fit ml-[10vw] flex flex-row items-center'>
-                        <View className='h-16 w-16 border-[1px] border-black'>
-                            <Image className='w-full h-full' source={require("../../assets/Socialicons/Facebook.png")} />
+                        <View className='h-16 w-16 flex items-center justify-center'>
+                            <Image className='w-10 h-10' source={require("../../assets/Socialicons/Facebook.png")} />
                         </View>
                         <Text className='text-[#111719] text-[18px] ml-4 font-semibold'>
                             agrinexa
                         </Text>
                     </View>
                     <View className='w-fit ml-[10vw] flex flex-row items-center'>
-                        <View className='h-16 w-16 border-[1px] border-black'>
-                            <Image className='w-full h-full' source={require("../../assets/Socialicons/LinkedIn.png")} />
+                        <View className='h-16 w-16 flex items-center justify-center'>
+                            <Image className='w-10 h-10' source={require("../../assets/Socialicons/LinkedIn.png")} />
                         </View>
                         <Text className='text-[#111719] text-[18px] ml-4 font-semibold'>
                             agrinexa
                         </Text>
                     </View>
                     <View className='w-fit ml-[10vw] flex flex-row items-center'>
-                        <View className='h-16 w-16 border-[1px] border-black'>
-                            <Image className='w-full h-full' source={require("../../assets/Socialicons/Twitter.png")} />
+                        <View className='h-16 w-16 flex items-center justify-center'>
+                            <Image className='w-10 h-10' source={require("../../assets/Socialicons/Twitter.png")} />
                         </View>
                         <Text className='text-[#111719] text-[18px] ml-4 font-semibold'>
                             agrinexa
