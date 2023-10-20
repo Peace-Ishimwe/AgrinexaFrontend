@@ -15,11 +15,12 @@ import VerificationCode from '../screens/(auth)/verification/VerificationCode';
 import ResetPassword from '../screens/(auth)/reset-password/ResetPassword';
 import Login from '../screens/(auth)/login/Login';
 import AddAddress from '../screens/address/AddAddress';
+import ContactUs from '../screens/contactUs/ContactUs';
 
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName='completedSuccessVerified' screenOptions={{ headerShown: false }} >
+      <stack.Navigator initialRouteName='contactUs' screenOptions={{ headerShown: false }} >
         <stack.Screen name="welcome" component={Welcome} />
         <stack.Screen name="onBoarding" component={OnBoarding} />
         <stack.Screen name="personalize" component={PersonalizeExperience} />
@@ -31,6 +32,7 @@ const RootNavigator = () => {
         <stack.Screen name='login' component={Login} />
         <stack.Screen name='addaddress' component={AddAddress} />
         <stack.Screen name='completedSuccessVerified' component={CompletedSuccesVerified} />
+        <stack.Screen name='contactUs' component={ContactUs}/>
       </stack.Navigator>
     </NavigationContainer>
   );
