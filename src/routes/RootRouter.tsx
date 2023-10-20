@@ -8,6 +8,7 @@ import Welcome from '../screens/welcome/Welcome';
 import OnBoarding from '../screens/onBoarding/OnBoarding';
 import PersonalizeExperience from '../screens/PersonalizeExperience/PersonalizeExperience';
 import CompletedSuccess from '../screens/completedSuccess/CompletedSuccess';
+import CompletedSuccesVerified from '../screens/completedSuccess/CompletedSuccesVerified';
 import RegisterWithPhone from '../screens/(auth)/register/RegisterWithPhone';
 import RegisterWithEmail from '../screens/(auth)/register/RegisterWithEmail';
 import VerificationCode from '../screens/(auth)/verification/VerificationCode';
@@ -18,7 +19,7 @@ import AddAddress from '../screens/address/AddAddress';
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName='addaddress' screenOptions={{ headerShown: false }} >
+      <stack.Navigator initialRouteName='completedSuccessVerified' screenOptions={{ headerShown: false }} >
         <stack.Screen name="welcome" component={Welcome} />
         <stack.Screen name="onBoarding" component={OnBoarding} />
         <stack.Screen name="personalize" component={PersonalizeExperience} />
@@ -29,6 +30,7 @@ const RootNavigator = () => {
         <stack.Screen name='resetpassword' component={ResetPassword} />
         <stack.Screen name='login' component={Login} />
         <stack.Screen name='addaddress' component={AddAddress} />
+        <stack.Screen name='completedSuccessVerified' component={CompletedSuccesVerified} />
       </stack.Navigator>
     </NavigationContainer>
   );

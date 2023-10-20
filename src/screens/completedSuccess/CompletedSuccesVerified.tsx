@@ -5,7 +5,7 @@ import { styled } from 'nativewind';
 
 const StyledPressable = styled(Pressable)
 
-const CompletedSuccess = () => {
+const CompletedSuccessVerified = () => {
     return (
         <SafeAreaView className='h-[100vh] bg-mainColor flex justify-between'>
             <View className='justify-between flex items-center'>
@@ -15,15 +15,13 @@ const CompletedSuccess = () => {
                     <Image className='mx-auto' source={require("../../assets/completedIcon.png")} />
                     <View className='pt-[2vh]'>
                         <Text className='text-[26px] font-[700] text-[#fff] text-center'>Welcome back <Text className='text-subMainColor'>Peace,</Text></Text>
-                    </View>
-                    <View className='pt-[3vh]'>
-                        <Text className='text-[#1C1B1F] text-base text-center'>
-                            Congratulations to you. You have now {"\n"} entered our farm!
+                        <Text className='text-[26px] font-[700] text-[#fff] text-center'>
+                        You are Verified!😀
                         </Text>
                     </View>
                     <View className='pt-[3vh]'>
                         <Text className='text-[#1C1B1F] text-base text-center'>
-                            Continue to view our services!
+                        Congratulations to you. You are now Verified! {"\n"} Kindly proceed to signup!
                         </Text>
                     </View>
                 </View>
@@ -35,4 +33,4 @@ const CompletedSuccess = () => {
     )
 }
 
-export default withExpoSnack(CompletedSuccess)
+export default withExpoSnack(CompletedSuccessVerified)
