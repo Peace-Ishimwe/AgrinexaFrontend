@@ -20,7 +20,7 @@ import ContactUs from '../screens/contactUs/ContactUs';
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName='contactUs' screenOptions={{ headerShown: false }} >
+      <stack.Navigator initialRouteName='welcome' screenOptions={{ headerShown: false }} >
         <stack.Screen name="welcome" component={Welcome} />
         <stack.Screen name="onBoarding" component={OnBoarding} />
         <stack.Screen name="personalize" component={PersonalizeExperience} />
