@@ -1,9 +1,8 @@
-import React, { useRef, useState } from 'react'
-import { SafeAreaView, Text, View } from 'react-native'
+import React, { useRef, useState } from 'react';
+import { SafeAreaView, Text, View, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import PagerView from 'react-native-pager-view';
 import { withExpoSnack } from 'nativewind';
-
 
 import Slide1 from './slides/Slide1';
 import Slide2 from './slides/Slide2';
@@ -34,11 +33,14 @@ const Dashboard = () => {
             pageRef.current?.setPage(currentPage - 1);
         }
     };
+
     return (
-        <SafeAreaView className='px-[2vh] bg-[#F5FDFB] h-[100vh]'>
-            <View className='h-[15vh] flex flex-row items-center justify-between'>
-                <Text className='text-[#111111] text-[21px] max-w-7/12 font-medium'>Hello, Peace Ishimwe 🌿</Text>
-                <View className='p-2 rounded-full bg-[#F3F9F6]'>
+        <SafeAreaView className="px-[2vh] bg-[#F5FDFB] h-[100vh]">
+            <View className="h-[15vh] flex flex-row items-center justify-between">
+                <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium">
+                    Hello, Peace Ishimwe 🌿
+                </Text>
+                <View className="p-2 rounded-full bg-[#F3F9F6]">
                     <Ionicons name="settings" size={28} color="#0DFF4D" />
                 </View>
             </View>
@@ -53,23 +55,66 @@ const Dashboard = () => {
                     <Slide3 back={goToPreviousPage} />
                 </View>
             </PagerView>
-            <View className='h-[57vh]'>
-                <View className='' style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-                    <View className='w-[32%]'><StatusCard /></View>
-                    <View className='w-[32%]'><StatusCard /></View>
-                    <View className='w-[32%]'><StatusCard /></View>
+            <ScrollView style={{maxHeight: '60%'}} className='mx-[-2vh]'>
+                <View className="mt-5 px-[2vh]">
+                    <View
+                        className=""
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            flexWrap: 'wrap',
+                            justifyContent: 'space-between',
+                        }}
+                    >
+                        <View className="w-[32%]">
+                            <StatusCard />
+                        </View>
+                        <View className="w-[32%]">
+                            <StatusCard />
+                        </View>
+                        <View className="w-[32%]">
+                            <StatusCard />
+                        </View>
+                    </View>
+                    <View
+                        className="mt-2"
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'stretch',
+                        }}
+                    >
+                        <View className="w-[32%]">
+                            <StatusCard />
+                        </View>
+                        <View
+                            className="w-8/12"
+                            style={{ width: '66.6%', marginLeft: 9 }}
+                        >
+                            <InfoCard />
+                        </View>
+                    </View>
+                    <View
+                        className="mt-[8px] mb-24"
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'stretch',
+                        }}
+                    >
+                        <View className="w-8/12">
+                            <InfoCard />
+                        </View>
+                        <View className="w-[32%]">
+                            <StatusCard />
+                        </View>
+                    </View>
                 </View>
-                <View className='mt-2' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'stretch' }}>
-                    <View className='w-[32%]'><StatusCard /></View>
-                    <View className='w-8/12' style={{width: '66.6%' , marginLeft: 9}}><InfoCard /></View>
-                </View>
-                <View className='mt-2' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'stretch' }}>
-                    <View className='w-8/12'><InfoCard /></View>
-                    <View className='w-[32%]'><StatusCard /></View>
-                </View>
-            </View>
+            </ScrollView>
         </SafeAreaView>
-    )
-}
+    );
+};
 
-export default withExpoSnack(Dashboard)
+export default withExpoSnack(Dashboard);

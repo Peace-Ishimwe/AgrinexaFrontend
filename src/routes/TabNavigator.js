@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Entypo, AntDesign , MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo, AntDesign , MaterialCommunityIcons , Feather , Ionicons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
 
 import Dashboard from '../screens/(dashboard)/Dashboard';
@@ -11,8 +11,6 @@ const screenOptions = {
     headerShown: false,
     tabBarStyle: {
         position: 'absolute',
-        borderTopLeftRadius: 21,
-        borderTopRightRadius: 21,
         backgroundColor: '#fff',
         position: 'absolute',
         bottom: 0,
@@ -21,8 +19,8 @@ const screenOptions = {
         height: 94,
         zIndex: 0,
     },
-    tabBarActiveTintColor: '#91C788',
-    tabBarInactiveTintColor: '#999999',
+    tabBarActiveTintColor: '#5DCCFC',
+    tabBarInactiveTintColor: '#000',
 };
 
 const TabNavigator = () => {
@@ -34,13 +32,9 @@ const TabNavigator = () => {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            <Entypo
-                                name="home"
-                                size={24}
-                                color={focused ? '#91C788' : '#999999'}
-                            />
-                            <Text style={{ fontSize: 12, color: focused ? '#91C788' : '#999999' }}>
-                                HOME
+                            <Feather name="home" size={28} color={focused ? '#5DCCFC' : '#000'} />
+                            <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
+                                Home
                             </Text>
                         </View>
                     ),
@@ -52,13 +46,9 @@ const TabNavigator = () => {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            <AntDesign
-                                name="search1"
-                                size={24}
-                                color={focused ? '#91C788' : '#999999'}
-                            />
-                            <Text style={{ fontSize: 12, color: focused ? '#91C788' : '#999999' }}>
-                                SEARCH
+                            <MaterialCommunityIcons name="google-analytics" size={28} color={focused ? '#5DCCFC' : '#000'} />
+                            <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
+                                Analysis
                             </Text>
                         </View>
                     ),
@@ -69,15 +59,8 @@ const TabNavigator = () => {
                 component={Dashboard}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            <Entypo
-                                name="camera"
-                                size={24}
-                                color={focused ? '#91C788' : '#999999'}
-                            />
-                            <Text style={{ fontSize: 12, color: focused ? '#91C788' : '#999999' }}>
-                                SCAN
-                            </Text>
+                        <View className='absolute top-[-20] bg-white p-4 rounded-full' style={{ alignItems: 'center', justifyContent: 'center' , elevation: 12 }}>
+                            <Ionicons name="alarm-outline" size={42} color={focused ? '#5DCCFC' : '#000'} />
                         </View>
                     ),
                 }}
@@ -88,13 +71,9 @@ const TabNavigator = () => {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            <Entypo
-                                name="heart"
-                                size={24}
-                                color={focused ? '#91C788' : '#999999'}
-                            />
-                            <Text style={{ fontSize: 12, color: focused ? '#91C788' : '#999999' }}>
-                                LIKE
+                            <Ionicons name="ios-settings-outline" size={28} color={focused ? '#5DCCFC' : '#000'} />
+                            <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
+                                Settings
                             </Text>
                         </View>
                     ),
@@ -106,13 +85,9 @@ const TabNavigator = () => {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            <MaterialCommunityIcons
-                                name="account"
-                                size={24}
-                                color={focused ? '#91C788' : '#999999'}
-                            />
-                            <Text style={{ fontSize: 12, color: focused ? '#91C788' : '#999999' }}>
-                                ACCOUNT
+                            <Feather name="user" size={28} color={focused ? '#5DCCFC' : '#000'} />
+                            <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
+                                Profile
                             </Text>
                         </View>
                     ),
