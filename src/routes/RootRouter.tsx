@@ -16,12 +16,12 @@ import ResetPassword from '../screens/(auth)/reset-password/ResetPassword';
 import Login from '../screens/(auth)/login/Login';
 import AddAddress from '../screens/address/AddAddress';
 import ContactUs from '../screens/contactUs/ContactUs';
-import Dashboard from '../screens/(dashboard)/Dashboard';
+import TabNavigator from './TabNavigator';
 
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName='dashboard' screenOptions={{ headerShown: false }} >
+      <stack.Navigator initialRouteName='main' screenOptions={{ headerShown: false }} >
         <stack.Screen name="welcome" component={Welcome} />
         <stack.Screen name="onBoarding" component={OnBoarding} />
         <stack.Screen name="personalize" component={PersonalizeExperience} />
@@ -34,7 +34,7 @@ const RootNavigator = () => {
         <stack.Screen name='addaddress' component={AddAddress} />
         <stack.Screen name='completedSuccessVerified' component={CompletedSuccesVerified} />
         <stack.Screen name='contactUs' component={ContactUs} />
-        <stack.Screen name='dashboard' component={Dashboard} />
+        <stack.Screen name='main' component={TabNavigator} />
       </stack.Navigator>
     </NavigationContainer>
   );

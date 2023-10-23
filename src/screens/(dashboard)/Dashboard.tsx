@@ -35,7 +35,7 @@ const Dashboard = () => {
         }
     };
     return (
-        <SafeAreaView className='px-[2vh] bg-white h-[100vh]'>
+        <SafeAreaView className='px-[2vh] bg-[#F5FDFB] h-[100vh]'>
             <View className='h-[15vh] flex flex-row items-center justify-between'>
                 <Text className='text-[#111111] text-[21px] max-w-7/12 font-medium'>Hello, Peace Ishimwe 🌿</Text>
                 <View className='p-2 rounded-full bg-[#F3F9F6]'>
@@ -53,19 +53,19 @@ const Dashboard = () => {
                     <Slide3 back={goToPreviousPage} />
                 </View>
             </PagerView>
-            <View className='h-[50vh]'>
-                <View className='' style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
-                    <View><StatusCard /></View>
-                    <View className='ml-2'><StatusCard /></View>
-                    <View className='ml-2'><StatusCard /></View>
+            <View className='h-[57vh]'>
+                <View className='' style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+                    <View className='w-[32%]'><StatusCard /></View>
+                    <View className='w-[32%]'><StatusCard /></View>
+                    <View className='w-[32%]'><StatusCard /></View>
                 </View>
-                <View className='mt-2' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'stretch' }}>
-                    <View className=''><StatusCard /></View>
-                    <View className='ml-2 w-8/12' style={{width: '66.6%' , marginLeft: 9}}><InfoCard /></View>
+                <View className='mt-2' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'stretch' }}>
+                    <View className='w-[32%]'><StatusCard /></View>
+                    <View className='w-8/12' style={{width: '66.6%' , marginLeft: 9}}><InfoCard /></View>
                 </View>
-                <View className='mt-2' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'stretch' }}>
+                <View className='mt-2' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'stretch' }}>
                     <View className='w-8/12'><InfoCard /></View>
-                    <View className='ml-2'><StatusCard /></View>
+                    <View className='w-[32%]'><StatusCard /></View>
                 </View>
             </View>
         </SafeAreaView>
