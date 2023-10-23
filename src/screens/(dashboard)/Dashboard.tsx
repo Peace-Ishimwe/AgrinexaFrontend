@@ -8,6 +8,7 @@ import { withExpoSnack } from 'nativewind';
 import Slide1 from './slides/Slide1';
 import Slide2 from './slides/Slide2';
 import Slide3 from './slides/Slide3';
+import InfoCard from './cards/InfoCard';
 
 const Dashboard = () => {
     const pageRef = useRef<PagerView | null>(null);
@@ -40,7 +41,7 @@ const Dashboard = () => {
                     <Ionicons name="settings" size={28} color="#0DFF4D" />
                 </View>
             </View>
-            <PagerView style={{ flex: 1 }} initialPage={0} ref={pageRef}>
+            <PagerView style={{ flex: 1}} initialPage={0} ref={pageRef}>
                 <View key={1}>
                     <Slide1 next={goToNextPage} />
                 </View>
@@ -51,8 +52,11 @@ const Dashboard = () => {
                     <Slide3 back={goToPreviousPage} />
                 </View>
             </PagerView>
-            <View>
-                <View style={{display: 'flex' , flexDirection: 'row'}}>
+            <View className='h-[50vh]'>
+                <View className='' style={{display: 'flex' , flexDirection: 'row' , flexWrap: 'wrap' , justifyContent: 'center'}}>
+                    <View><InfoCard /></View>
+                    <View className='ml-2'><InfoCard /></View>
+                    <View className='ml-2'><InfoCard /></View>
                 </View>
             </View>
         </SafeAreaView>
