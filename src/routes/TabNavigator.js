@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Entypo, AntDesign , MaterialCommunityIcons , Feather , Ionicons } from '@expo/vector-icons';
+import { Entypo, AntDesign, MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
 
 import Dashboard from '../screens/(dashboard)/Dashboard';
@@ -59,7 +59,16 @@ const TabNavigator = () => {
                 component={Dashboard}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View className='absolute top-[-20] bg-white p-4 rounded-full' style={{ alignItems: 'center', justifyContent: 'center' , elevation: 12 }}>
+                        <View className='absolute top-[-20] bg-white p-4 rounded-full' style={{
+                            alignItems: 'center', justifyContent: 'center', shadowColor: "#000",
+                            shadowOffset: {
+                                width: 0,
+                                height: 3,
+                            },
+                            shadowOpacity: 0.29,
+                            shadowRadius: 4.65,
+                            elevation: 7
+                        }}>
                             <Ionicons name="alarm-outline" size={42} color={focused ? '#5DCCFC' : '#000'} />
                         </View>
                     ),
