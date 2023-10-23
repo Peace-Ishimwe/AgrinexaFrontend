@@ -52,7 +52,8 @@ const Dashboard = () => {
                 </View>
             </PagerView>
             <View>
-                
+                <View style={{display: 'flex' , flexDirection: 'row'}}>
+                </View>
             </View>
         </SafeAreaView>
     )

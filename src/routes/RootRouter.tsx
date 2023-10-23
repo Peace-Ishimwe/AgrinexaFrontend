@@ -21,7 +21,7 @@ import Dashboard from '../screens/(dashboard)/Dashboard';
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName='dashboard' screenOptions={{ headerShown: false }} >
+      <stack.Navigator initialRouteName='welcome' screenOptions={{ headerShown: false }} >
         <stack.Screen name="welcome" component={Welcome} />
         <stack.Screen name="onBoarding" component={OnBoarding} />
         <stack.Screen name="personalize" component={PersonalizeExperience} />
