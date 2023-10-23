@@ -8,6 +8,7 @@ import { withExpoSnack } from 'nativewind';
 import Slide1 from './slides/Slide1';
 import Slide2 from './slides/Slide2';
 import Slide3 from './slides/Slide3';
+import StatusCard from './cards/StatusCard';
 import InfoCard from './cards/InfoCard';
 
 const Dashboard = () => {
@@ -41,7 +42,7 @@ const Dashboard = () => {
                     <Ionicons name="settings" size={28} color="#0DFF4D" />
                 </View>
             </View>
-            <PagerView style={{ flex: 1}} initialPage={0} ref={pageRef}>
+            <PagerView style={{ flex: 1 }} initialPage={0} ref={pageRef}>
                 <View key={1}>
                     <Slide1 next={goToNextPage} />
                 </View>
@@ -53,14 +54,22 @@ const Dashboard = () => {
                 </View>
             </PagerView>
             <View className='h-[50vh]'>
-                <View className='' style={{display: 'flex' , flexDirection: 'row' , flexWrap: 'wrap' , justifyContent: 'center'}}>
-                    <View><InfoCard /></View>
-                    <View className='ml-2'><InfoCard /></View>
-                    <View className='ml-2'><InfoCard /></View>
+                <View className='' style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
+                    <View><StatusCard /></View>
+                    <View className='ml-2'><StatusCard /></View>
+                    <View className='ml-2'><StatusCard /></View>
+                </View>
+                <View className='mt-2' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'stretch' }}>
+                    <View className=''><StatusCard /></View>
+                    <View className='ml-2 w-8/12' style={{width: '66.6%' , marginLeft: 9}}><InfoCard /></View>
+                </View>
+                <View className='mt-2' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'stretch' }}>
+                    <View className='w-8/12'><InfoCard /></View>
+                    <View className='ml-2'><StatusCard /></View>
                 </View>
             </View>
         </SafeAreaView>
     )
 }
 
-export default withExpoSnack(Dashboard) 
+export default withExpoSnack(Dashboard)

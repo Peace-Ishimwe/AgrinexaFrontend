@@ -1,23 +1,63 @@
-import React from 'react'
-import { Text, View } from 'react-native'
-import { HumidityIcon } from '../../../assets/icons/icons'
-
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import { HumidityIcon } from '../../../assets/icons/icons';
 
 const InfoCard = () => {
-
   return (
-    <View className='bg-[#fff] pl-3 py-3 w-[120px] rounded-xl' style={{
-      shadowColor: '#0C9559',
-      shadowOffset: { width: 0, height: 8 },
-      shadowOpacity: 0.13,
-      shadowRadius: 24,
-      elevation: 12
-    }}>
-      <View className='mb-1'><HumidityIcon /></View>
-      <Text className='text-textSubMainColor text-base'>Humidity</Text>
-      <Text className='mt-1 text-[#06492C] font-bold text-xl'>74%</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Nutrient Level</Text>
+      <View style={styles.row}>
+        <View style={styles.iconContainer}>
+          <HumidityIcon />
+        </View>
+        <View>
+          <Text style={styles.text}>5 grams left</Text>
+        </View>
+      </View>
+      <View style={styles.row}>
+        <View style={styles.iconContainer}>
+          <HumidityIcon />
+        </View>
+        <View>
+          <Text style={styles.text}>5 grams left</Text>
+        </View>
+      </View>
     </View>
-  )
-}
+  );
+};
 
-export default InfoCard
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+    paddingLeft: 9,
+    paddingVertical: 9,
+    width: '100%',
+    borderRadius: 8,
+    shadowColor: '#0C9559',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.13,
+    shadowRadius: 24,
+    elevation: 12,
+  },
+  title: {
+    color: '#9796A1',
+    fontSize: 16,
+    marginBottom: 9
+  },
+  row: {
+    flexDirection: 'row',
+    marginTop: 3,
+  },
+  iconContainer: {
+    marginBottom: 1,
+  },
+  text: {
+    marginTop: 1,
+    marginLeft: 2,
+    color: '#06492C',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+});
+
+export default InfoCard;

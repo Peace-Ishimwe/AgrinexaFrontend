@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons'
 import React from 'react'
 import { View, Image, Text, Pressable } from 'react-native'
 import { styled } from 'nativewind'
+import { MainShadow } from '../../../assets/styles/shadow';
 
 interface onBoardingProps {
     back: () => void;
@@ -14,7 +15,7 @@ const Slide3: React.FC<onBoardingProps> = ({ back }) => {
         <View className='flex items-center'>
             <View className='w-full relative'>
                 <Image source={require('../../../assets/dashboard/sensorReminder.png')} className='rounded-2xl w-[100%]' />
-                <StyledView className='absolute bg-white w-10/12 flex flex-row items-center bottom-[-40] rounded-xl px-5 py-3 left-[8%] shadow-xl'>
+                <StyledView className='absolute bg-white w-10/12 flex flex-row items-center bottom-[-40] rounded-xl px-5 py-3 left-[8%]' style={MainShadow}>
                     <Pressable onPress={back} className='p-2 rounded-full bg-[#F3F9F6]'>
                         <Ionicons name="chevron-back" size={24} color="#0C9359" />
                     </Pressable>
