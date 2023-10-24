@@ -14,10 +14,10 @@ const Slide1: React.FC<onBoardingProps> = ({ next }) => {
     return (
         <View className='flex items-center'>
             <View className='w-full relative'>
-                <Image source={require('../../../assets/dashboard/smartIrrigation.png')} className='rounded-2xl w-[100%]' />
+                <Image source={require('../../../assets/dashboard/waterTracking.png')} className='rounded-2xl w-[100%]' />
                 <StyledView className='absolute bg-white w-10/12 flex flex-row justify-between items-center bottom-[-40] rounded-xl px-5 py-3 left-[8%]' style={MainShadow}>
                     <View>
-                        <Text className='text-xl font-medium'>Smart Irrigation</Text>
+                        <Text className='text-xl font-medium'>Water Tracking</Text>
                         <Text className='text-textMainColor'>
                             You can irrigate your crops{'\n'}anywhere you're!
                         </Text>
