@@ -3,6 +3,7 @@ import { Image, ImageBackground, Pressable, SafeAreaView, Text, TextInput, View 
 import BackPageButton from '../../../components/buttons/backPageButton'
 import ButtonTwo from '../../../components/buttons/buttonTwo'
 import styled from 'styled-components/native'
+import { useLinkTo } from '@react-navigation/native'
 
 const StyledScrollView = styled.ScrollView.attrs(() => ({
     contentContainerStyle: {
@@ -13,6 +14,7 @@ const StyledScrollView = styled.ScrollView.attrs(() => ({
 const Login = () => {
 
     const [password, setPassword] = useState("");
+    const linkTo = useLinkTo();
 
     return (
         <SafeAreaView className='bg-white h-[100vh] flex justify-between'>
@@ -45,8 +47,12 @@ const Login = () => {
                         <View className='mt-10'>
                             <ButtonTwo name='SIGN UP' />
                         </View>
-                        <View className='mt-6'>
-                            <Text className='text-center text-textMainColor text-[18px]'>Already have an account? <Text className='text-mainColor'> Login</Text></Text>
+                        <View className='mt-6 flex flex-row items-center justify-center'>
+                            <Text className='text-center text-textMainColor text-[18px]'>Don't have an account?
+                            </Text>
+                            <Pressable onPress={() => linkTo("/registerwithphone")}>
+                                <Text style={{ color: '#34A853', fontSize: 18 }} className='text-mainColor  ml-2 text-[18px]'>Signup</Text>
+                            </Pressable>
                         </View>
                     </View>
                 </View>

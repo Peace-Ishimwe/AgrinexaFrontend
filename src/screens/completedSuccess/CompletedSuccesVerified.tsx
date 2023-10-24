@@ -2,10 +2,12 @@ import React from 'react'
 import { Image, ImageBackground, Pressable, SafeAreaView, Text, View } from 'react-native'
 import { withExpoSnack } from 'nativewind';
 import { styled } from 'nativewind';
+import { useLinkTo } from '@react-navigation/native';
 
 const StyledPressable = styled(Pressable)
 
 const CompletedSuccessVerified = () => {
+    const linkTo = useLinkTo();
     return (
         <SafeAreaView className='h-[100vh] bg-mainColor flex justify-between'>
             <View className='justify-between flex items-center'>
@@ -27,7 +29,7 @@ const CompletedSuccessVerified = () => {
                 </View>
             </View>
             <View className='h-[20vh] w-full flex items-center justify-center px-[35]'>
-                <StyledPressable className='bg-subMainColor shadow-2xl py-[20px] w-full rounded-[15px]'><Text className='text-center text-white font-[700] text-base'>CONTINUE</Text></StyledPressable>
+                <StyledPressable onPress={()=> linkTo("/addaddress")} className='bg-subMainColor shadow-2xl py-[20px] w-full rounded-[15px]'><Text className='text-center text-white font-[700] text-base'>CONTINUE</Text></StyledPressable>
             </View>
         </SafeAreaView>
     )

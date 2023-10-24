@@ -36,7 +36,7 @@ const Welcome = () => {
                     </Pressable>
                 </View>
                 <View className='mt-[20px] flex flex-col justify-center'>
-                    <Pressable className='rounded-full border-[1px] mb-4 border-[#fff] py-3 flex items-center bg-[#ffffff35]'>
+                    <Pressable onPress={()=>{linkTo("/registerwithemail")}} className='rounded-full border-[1px] mb-4 border-[#fff] py-3 flex items-center bg-[#ffffff35]'>
                         <Text className='text-[#fff] text-base'>Start with Email</Text>
                     </Pressable>
                     <Pressable onPress={()=> linkTo("/registerwithphone")} className='rounded-full border-[1px] border-[#fff] py-3 flex items-center bg-[#ffffff35]'>

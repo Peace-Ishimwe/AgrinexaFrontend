@@ -127,7 +127,7 @@ const VerificationCode = () => {
             <Text className='text-center text-textMainColor text-[18px]'>Didn't recieve the code<Text className='text-mainColor'>  Please resend</Text></Text>
           </View>
           <View className='mt-10'>
-            <ButtonTwo name='SEND' />
+            <ButtonTwo onPress={()=> linkTo("/completedSuccessVerified")} name='SEND' />
           </View>
         </View>
       </View>
