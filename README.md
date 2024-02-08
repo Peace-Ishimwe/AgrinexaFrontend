@@ -1,1 +1,0 @@
-# AgriNexa# AgrinexaFrontend

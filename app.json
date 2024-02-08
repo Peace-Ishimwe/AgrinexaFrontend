@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AgriNexa",
-    "slug": "AgriNexa",
+    "name": "AgrinexaMobileFrontend",
+    "slug": "AgrinexaMobileFrontend",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,9 +10,6 @@
       "image": "./assets/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
@@ -23,17 +20,11 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.peaceishimwe.AgriNexa"
+        "backgroundColor": "#ffffff"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "2d57cb76-1c16-4c2e-a8c2-267f940c71f1"
-      }
     }
   }
 }
