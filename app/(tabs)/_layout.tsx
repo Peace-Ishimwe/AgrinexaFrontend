@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
 import { ParamListBase, RouteProp, useLinkTo } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
-import Dashboard from './Dashboard';
-import Home from './Home';
-import Weather from './Weather';
-import FarmDashBoard from './FarmDashboard/[FarmId]';
 import { getData } from '@/utils/storage';
-import UserProfile from './UserProfile';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { MainShadow } from '@/assets/styles/shadow';
 import { DrawerNavigatorProvider } from '@/context/DrawerContext';
 import CustomDrawer from '@/container/CustomDrawer';
 
-const Tab = createBottomTabNavigator();
 
 const screenOptions = ({ route }: { route: RouteProp<ParamListBase, string>; navigation: any }): BottomTabNavigationOptions => ({
   tabBarShowLabel: false,
@@ -59,7 +53,7 @@ const TabLayout = () => {
       <CustomDrawer>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <BottomSheetModalProvider>
-            <Tabs initialRouteName='Homestack' screenOptions={screenOptions}>
+            <Tabs initialRouteName='Home' screenOptions={screenOptions}>
               <Tabs.Screen
                 name="Home"
                 options={{

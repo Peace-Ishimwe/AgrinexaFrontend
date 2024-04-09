@@ -22,15 +22,16 @@ export default function RootLayout() {
 }
 function RootLayoutNav() {
   const { isAuthenticated } = useAuth()
+  console.log(isAuthenticated);
   return (
     <ContextProviders >
       {
-        isAuthenticated ? (
+        !isAuthenticated ? (
           <Stack initialRouteName='(tabs)' screenOptions={{ headerShown: false }}>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           </Stack>
         ) : (
-          <Stack initialRouteName='Welcome' screenOptions={{ headerShown: false }} >
+          <Stack initialRouteName='' screenOptions={{ headerShown: false }} >
             <Stack.Screen name='(auth)' />
             <Stack.Screen name='Welcome' />
             <Stack.Screen name='AddAddress' />

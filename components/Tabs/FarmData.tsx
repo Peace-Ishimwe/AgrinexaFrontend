@@ -10,9 +10,9 @@ interface props {
     handlOnPress: () => void;
 }
 
-const FarmData: React.FC<props> = ({ handlOnPress }) => {
-    const { selectedField } = useFarmContext()
 
+const FarmData: React.FC<props> = ({ handlOnPress }) => {
+    const { selectedField } = useFarmContext();
     return (
         <View style={{ marginTop: 20, paddingHorizontal: windowHeight * 2 / 100 }}>
             <View
@@ -56,7 +56,7 @@ const FarmData: React.FC<props> = ({ handlOnPress }) => {
                 </View>
             </View>
             <View
-                className="mb-[170px]"
+                className="mb-[120px]"
                 style={{
                     display: 'flex',
                     flexDirection: 'row',

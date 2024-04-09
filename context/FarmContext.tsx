@@ -6,7 +6,6 @@ import { authorizedAPI } from '../utils/api'; // Assume authorizedAPI is a pre-c
 interface FarmContextType {
     selectedField: any;
     setSelectedField: (field: any) => void;
-    RetrieveFarmsData: () => void;
 }
 
 // Create a context with default values
@@ -31,17 +30,9 @@ const FarmProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         retrieveSelectedField();
     }, []);
 
-    const RetrieveFarmsData = async () => {
-        try {
-            const response = await authorizedAPI.get('/fields');
-            return response;
-        } catch (error) {
-            console.error('Error updating selected field:', error);
-        }
-    };
 
     return (
-        <FarmContext.Provider value={{ selectedField, setSelectedField, RetrieveFarmsData }}>
+        <FarmContext.Provider value={{ selectedField,setSelectedField }}>
             {children}
         </FarmContext.Provider>
     );
