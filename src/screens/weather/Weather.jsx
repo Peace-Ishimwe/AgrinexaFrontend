@@ -176,7 +176,7 @@ const Weather = () => {
                   </View>
                   <View className='w-6/12'>
                     {/* Weather image */}
-                    <View className='mr-[21px] flex items-center'>
+                    <View style={{display: "flex"}} className='mr-[21px] flex items-center'>
                       <Image
                         source={weatherImages[current?.condition?.text] || { uri: "https:" + current?.condition?.icon }}
                         className='w-[71px] h-[71px]'

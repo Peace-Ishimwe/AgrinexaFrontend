@@ -54,7 +54,6 @@ const RootNavigator = () => {
         {isLoggedIn ? (
           <>
             <stack.Screen name="main" component={TabNavigator} />
-
           </>
         ) : (
           <>
