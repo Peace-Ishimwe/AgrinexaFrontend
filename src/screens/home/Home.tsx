@@ -1,9 +1,12 @@
 import React, { useRef, useState } from 'react';
-import { SafeAreaView, Text, View, ScrollView, Image, Pressable, Dimensions } from 'react-native';
+import { SafeAreaView, Text, View, ScrollView, Image, Pressable, Dimensions, ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { withExpoSnack } from 'nativewind';
+import { withExpoSnack, styled } from 'nativewind';
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
+import { MainShadow } from '../../assets/styles/shadow';
+import ButtonOne from '../../components/buttons/buttonOne';
+import { useLinkTo } from '@react-navigation/native';
 
 
 const getGreeting = () => {
@@ -17,8 +20,17 @@ const getGreeting = () => {
     }
 };
 
-const Dashboard = () => {
+const StyledView = styled(View)
+
+const Home = () => {
     const greeting = getGreeting();
+    const additionalStyles: ViewStyle = {
+        position: "absolute",
+        right: 0
+    };
+    const combinedStyles: ViewStyle = { ...MainShadow, ...additionalStyles };
+
+    const linkTo = useLinkTo()
 
     return (
         <SafeAreaView className="px-[2vh] bg-[#FFF] h-[100vh]">
@@ -36,7 +48,7 @@ const Dashboard = () => {
                     <View style={{ position: "absolute" }} className='w-[10px] h-[10px] rounded-full bg-[#0DFF4D] right-0'></View>
                 </View>
             </View>
-            <View className='w-full relative mt-[48px]'>
+            <View style={{ marginTop: 48 }} className='w-full relative'>
                 <Image source={require('../../assets/Home/Group481825.jpg')} className='rounded-2xl w-[100%]' />
                 <View className='absolute'>
                     <Text className='text-[20px] font-medium text-[#FF0000]'>Alert!</Text>
@@ -47,24 +59,42 @@ const Dashboard = () => {
                 </Pressable>
             </View>
             <View style={{ position: "relative", marginTop: 48 }} >
-                <View style={{ width: "50%", position: "relative" }}>
-                    <Image source={require("../../assets/Home/Process.jpg")} className='h-fit' style={{ width: "100%", height: windowWidth / 2 - (windowHeight * 2 / 100) }} />
-                    <View style={{ position: "absolute" }} className='top-[55%] left-[15%] -translate-x-1/2 -translate-y-1/2'>
-                        <Text className='text-[#384144]'>Tomato farm</Text>
-                        <Text className='text-white text-[20px] font-semibold ml-[20px]'>1000ml</Text>
+                <View style={{ flexDirection: "row", alignItems: "flex-end", justifyContent: "space-between" }}>
+                    <View style={{ width: "50%", position: "relative" }}>
+                        <Image source={require("../../assets/Home/Process.jpg")} className='h-fit' style={{ width: "100%", height: windowWidth / 2 - (windowHeight * 2 / 100) }} />
+                        <View style={{ position: "absolute" }} className='top-[55%] left-[15%] -translate-x-1/2 -translate-y-1/2'>
+                            <Text className='text-[#384144]'>Tomato farm</Text>
+                            <Text className='text-white text-[20px] font-semibold ml-[20px]'>1000ml</Text>
+                        </View>
+                    </View>
+                    <View style={MainShadow} className='rounded-md mb-[20px] p-[10px] w-[118px]'>
+                        <Text className='font-medium text-[16px] text-[#90A5B4] text-center'>Maximum</Text>
+                        <Text style={{ fontWeight: "600", fontSize: 21, color: "black", textAlign: "center", marginTop: 6 }} className=''>100ml</Text>
                     </View>
                 </View>
-                <View>
-                    <View>
-                        <Text className='font-medium text'>9:30 AM</Text>
-                        <View></View>
+                <View style={combinedStyles} className='rounded-md p-[10px] w-[50%]'>
+                    <View style={{ flexDirection: "row", alignItems: "center", gap: 24 }} className=''>
+                        <Text className='font-medium text-[16px] text-[#90A5B4]'>9:30 AM</Text>
+                        <View className='w-[44px] h-[4px] bg-[#90A5B4] rounded-full'></View>
+                    </View>
+                    <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }} className='mt-[12px]'>
+                        <Text className='font-semibold text-[21px] text-black'>2000ml</Text>
+                        <Text style={{ color: "#90A5B4" }} className='text-[17px] font-medium'>
+                            10%
+                        </Text>
                     </View>
                 </View>
             </View>
+            <View style={{marginTop: 48}} className='flex items-center justify-center px-[35]'>
+                <Pressable onPress={() => linkTo("/dashboard")} className='bg-mainColor py-[20px] w-full rounded-[15px]'><Text className='text-center text-white font-[700] text-base'>GO TO DASHBOARD</Text></Pressable>
+            </View>
+            <Text style={{ width: 220, textAlign: "center", color: "#90A5B4", fontWeight: "500", fontSize: 14, marginTop: 12 }} className='mx-auto'>
+                You got 50% of today’s goal, keep focus on your health!
+            </Text>
         </SafeAreaView>
     );
 };
 
 
 
-export default withExpoSnack(Dashboard);
+export default withExpoSnack(Home);
