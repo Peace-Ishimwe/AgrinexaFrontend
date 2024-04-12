@@ -30,7 +30,7 @@ const SearchSection = ({ showSearch, locations, toggleSearch, handleTextDebounce
       </View>
       {
         locations.length > 0 && showSearch ? (
-          <View style={{ position: "absolute", top: 64 }} className='w-full bg-gray-100 rounded-3xl overflow-hidden'>
+          <View style={{ position: "absolute", top: 64, zIndex: 999 }} className='w-full bg-gray-100 rounded-3xl overflow-hidden'>
             {locations.map((loc, index) => {
               const showBorder = index + 1 !== locations.length;
               const borderStyle = showBorder
@@ -152,64 +152,65 @@ const Weather = () => {
   const handleTextDebounce = useCallback(debounce(handleSearch, 200), [])
   const { location, current } = weather;
   return (
-    <View className='flex-1 relative'>
+    <View className='flex-1 relative bg-white'>
       <StatusBar style='light' />
       {/* <Image blurRadius={30} source={require("../../assets/Weather/images/bg.png")} className='absolute w-full h-full' /> */}
-      {/* {
+      {
         loading ? (
           <View className='flex-1 flex-row justify-center items-center'>
             <Progress.CircleSnail thickness={10} size={120} color={"#0bb3b2"} />
           </View>
-        ) : ( */}
+        ) : (
+          <View>
+            <ImageBackground source={require("../../assets/Weather/images/bgWeather.png")}>
+              {/* Search section */}
+              <SafeAreaView>
+                <SearchSection locations={locations} showSearch={showSearch} toggleSearch={toggleSearch} handleTextDebounce={handleTextDebounce} handleLocation={handleLocation} />
+                <View style={{ flexDirection: "row", justifyContent: "space-between", alignContent: "center", alignItems: "center" }} className='mx-4'>
+                  <View>
+                    <Text className='text-white text-xl ml-2'><Text className='text-2xl text-white font-semibold'>{location?.name},</Text> {location?.country}</Text>
+                    <Text style={{ fontSize: 90, color: "white" }} className='font-semibold mx-[21px]'>
+                      {current?.temp_c}&#176;
+                    </Text>
+                  </View>
+                  <View className='w-6/12'>
+                    {/* Weather image */}
+                    <View className='mr-[21px] flex items-center'>
+                      <Image
+                        source={weatherImages[current?.condition?.text]}
+                        className='w-[71px] h-[71px]'
+                      />
+                      <Text className="text-center  text-white text-xl tracking-widest">
+                        {current?.condition?.text}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </SafeAreaView>
+            </ImageBackground>
+            {/* Stats */}
+            <View className='mt-[12px]' style={{ marginHorizontal: 16 }}>
+              <View style={{ flexDirection: 'row', justifyContent: "space-between" }} className='w-full'>
 
-      <ImageBackground source={require("../../assets/Weather/images/bgWeather.png")}>
-        {/* Search section */}
-        <SafeAreaView>
-          <SearchSection locations={locations} showSearch={showSearch} toggleSearch={toggleSearch} handleTextDebounce={handleTextDebounce} handleLocation={handleLocation} />
-          <View style={{ flexDirection: "row", justifyContent: "space-between", alignContent: "center", alignItems: "center" }} className='mx-4'>
-            <View>
-              <Text className='text-white text-xl ml-2'><Text className='text-2xl text-white font-semibold'>Kigali,</Text> Rwanda</Text>
-              <Text style={{ fontSize: 90, color: "white" }} className='font-semibold mx-[21px]'>
-                {current?.temp_c}&#176;
-              </Text>
-            </View>
-            <View className='w-6/12'>
-              {/* Weather image */}
-              <View className='mr-[21px] flex items-center'>
-                <Image
-                  source={weatherImages[current?.condition?.text]}
-                  className='w-[71px] h-[71px]'
-                />
-                <Text className="text-center  text-white text-xl tracking-widest">
-                  {current?.condition?.text}
-                </Text>
+                <StatsCard icon={<Feather name="wind" size={24} color="black" />} name={"Wind speed"} value={current?.wind_kph + "km/h"} />
+                <StatsCard icon={<Feather name="cloud-rain" size={24} color="black" />} name={"Precipitation"} value={current?.precip_mm + "mm"} />
+
+              </View>
+              <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: 16 }} className='w-full'>
+                <StatsCard icon={<MaterialIcons name="waves" size={24} color="black" />} name={"Pressure"} value={current?.pressure_mb + "mb"} />
+                <StatsCard icon={<Feather name="sun" size={24} color="black" />} name={"UV Index"} value={current?.uv} />
               </View>
             </View>
+            {/* forecast for next days */}
+            <ForecastNextDaysSection weather={weather} />
+            {/* sun rise and sun set */}
+            <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: 16 }} className='w-full px-4'>
+              <StatsCard icon={<Feather name="sunrise" size={24} color="black" />} name={"Sun rise"} value={weather?.forecast?.forecastday[0]?.astro?.sunrise} />
+              <StatsCard icon={<Feather name="sunset" size={24} color="black" />} name={"Sun set"} value={weather?.forecast?.forecastday[0]?.astro?.sunset} />
+            </View>
           </View>
-        </SafeAreaView>
-      </ImageBackground>
-      {/* Stats */}
-      <View className='mt-[12px]' style={{ marginHorizontal: 16 }}>
-        <View style={{ flexDirection: 'row', justifyContent: "space-between" }} className='w-full'>
-
-          <StatsCard icon={<Feather name="wind" size={24} color="black" />} name={"Wind speed"} value={current?.wind_kph + "km/h"} />
-          <StatsCard icon={<Feather name="cloud-rain" size={24} color="black" />} name={"Precipitation"} value={current?.precip_mm + "mm"} />
-
-        </View>
-        <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: 16 }} className='w-full'>
-          <StatsCard icon={<MaterialIcons name="waves" size={24} color="black" />} name={"Pressure"} value={current?.pressure_mb + "mb"} />
-          <StatsCard icon={<Feather name="sun" size={24} color="black" />} name={"UV Index"} value={current?.uv} />
-        </View>
-      </View>
-      {/* forecast for next days */}
-      <ForecastNextDaysSection weather={weather} />
-      {/* sun rise and sun set */}
-      <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: 16 }} className='w-full px-4'>
-        <StatsCard icon={<Feather name="sunrise" size={24} color="black" />} name={"Sun rise"} value={weather?.forecast?.forecastday[0]?.astro?.sunrise} />
-        <StatsCard icon={<Feather name="sunset" size={24} color="black" />} name={"Sun set"} value={weather?.forecast?.forecastday[0]?.astro?.sunset} />
-      </View>
-      {/* ) */}
-      {/* } */}
+        )
+      }
     </View>
   )
 }
