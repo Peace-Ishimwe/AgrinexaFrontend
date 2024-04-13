@@ -5,7 +5,6 @@ import { withExpoSnack, styled } from 'nativewind';
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import { MainShadow } from '../../assets/styles/shadow';
-import ButtonOne from '../../components/buttons/buttonOne';
 import { useLinkTo } from '@react-navigation/native';
 
 

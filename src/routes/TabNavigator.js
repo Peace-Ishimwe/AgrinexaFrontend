@@ -2,11 +2,24 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 
 import Dashboard from '../screens/(dashboard)/Dashboard';
 import Home from '../screens/home/Home';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+const HomeStack = () => {
+    return (
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="home" component={Home} />
+                <Stack.Screen name="dashboard" component={Dashboard} />
+            </Stack.Navigator>
+    );
+};
+
 const screenOptions = {
     tabBarShowLabel: false,
     headerShown: false,
@@ -28,8 +41,8 @@ const TabNavigator = () => {
     return (
         <Tab.Navigator screenOptions={screenOptions}>
             <Tab.Screen
-                name="home"
-                component={Home}
+                name="homestack"
+                component={HomeStack}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
