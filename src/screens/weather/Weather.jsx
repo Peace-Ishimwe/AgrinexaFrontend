@@ -79,9 +79,10 @@ const ForecastNextDaysSection = ({ weather }) => {
             return (
               <View key={index} style={styles.container} className='space-y-2'>
                 <Image
-                  source={weatherImages[item?.day?.condition?.text]}
+                  source={weatherImages[item?.day?.condition?.text] || { uri: `https:${item?.day?.condition?.icon}` }}
                   style={styles.image}
                 />
+
                 <Text style={styles.text}>{dayName}</Text>
                 <Text style={[styles.text, styles.boldText]}> {item?.day?.avgtemp_c}&#176;</Text>
               </View>
@@ -162,14 +163,14 @@ const Weather = () => {
           </View>
         ) : (
           <View>
-            <ImageBackground source={require("../../assets/Weather/images/bgWeather.png")}>
+            <ImageBackground source={require("../../assets/Weather/images/bgWeather.png")} style={{ paddingBottom: 18 }}>
               {/* Search section */}
               <SafeAreaView>
                 <SearchSection locations={locations} showSearch={showSearch} toggleSearch={toggleSearch} handleTextDebounce={handleTextDebounce} handleLocation={handleLocation} />
                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignContent: "center", alignItems: "center" }} className='mx-4'>
                   <View>
                     <Text className='text-white text-xl ml-2'><Text className='text-2xl text-white font-semibold'>{location?.name},</Text> {location?.country}</Text>
-                    <Text style={{ fontSize: 90, color: "white" }} className='font-semibold mx-[21px]'>
+                    <Text style={{ fontSize: 64, color: "white" }} className='font-semibold mx-[21px]'>
                       {current?.temp_c}&#176;
                     </Text>
                   </View>
@@ -177,7 +178,7 @@ const Weather = () => {
                     {/* Weather image */}
                     <View className='mr-[21px] flex items-center'>
                       <Image
-                        source={weatherImages[current?.condition?.text]}
+                        source={weatherImages[current?.condition?.text] || { uri: "https:" + current?.condition?.icon }}
                         className='w-[71px] h-[71px]'
                       />
                       <Text className="text-center  text-white text-xl tracking-widest">
@@ -204,7 +205,7 @@ const Weather = () => {
             {/* forecast for next days */}
             <ForecastNextDaysSection weather={weather} />
             {/* sun rise and sun set */}
-            <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: 16 }} className='w-full px-4'>
+            <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: 0 }} className='w-full px-4'>
               <StatsCard icon={<Feather name="sunrise" size={24} color="black" />} name={"Sun rise"} value={weather?.forecast?.forecastday[0]?.astro?.sunrise} />
               <StatsCard icon={<Feather name="sunset" size={24} color="black" />} name={"Sun set"} value={weather?.forecast?.forecastday[0]?.astro?.sunset} />
             </View>
