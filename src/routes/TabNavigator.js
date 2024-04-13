@@ -80,7 +80,7 @@ const TabNavigator = () => {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            <Ionicons name="ios-settings-outline" size={28} color={focused ? '#5DCCFC' : '#000'} />
+                            <Ionicons name="settings-outline" size={28} color={focused ? '#5DCCFC' : '#000'} />
                             <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
                                 Settings
                             </Text>

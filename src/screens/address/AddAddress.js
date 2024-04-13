@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { ImageBackground, SafeAreaView, Text, TextInput, View, StyleSheet } from 'react-native'
+import { ImageBackground, SafeAreaView, Text, TextInput, View, StyleSheet, StatusBar } from 'react-native'
 import BackPageButton from '../../components/buttons/backPageButton'
 import ButtonTwo from '../../components/buttons/buttonTwo'
 import styled from 'styled-components/native'
@@ -30,9 +30,10 @@ const AddAddress = () => {
     }, []);
     return (
         <SafeAreaView className='bg-white h-[100vh] flex justify-between'>
+            <StatusBar translucent backgroundColor={'transparent'} />
             <StyledScrollView className='h-full bg-white flex'>
                 <View>
-                    <ImageBackground className='h-[20vh] px-[2vh] pt-[4vh]' source={require("../../assets/authBgImage.png")}>
+                    <ImageBackground className='h-[20vh] px-[2vh] pt-[6vh]' source={require("../../assets/authBgImage.png")}>
                         <View className='flex flex-col items-start'>
                             <BackPageButton />
                             <Text className='text-[#fff] text-[37px] mt-4'>Add your Address</Text>
@@ -105,7 +106,7 @@ const AddAddress = () => {
                         </View>
                         <View className='mt-5'>
                             <Text aria-label="Label for Username" className='text-base text-textMainColor font-medium' nativeID="email">Street (Include farm index number)</Text>
-                            <TextInput keyboardType='email-address' style={{ borderRadius: 10 }} aria-labelledby="email" className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl' placeholder='ex: Peace Ishimwe' defaultValue='Street' />
+                            <TextInput keyboardType='email-address' style={{ borderRadius: 10 }} aria-labelledby="email" className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl' placeholder='ex: KN 197' defaultValue='Street' />
                         </View>
                         <View className='my-10'>
                             <ButtonTwo name='SAVE' />
