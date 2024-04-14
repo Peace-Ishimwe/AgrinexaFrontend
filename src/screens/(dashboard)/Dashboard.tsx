@@ -36,7 +36,7 @@ const Dashboard = () => {
 
     return (
         <SafeAreaView className="px-[2vh] bg-[#F5FDFB] h-[100vh]">
-            <View className="h-[15vh] flex flex-row items-center justify-between">
+            <View className="h-[15vh] pt-[3vh] flex flex-row items-center justify-between">
                 <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium">
                     Hello, Peace Ishimwe 🌿
                 </Text>

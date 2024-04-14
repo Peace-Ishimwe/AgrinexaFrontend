@@ -4,6 +4,7 @@ import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
 
 import Dashboard from '../screens/(dashboard)/Dashboard';
+import Home from '../screens/home/Home';
 
 const Tab = createBottomTabNavigator();
 const screenOptions = {
@@ -28,7 +29,7 @@ const TabNavigator = () => {
         <Tab.Navigator screenOptions={screenOptions}>
             <Tab.Screen
                 name="home"
-                component={Dashboard}
+                component={Home}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -59,16 +60,19 @@ const TabNavigator = () => {
                 component={Dashboard}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View className='absolute top-[-20] bg-white p-4 rounded-full' style={{
-                            alignItems: 'center', justifyContent: 'center', shadowColor: "#000",
-                            shadowOffset: {
-                                width: 0,
-                                height: 3,
-                            },
-                            shadowOpacity: 0.29,
-                            shadowRadius: 4.65,
-                            elevation: 7
-                        }}>
+                        <View
+                            className='top-[-20] bg-white p-4 rounded-full'
+                            style={{
+                                position: "absolute",
+                                alignItems: 'center', justifyContent: 'center', shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 3,
+                                },
+                                shadowOpacity: 0.29,
+                                shadowRadius: 4.65,
+                                elevation: 7
+                            }}>
                             <Ionicons name="alarm-outline" size={42} color={focused ? '#5DCCFC' : '#000'} />
                         </View>
                     ),

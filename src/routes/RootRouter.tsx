@@ -21,7 +21,7 @@ import TabNavigator from './TabNavigator';
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName='addaddress' screenOptions={{ headerShown: false }} >
+      <stack.Navigator initialRouteName='main' screenOptions={{ headerShown: false }} >
         <stack.Screen name="welcome" component={Welcome} />
         <stack.Screen name="onBoarding" component={OnBoarding} />
         <stack.Screen name="personalize" component={PersonalizeExperience} />
