@@ -152,6 +152,7 @@ const Weather = () => {
 
   const handleTextDebounce = useCallback(debounce(handleSearch, 200), [])
   const { location, current } = weather;
+  
   return (
     <View className='flex-1 relative bg-white'>
       <StatusBar style='light' />
@@ -159,7 +160,7 @@ const Weather = () => {
       {
         loading ? (
           <View className='flex-1 flex-row justify-center items-center'>
-            <Progress.CircleSnail thickness={10} size={120} color={"#0bb3b2"} />
+            <Progress.CircleSnail thickness={6} size={80} color={"#34A853"} />
           </View>
         ) : (
           <View>
@@ -206,7 +207,7 @@ const Weather = () => {
               {/* forecast for next days */}
               <ForecastNextDaysSection weather={weather} />
               {/* sun rise and sun set */}
-              <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: 0, marginBottom: 340 }} className='w-full px-4'>
+              <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: 0, marginBottom: 340, paddingHorizontal: 16 }} className='w-full'>
                 <StatsCard icon={<Feather name="sunrise" size={24} color="black" />} name={"Sun rise"} value={weather?.forecast?.forecastday[0]?.astro?.sunrise} />
                 <StatsCard icon={<Feather name="sunset" size={24} color="black" />} name={"Sun set"} value={weather?.forecast?.forecastday[0]?.astro?.sunset} />
               </View>

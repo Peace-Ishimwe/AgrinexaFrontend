@@ -1,15 +1,18 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { HumidityIcon } from '../../../assets/icons/icons';
 
-const StatusCard = () => {
+interface StatusCardProps {
+  iconName: string;
+  value: string;
+  icon: React.ReactNode;
+}
+
+const StatusCard = ({ iconName, value, icon }: StatusCardProps) => {
   return (
     <View style={styles.container}>
-      <View style={styles.iconContainer}>
-        <HumidityIcon />
-      </View>
-      <Text style={styles.title}>Humidity</Text>
-      <Text style={styles.value}>74%</Text>
+      <View style={styles.iconContainer}>{icon}</View>
+      <Text style={styles.title}>{iconName}</Text>
+      <Text style={styles.value}>{value}</Text>
     </View>
   );
 };

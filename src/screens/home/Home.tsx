@@ -67,7 +67,7 @@ const Home = () => {
                                 <Text className='text-white text-[20px] font-semibold ml-[20px]'>1000ml</Text>
                             </View>
                         </View>
-                        <View style={MainShadow} className='rounded-md mb-[20px] p-[10px] w-[118px]'>
+                        <View style={MainShadow} className='rounded-md p-[10px] w-[118px]'>
                             <Text className='font-medium text-[16px] text-[#90A5B4] text-center'>Maximum</Text>
                             <Text style={{ fontWeight: "600", fontSize: 21, color: "black", textAlign: "center", marginTop: 6 }} className=''>100ml</Text>
                         </View>
@@ -86,7 +86,27 @@ const Home = () => {
                     </View>
                 </View>
                 <View style={{ marginTop: 48, display: "flex" }} className='items-center justify-center px-[35]'>
-                    <Pressable onPress={() => linkTo("/dashboard")} style={{backgroundColor: "#34A853", paddingVertical: 20}} className='bg-mainColor py-[20px] w-full rounded-[15px]'><Text className='text-center text-white font-[700] text-base'>GO TO DASHBOARD</Text></Pressable>
+                    <Pressable
+                        onPress={() => linkTo("/dashboard")}
+                        style={{
+                            backgroundColor: "#34A853",
+                            paddingVertical: 20,
+                            width: "100%",
+                            borderRadius: 15,
+                        }}
+                    >
+                        <Text
+                            style={{
+                                textAlign: "center",
+                                color: "white",
+                                fontWeight: "700",
+                                fontSize: 16,
+                            }}
+                        >
+                            GO TO DASHBOARD
+                        </Text>
+                    </Pressable>
+
                 </View>
                 <Text style={{ width: 220, textAlign: "center", color: "#90A5B4", fontWeight: "500", fontSize: 14, marginTop: 12, marginBottom: 120 }} className='mx-auto'>
                     You got 50% of today’s goal, keep focus on your health!
