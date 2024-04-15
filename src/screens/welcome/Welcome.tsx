@@ -1,12 +1,48 @@
-import React from 'react'
-import { ImageBackground, Pressable, View, Text, Image, SafeAreaView } from 'react-native'
+import React, { useState } from 'react'
+import { ImageBackground, Pressable, View, Text, Image, SafeAreaView, StatusBar, StatusBarStyle } from 'react-native'
 import { useLinkTo } from '@react-navigation/native'
-
+const STYLES = ['default', 'dark-content', 'light-content'] as const;
+const TRANSITIONS = ['fade', 'slide', 'none'] as const;
 const Welcome = () => {
     const linkTo = useLinkTo();
+    const [hidden, setHidden] = useState(false);
+    const [statusBarStyle, setStatusBarStyle] = useState<StatusBarStyle>(
+        STYLES[0],
+    );
+    const [statusBarTransition, setStatusBarTransition] = useState<
+        'fade' | 'slide' | 'none'
+    >(TRANSITIONS[0]);
+
+    const changeStatusBarVisibility = () => setHidden(!hidden);
+
+    const changeStatusBarStyle = () => {
+        const styleId = STYLES.indexOf(statusBarStyle) + 1;
+        if (styleId === STYLES.length) {
+            setStatusBarStyle(STYLES[0]);
+        } else {
+            setStatusBarStyle(STYLES[styleId]);
+        }
+    };
+
+    const changeStatusBarTransition = () => {
+        const transition = TRANSITIONS.indexOf(statusBarTransition) + 1;
+        if (transition === TRANSITIONS.length) {
+            setStatusBarTransition(TRANSITIONS[0]);
+        } else {
+            setStatusBarTransition(TRANSITIONS[transition]);
+        }
+    };
     return (
-        <SafeAreaView>
-            <ImageBackground source={require("../../assets/Welcome.png")} className='h-[100vh] px-[35]'>
+        <SafeAreaView style={{ flex: 1 }}>
+            <ImageBackground source={require("../../assets/Welcome.png")} style={{ flex: 1 }} className='px-[35]'>
+            <StatusBar
+                animated={true}
+                barStyle={statusBarStyle}
+                showHideTransition={statusBarTransition}
+                translucent
+                backgroundColor="transparent"
+                hidden={hidden}
+            />
                 <View className='flex flex-row justify-end h-[10vh] items-end'>
                     <Pressable onPress={() => linkTo("/onBoarding")} className='bg-white px-[16] py-[8] rounded-full'>
                         <Text className='text-mainColor font-semibold'>skip</Text>
@@ -20,7 +56,7 @@ const Welcome = () => {
                         <Text className='text-[18px] font-medium text-white leading-[27px]'>Make Easy Farming with fast soil & {"\n"}water management system .</Text>
                     </View>
                 </View>
-                <View style={{flexDirection: 'row'}} className='mt-[20px] items-center gap-x-3 justify-center'>
+                <View style={{ flexDirection: 'row' }} className='mt-[20px] items-center gap-x-3 justify-center'>
                     <View className='h-[1] bg-white w-3/12'></View>
                     <Text className='text-white text-base'>sign in with</Text>
                     <View className='h-[1] bg-white w-3/12'></View>
@@ -36,10 +72,10 @@ const Welcome = () => {
                     </Pressable>
                 </View>
                 <View className='mt-[20px] flex flex-col justify-center'>
-                    <Pressable onPress={()=>{linkTo("/registerwithemail")}} className='rounded-full border-[1px] mb-4 border-[#fff] py-3 flex items-center bg-[#ffffff35]'>
+                    <Pressable onPress={() => { linkTo("/registerwithemail") }} className='rounded-full border-[1px] mb-4 border-[#fff] py-3 flex items-center bg-[#ffffff35]'>
                         <Text className='text-[#fff] text-base'>Start with Email</Text>
                     </Pressable>
-                    <Pressable onPress={()=> linkTo("/registerwithphone")} className='rounded-full border-[1px] border-[#fff] py-3 flex items-center bg-[#ffffff35]'>
+                    <Pressable onPress={() => linkTo("/registerwithphone")} className='rounded-full border-[1px] border-[#fff] py-3 flex items-center bg-[#ffffff35]'>
                         <Text className='text-[#fff] text-base'>Start with Phone</Text>
                     </Pressable>
                 </View>
