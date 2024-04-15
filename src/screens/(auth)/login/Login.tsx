@@ -35,6 +35,7 @@ const Login = () => {
                 storeData("token2", refresh_token),
                 storeData("user", user)
             ]);
+            linkTo("/main")
         } catch (error) {
             console.error('Error posting data:', error);
         }

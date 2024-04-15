@@ -76,6 +76,7 @@ const Dashboard = () => {
                     deleteData("token")
                     deleteData("token2")
                     deleteData("user")
+                    linkTo("/welcome")
                 }} className="p-[8px] rounded-full bg-[#F3F9F6]">
                     <Ionicons name="settings" size={28} color="#0DFF4D" />
                 </Pressable>
