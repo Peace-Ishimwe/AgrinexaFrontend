@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView, Text, View, ScrollView, Image, Pressable, Dimensions, ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { withExpoSnack, styled } from 'nativewind';
@@ -6,6 +6,7 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import { MainShadow } from '../../assets/styles/shadow';
 import { useLinkTo } from '@react-navigation/native';
+import { getData } from '../../utils/storage';
 
 
 const getGreeting = () => {
@@ -30,6 +31,20 @@ const Home = () => {
     const combinedStyles: ViewStyle = { ...MainShadow, ...additionalStyles };
 
     const linkTo = useLinkTo()
+    const [user, setUser] = useState<{ name: string; email: string } | null>(
+        null
+    );
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const user = await getData("user");
+                setUser(user);
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        };
+        fetchUserData();
+    }, []);
 
     return (
         <SafeAreaView className="px-[2vh] bg-[#FFF] h-[100vh]">
@@ -39,7 +54,7 @@ const Home = () => {
                         {greeting},
                     </Text>
                     <Text className="text-[#111111] text-[21px] max-w-7/12 font-semibold">
-                        Castella!
+                    {user?.name} 🌿
                     </Text>
                 </View>
                 <View className="p-2 rounded-full bg-[#F3F9F6] relative">

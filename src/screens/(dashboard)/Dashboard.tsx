@@ -96,7 +96,7 @@ const Dashboard = () => {
                     <Slide3 back={goToPreviousPage} />
                 </View>
             </PagerView>
-            <ScrollView style={{ maxHeight: "47%" }} className="mx-[-2vh]">
+            <ScrollView style={{ maxHeight: "53%" }} className="mx-[-2vh]">
                 {loading ? (
                     <View style={{ display: "flex" }} className="items-center justify-center h-[100px]">
                         <Text className="text-gray-600 text-xl">Loading...</Text>

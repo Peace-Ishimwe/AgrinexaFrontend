@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView, Text, View, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Entypo, Ionicons } from '@expo/vector-icons';
 import PagerView from 'react-native-pager-view';
 import { withExpoSnack } from 'nativewind';
 import Slide1 from './slides/Slide1';
@@ -56,7 +56,7 @@ const FarmDashboard = () => {
         <SafeAreaView className="px-[2vh] bg-[#F5FDFB] h-[100vh]">
             <View className="h-[15vh] pt-[3vh] flex flex-row items-center justify-between">
                 <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium">
-                {selectedField?.name} 🌿
+                    {selectedField?.name} 🌿
                 </Text>
                 <View className="p-2 rounded-full bg-[#F3F9F6]">
                     <Ionicons name="settings" size={28} color="#0DFF4D" />
@@ -73,10 +73,10 @@ const FarmDashboard = () => {
                     <Slide3 back={goToPreviousPage} />
                 </View>
             </PagerView>
-            {/* <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium text-center">
+            <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium text-center">
                 {selectedField?.name}
-            </Text> */}
-            <ScrollView style={{ maxHeight: '47%' }} className='mx-[-2vh]'>
+            </Text>
+            <ScrollView style={{ maxHeight: '53%' }} className='mx-[-2vh]'>
                 <View className="mt-5 px-[2vh]">
                     <View
                         className=""
@@ -88,13 +88,13 @@ const FarmDashboard = () => {
                         }}
                     >
                         <View className="w-[31%]">
-                            <StatusCard icon={<MaterialCommunityIcons name="longitude" size={28} color="#0DFF4D" />} iconName='Longitude' />
+                            <StatusCard icon={<MaterialCommunityIcons name="longitude" size={28} color="#0DFF4D" />} iconName='Longitude' value={selectedField?.long} />
                         </View>
                         <View className="w-[31%]">
-                            <StatusCard icon={<MaterialCommunityIcons name="latitude" size={28} color="#0DFF4D" />} iconName='Latitude' />
+                            <StatusCard icon={<MaterialCommunityIcons name="latitude" size={28} color="#0DFF4D" />} iconName='Latitude' value={selectedField?.lat} />
                         </View>
                         <View className="w-[31%]">
-                            <StatusCard icon={<MaterialIcons name="photo-size-select-large" size={28} color="#0DFF4D" />} iconName='Farm size' />
+                            <StatusCard icon={<MaterialIcons name="photo-size-select-large" size={28} color="#0DFF4D" />} iconName='Farm size' value={selectedField?.size} />
                         </View>
                     </View>
                     <View
@@ -108,13 +108,13 @@ const FarmDashboard = () => {
                         }}
                     >
                         <View className="w-[31%]">
-                            <StatusCard icon={<MaterialCommunityIcons name="longitude" size={28} color="#0DFF4D" />} iconName='Longitude' />
+                            <StatusCard icon={<FontAwesome5 name="temperature-high" size={28} color="#0DFF4D" />} iconName='Temperature' />
                         </View>
                         <View className="w-[31%]">
-                            <StatusCard icon={<MaterialCommunityIcons name="latitude" size={28} color="#0DFF4D" />} iconName='Latitude' />
+                            <StatusCard icon={<Entypo name="drop" size={28} color="#0DFF4D" />} iconName='Moisture' />
                         </View>
                         <View className="w-[31%]">
-                            <StatusCard icon={<MaterialIcons name="photo-size-select-large" size={28} color="#0DFF4D" />} iconName='Farm size' />
+                            <StatusCard icon={<MaterialIcons name="waves" size={28} color="#0DFF4D" />} iconName='Humidity' />
                         </View>
                     </View>
                     <View
@@ -131,7 +131,7 @@ const FarmDashboard = () => {
                             <InfoCard />
                         </View>
                         <View className="w-[31%]">
-                            <StatusCard icon={<MaterialCommunityIcons name="longitude" size={28} color="#0DFF4D" />} iconName='Longitude' />
+                            <StatusCard icon={<MaterialIcons name="sensors" size={28} color="#0DFF4D" />} iconName='Sensor status' value='ON' />
                         </View>
                     </View>
                 </View>
