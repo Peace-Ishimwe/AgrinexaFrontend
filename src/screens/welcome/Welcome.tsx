@@ -20,7 +20,7 @@ const Welcome = () => {
                         <Text className='text-[18px] font-medium text-white leading-[27px]'>Make Easy Farming with fast soil & {"\n"}water management system .</Text>
                     </View>
                 </View>
-                <View className='mt-[20px] flex flex-row items-center gap-x-3 justify-center'>
+                <View style={{flexDirection: 'row'}} className='mt-[20px] items-center gap-x-3 justify-center'>
                     <View className='h-[1] bg-white w-3/12'></View>
                     <Text className='text-white text-base'>sign in with</Text>
                     <View className='h-[1] bg-white w-3/12'></View>
