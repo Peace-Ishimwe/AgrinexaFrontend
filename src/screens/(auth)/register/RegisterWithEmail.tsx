@@ -16,14 +16,16 @@ const RegisterWithEmail: React.FC = () => {
     const linkTo = useLinkTo();
     const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm<FormData>();
     const onSubmit = async (data: FormData) => {
-        try {
-          const response = await axios.post(process.env.EXPO_PUBLIC_BACKEND_URL as string + "/auth/register", data);
-          console.log('Response from server:', response.data);
-          // Optionally, you can handle success responses here
-        } catch (error) {
-          console.error('Error posting data:', error);
-          // Optionally, you can handle error responses here
-        }
+        console.log(data)
+        // try {
+        //   const response = await axios.post(process.env.EXPO_PUBLIC_BACKEND_URL as string + "/auth/register", data);
+        //   console.log('Response from server:', response.data);
+        //   // Optionally, you can handle success responses here
+        //   linkTo("/addaddress")
+        // } catch (error) {
+        //   console.error('Error posting data:', error);
+        //   // Optionally, you can handle error responses here
+        // }
       };
 
     const onError: SubmitErrorHandler<FormData> = (errors, e) => {

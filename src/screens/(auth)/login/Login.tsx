@@ -4,6 +4,8 @@ import BackPageButton from '../../../components/buttons/backPageButton'
 import ButtonTwo from '../../../components/buttons/buttonTwo'
 import styled from 'styled-components/native'
 import { useLinkTo } from '@react-navigation/native'
+import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
+import axios from 'axios'
 
 const StyledScrollView = styled.ScrollView.attrs(() => ({
     contentContainerStyle: {
@@ -11,10 +13,30 @@ const StyledScrollView = styled.ScrollView.attrs(() => ({
     },
 }))``;
 
-const Login = () => {
 
-    const [password, setPassword] = useState("");
+interface FormData {
+    email: string;
+    password: string;
+}
+const Login = () => {
     const linkTo = useLinkTo();
+    const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm<FormData>();
+    const onSubmit = async (data: FormData) => {
+        console.log(data)
+        try {
+          const response = await axios.post(process.env.EXPO_PUBLIC_BACKEND_URL as string + "/auth/login", data);
+          console.log('Response from server:', response.data);
+          // Optionally, you can handle success responses here
+          linkTo("/addaddress")
+        } catch (error) {
+          console.error('Error posting data:', error);
+          // Optionally, you can handle error responses here
+        }
+      };
+
+    const onError: SubmitErrorHandler<FormData> = (errors, e) => {
+        return console.log(errors)
+    }
 
     return (
         <SafeAreaView className='bg-white h-[100vh] flex justify-between'>
@@ -31,17 +53,35 @@ const Login = () => {
                         <Text className='text-subMainColor text-[28px] font-semibold'>AgriNexa!</Text>
                         <View className='mt-5'>
                             <Text aria-label="Label for Username" className='text-base text-textMainColor font-medium' nativeID="email">E-mail</Text>
-                            <TextInput keyboardType='email-address' aria-labelledby="email" className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl' placeholder='peaceishimwem@gmail.com' />
+                            <Controller
+                                control={control}
+                                render={({ field: {onChange, value} }) => (
+                                    <TextInput keyboardType='email-address'
+                                        aria-labelledby="email" className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl' placeholder='peaceishimwem@gmail.com' 
+                                        onChangeText={value => onChange(value)}
+                                        value={value}
+                                    />
+                                )}
+                                name='email'
+                                rules={{ required: 'You must enter your email', pattern: { value: /^\S+@\S+$/i, message: 'Enter a valid email address' } }}
+                            />
                         </View>
                         <View className='mt-5'>
                             <Text aria-label="Label for Username" className='text-base text-textMainColor font-medium' nativeID="password">Password</Text>
-                            <TextInput
-                                placeholder="* * * * * * * * "
-                                value={password}
-                                onChangeText={val => setPassword(val)}
-                                className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl'
-                                secureTextEntry={true}
-                                aria-accessibilityLabelledBy={"password"}
+                            <Controller
+                                control={control}
+                                render={({ field: { onChange, value } }) => (
+                                    <TextInput
+                                        placeholder="* * * * * * * * "
+                                        className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl'
+                                        secureTextEntry={true}
+                                        aria-accessibilityLabelledBy={"password"}
+                                        onChangeText={value => onChange(value)}
+                                        value={value}
+                                    />
+                                )}
+                                name="password"
+                                rules={{ required: 'You must enter your password' }}
                             />
                         </View>
                         <View className='mt-10'>
