@@ -5,6 +5,8 @@ import { useLinkTo } from '@react-navigation/native';
 import BackPageButton from '../../../components/buttons/backPageButton';
 import ButtonTwo from '../../../components/buttons/buttonTwo';
 import axios from 'axios';
+import { storeData } from '../../../utils/storage';
+import { unauthorizedAPI } from '../../../utils/api';
 
 interface FormData {
     name: string;
@@ -14,19 +16,26 @@ interface FormData {
 
 const RegisterWithEmail: React.FC = () => {
     const linkTo = useLinkTo();
+    const [loading,setLoading] = useState(false)
     const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm<FormData>();
     const onSubmit = async (data: FormData) => {
-        console.log(data)
-        // try {
-        //   const response = await axios.post(process.env.EXPO_PUBLIC_BACKEND_URL as string + "/auth/register", data);
-        //   console.log('Response from server:', response.data);
-        //   // Optionally, you can handle success responses here
-        //   linkTo("/addaddress")
-        // } catch (error) {
-        //   console.error('Error posting data:', error);
-        //   // Optionally, you can handle error responses here
-        // }
+        setLoading(true)
+        try {
+          const response = await unauthorizedAPI.post(`/auth/register`, data);
+          const { access_token, refresh_token } = response.data;
+          await Promise.all([
+            storeData("token", access_token),
+            storeData("token2", refresh_token)  
+          ]);
+      
+          linkTo("/addaddress");
+        } catch (error) {
+          console.error('Error posting data:', error);
+        }
+      
+        setLoading(false);
       };
+      
 
     const onError: SubmitErrorHandler<FormData> = (errors, e) => {
         return console.log(errors)
@@ -52,7 +61,7 @@ const RegisterWithEmail: React.FC = () => {
                                 control={control}
                                 render={({ field: { onChange, value } }) => (
                                     <TextInput keyboardType='default'
-                                        aria-labelledby="fullName" className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl' placeholder='ex: Peace Ishimwe'
+                                        aria-labelledby="name" className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl' placeholder='ex: Peace Ishimwe'
                                         onChangeText={value => onChange(value)}
                                         value={value}
                                     />
@@ -96,7 +105,7 @@ const RegisterWithEmail: React.FC = () => {
                             />
                         </View>
                         <View className='mt-10'>
-                            <ButtonTwo name='SIGN UP' onPress={handleSubmit(onSubmit)} />
+                            <ButtonTwo name='SIGN UP' onPress={handleSubmit(onSubmit)} loading={loading} />
                         </View>
                         <View className='mt-6 flex flex-row items-center justify-center'>
                             <Text className='text-center text-textMainColor text-[18px]'>Already have an account?

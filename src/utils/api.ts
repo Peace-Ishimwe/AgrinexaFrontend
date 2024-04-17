@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_URL = 'https://example.com/api';
+const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
 const commonHeaders = {
   'Content-Type': 'application/json',
 };
