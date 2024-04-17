@@ -15,10 +15,9 @@ interface FormData {
 const RegisterWithEmail: React.FC = () => {
     const linkTo = useLinkTo();
     const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm<FormData>();
-    
     const onSubmit = async (data: FormData) => {
         try {
-          const response = await axios.post(process.env.EXPO_PUBLIC_BACKEND_PORT as string + "/auth/register", data);
+          const response = await axios.post(process.env.EXPO_PUBLIC_BACKEND_URL as string + "/auth/register", data);
           console.log('Response from server:', response.data);
           // Optionally, you can handle success responses here
         } catch (error) {
