@@ -22,10 +22,11 @@ const RegisterWithEmail: React.FC = () => {
         setLoading(true)
         try {
           const response = await unauthorizedAPI.post(`/auth/register`, data);
-          const { access_token, refresh_token } = response.data;
+          const { access_token, refresh_token,user } = response.data;
           await Promise.all([
             storeData("token", access_token),
-            storeData("token2", refresh_token)  
+            storeData("token2", refresh_token) , 
+            storeData("user", user)  
           ]);
       
           linkTo("/addaddress");

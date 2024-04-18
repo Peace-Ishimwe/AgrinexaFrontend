@@ -6,6 +6,8 @@ import styled from 'styled-components/native'
 import { useLinkTo } from '@react-navigation/native'
 import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
 import axios from 'axios'
+import { unauthorizedAPI } from '../../../utils/api'
+import { storeData } from '../../../utils/storage'
 
 const StyledScrollView = styled.ScrollView.attrs(() => ({
     contentContainerStyle: {
@@ -20,18 +22,24 @@ interface FormData {
 }
 const Login = () => {
     const linkTo = useLinkTo();
+    const[loading,setLoading] = useState(false)
     const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm<FormData>();
     const onSubmit = async (data: FormData) => {
-        console.log(data)
+        setLoading(true)
         try {
-          const response = await axios.post(process.env.EXPO_PUBLIC_BACKEND_URL as string + "/auth/login", data);
-          console.log('Response from server:', response.data);
-          // Optionally, you can handle success responses here
-          linkTo("/addaddress")
+          const response = await unauthorizedAPI.post(`/auth/login`, data);
+          const { access_token, refresh_token,user } = response.data;
+          await Promise.all([
+            storeData("token", access_token),
+            storeData("token2", refresh_token) , 
+            storeData("user", user)  
+          ]);
+      
+          linkTo("/main");
         } catch (error) {
           console.error('Error posting data:', error);
-          // Optionally, you can handle error responses here
         }
+        setLoading(false);
       };
 
     const onError: SubmitErrorHandler<FormData> = (errors, e) => {
@@ -85,7 +93,7 @@ const Login = () => {
                             />
                         </View>
                         <View className='mt-10'>
-                            <ButtonTwo name='SIGN UP' />
+                            <ButtonTwo name='SIGN UP' onPress={handleSubmit(onSubmit)} loading={loading} />
                         </View>
                         <View className='mt-6 flex flex-row items-center justify-center'>
                             <Text className='text-center text-textMainColor text-[18px]'>Don't have an account?

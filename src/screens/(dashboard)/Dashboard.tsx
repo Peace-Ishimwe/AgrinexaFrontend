@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView, Text, View, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import PagerView from 'react-native-pager-view';
@@ -9,16 +9,30 @@ import Slide2 from './slides/Slide2';
 import Slide3 from './slides/Slide3';
 import StatusCard from './cards/StatusCard';
 import InfoCard from './cards/InfoCard';
+import { getData } from '../../utils/storage';
 
 const Dashboard = () => {
     const pageRef = useRef<PagerView | null>(null);
     const [currentPage, setCurrentPage] = useState(0);
+    const [user,setUser] = useState<{name:string,email:string} | null>(null)
 
     const handlePageChange = (pageNumber: number) => {
         if (pageNumber >= 0 && pageNumber <= 2) {
             setCurrentPage(pageNumber);
         }
     };
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+          try {
+            const user = await getData("user");
+            setUser(user);
+          } catch (error) {
+            console.error('Error fetching user data:', error);
+          }
+        };
+        fetchUserData();
+      }, []);
 
     const goToNextPage = () => {
         if (currentPage < 2) {
@@ -38,7 +52,7 @@ const Dashboard = () => {
         <SafeAreaView className="px-[2vh] bg-[#F5FDFB] h-[100vh]">
             <View className="h-[15vh] flex flex-row items-center justify-between">
                 <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium">
-                    Hello, Peace Ishimwe 🌿
+                    Hello, {user?.name} 🌿
                 </Text>
                 <View className="p-2 rounded-full bg-[#F3F9F6]">
                     <Ionicons name="settings" size={28} color="#0DFF4D" />
