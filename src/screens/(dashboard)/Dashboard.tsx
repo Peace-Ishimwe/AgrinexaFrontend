@@ -55,7 +55,7 @@ const Dashboard = () => {
                     <Slide3 back={goToPreviousPage} />
                 </View>
             </PagerView>
-            <ScrollView style={{maxHeight: '55%'}} className='mx-[-2vh]'>
+            <ScrollView style={{ maxHeight: '55%' }} className='mx-[-2vh]'>
                 <View className="mt-5 px-[2vh]">
                     <View
                         className=""
@@ -96,7 +96,7 @@ const Dashboard = () => {
                         </View>
                     </View>
                     <View
-                        className="mt-[8px] mb-24"
+                        className="mt-[8px] mb-28"
                         style={{
                             display: 'flex',
                             flexDirection: 'row',

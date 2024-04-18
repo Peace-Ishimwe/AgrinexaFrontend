@@ -16,7 +16,7 @@
     "@react-navigation/native-stack": "^6.9.17",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
-    "expo": "^50.0.15",
+    "expo": "^50.0.17",
     "expo-image": "~1.10.6",
     "expo-status-bar": "~1.11.1",
     "nativewind": "^2.0.11",
