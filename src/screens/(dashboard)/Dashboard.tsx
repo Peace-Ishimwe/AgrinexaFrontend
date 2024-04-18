@@ -9,7 +9,7 @@ import Slide2 from "./slides/Slide2";
 import Slide3 from "./slides/Slide3";
 import StatusCard from "./cards/StatusCard";
 import InfoCard from "./cards/InfoCard";
-import { getData } from "../../utils/storage";
+import { deleteData, getData } from "../../utils/storage";
 import { authorizedAPI } from "../../utils/api";
 import { Image } from "react-native";
 import { useLinkTo } from "@react-navigation/native";
@@ -76,9 +76,13 @@ const Dashboard = () => {
         <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium">
           Hello, {user?.name} 🌿
         </Text>
-        <View className="p-2 rounded-full bg-[#F3F9F6]">
+        <Pressable onPress={()=>{
+          deleteData("token")
+          deleteData("token2")
+          deleteData("user")
+        }} className="p-2 rounded-full bg-[#F3F9F6]">
           <Ionicons name="settings" size={28} color="#0DFF4D" />
-        </View>
+        </Pressable>
       </View>
       <PagerView style={{ flex: 1 }} initialPage={0} ref={pageRef}>
         <View key={1}>

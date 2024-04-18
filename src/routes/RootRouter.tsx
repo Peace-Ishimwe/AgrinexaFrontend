@@ -51,13 +51,7 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       <stack.Navigator initialRouteName={isLoggedIn ? 'main' : 'main'} screenOptions={{ headerShown: false }}>
-        {isLoggedIn ? (
-          <>
             <stack.Screen name="main" component={TabNavigator} />
-
-          </>
-        ) : (
-          <>
             <stack.Screen name="welcome" component={Welcome} />
             <stack.Screen name="onBoarding" component={OnBoarding} />
             <stack.Screen name="personalize" component={PersonalizeExperience} />
@@ -71,8 +65,6 @@ const RootNavigator = () => {
             <stack.Screen name='completedSuccessVerified' component={CompletedSuccesVerified} />
             <stack.Screen name='contactUs' component={ContactUs} />
         <stack.Screen name='weather' component={Weather} />
-          </>
-        )}
       </stack.Navigator>
     </NavigationContainer>
   );

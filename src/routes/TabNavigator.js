@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useLinkTo } from '@react-navigation/native';
 
 import Dashboard from '../screens/(dashboard)/Dashboard';
 import Home from '../screens/home/Home';
 import Weather from '../screens/weather/Weather';
+import { getData } from '../utils/storage';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -39,6 +40,23 @@ const screenOptions = {
 };
 
 const TabNavigator = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const linkTo = useLinkTo()
+  
+    useEffect(() => {
+      const checkLoginStatus = async () => {
+        try {
+          const token = await getData("token");
+          if(!token) linkTo("/login");
+        } catch (error) {
+          console.error('Error checking login status:', error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      checkLoginStatus();
+    }, []);
     return (
         <Tab.Navigator initialRouteName='search' screenOptions={screenOptions}>
             <Tab.Screen
