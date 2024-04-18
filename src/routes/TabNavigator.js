@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import Dashboard from '../screens/(dashboard)/Dashboard';
 import Home from '../screens/home/Home';
+import Weather from '../screens/weather/Weather';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -39,7 +40,7 @@ const screenOptions = {
 
 const TabNavigator = () => {
     return (
-        <Tab.Navigator screenOptions={screenOptions}>
+        <Tab.Navigator initialRouteName='search' screenOptions={screenOptions}>
             <Tab.Screen
                 name="homestack"
                 component={HomeStack}
@@ -56,7 +57,7 @@ const TabNavigator = () => {
             />
             <Tab.Screen
                 name="search"
-                component={Dashboard}
+                component={Weather}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
