@@ -2,10 +2,25 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 
 import Dashboard from '../screens/(dashboard)/Dashboard';
+import Home from '../screens/home/Home';
+import Weather from '../screens/weather/Weather';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+const HomeStack = () => {
+    return (
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="home" component={Home} />
+                <Stack.Screen name="dashboard" component={Dashboard} />
+            </Stack.Navigator>
+    );
+};
+
 const screenOptions = {
     tabBarShowLabel: false,
     headerShown: false,
@@ -25,10 +40,10 @@ const screenOptions = {
 
 const TabNavigator = () => {
     return (
-        <Tab.Navigator screenOptions={screenOptions}>
+        <Tab.Navigator initialRouteName='search' screenOptions={screenOptions}>
             <Tab.Screen
-                name="home"
-                component={Dashboard}
+                name="homestack"
+                component={HomeStack}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -42,7 +57,7 @@ const TabNavigator = () => {
             />
             <Tab.Screen
                 name="search"
-                component={Dashboard}
+                component={Weather}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -59,16 +74,19 @@ const TabNavigator = () => {
                 component={Dashboard}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View className='absolute top-[-20] bg-white p-4 rounded-full' style={{
-                            alignItems: 'center', justifyContent: 'center', shadowColor: "#000",
-                            shadowOffset: {
-                                width: 0,
-                                height: 3,
-                            },
-                            shadowOpacity: 0.29,
-                            shadowRadius: 4.65,
-                            elevation: 7
-                        }}>
+                        <View
+                            className='top-[-20] bg-white p-4 rounded-full'
+                            style={{
+                                position: "absolute",
+                                alignItems: 'center', justifyContent: 'center', shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 3,
+                                },
+                                shadowOpacity: 0.29,
+                                shadowRadius: 4.65,
+                                elevation: 7
+                            }}>
                             <Ionicons name="alarm-outline" size={42} color={focused ? '#5DCCFC' : '#000'} />
                         </View>
                     ),
@@ -80,7 +98,7 @@ const TabNavigator = () => {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            <Ionicons name="ios-settings-outline" size={28} color={focused ? '#5DCCFC' : '#000'} />
+                            <Ionicons name="settings-outline" size={28} color={focused ? '#5DCCFC' : '#000'} />
                             <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
                                 Settings
                             </Text>

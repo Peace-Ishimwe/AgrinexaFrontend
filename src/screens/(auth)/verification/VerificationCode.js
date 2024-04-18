@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, ImageBackground, Pressable, SafeAreaView, StyleSheet, Text, View, Animated } from 'react-native'
+import { Image, ImageBackground, Pressable, SafeAreaView, StyleSheet, Text, View, Animated, StatusBar } from 'react-native'
 import BackPageButton from '../../../components/buttons/backPageButton'
 import ButtonTwo from '../../../components/buttons/buttonTwo'
 import { useLinkTo } from '@react-navigation/native'
@@ -97,9 +97,10 @@ const VerificationCode = () => {
   };
 
   return (
-    <SafeAreaView className='bg-white h-[100vh] flex justify-between'>
+    <SafeAreaView style={{ flex: 1 }} className='bg-white h-[100vh] flex justify-between'>
+      <StatusBar translucent backgroundColor={'transparent'} />
       <View>
-        <ImageBackground className='h-[33vh] px-[2vh] pt-[4vh]' source={require("../../../assets/authBgImage.png")}>
+        <ImageBackground className='h-[28vh] px-[2vh] pt-[6vh]' source={require("../../../assets/authBgImage.png")}>
           <View className='flex flex-col items-start'>
             <BackPageButton />
             <Text className='text-[#fff] text-[37px] mt-4'>Verification Code</Text>
@@ -111,23 +112,23 @@ const VerificationCode = () => {
           <Text className='text-textSubMainColor mt-6 text-base font-medium'>Please type the verification code sent to{"\n"}peaceishimwem@gmail.com</Text>
           <View className='mt-5'>
             {/* <TextInput className='border-[1px] bg-white border-subMainColor p-4 text-xl' placeholder='(+91) 972-585-3396' /> */}
-              <CodeField
-                ref={ref}
-                {...props}
-                value={value}
-                onChangeText={setValue}
-                cellCount={CELL_COUNT}
-                rootStyle={styles.codeFieldRoot}
-                keyboardType="number-pad"
-                textContentType="oneTimeCode"
-                renderCell={renderCell}
-              />
+            <CodeField
+              ref={ref}
+              {...props}
+              value={value}
+              onChangeText={setValue}
+              cellCount={CELL_COUNT}
+              rootStyle={styles.codeFieldRoot}
+              keyboardType="number-pad"
+              textContentType="oneTimeCode"
+              renderCell={renderCell}
+            />
           </View>
           <View className='mt-10'>
             <Text className='text-center text-textMainColor text-[18px]'>Didn't recieve the code<Text className='text-mainColor'>  Please resend</Text></Text>
           </View>
           <View className='mt-10'>
-            <ButtonTwo onPress={()=> linkTo("/completedSuccessVerified")} name='SEND' />
+            <ButtonTwo onPress={() => linkTo("/completedSuccessVerified")} name='SEND' />
           </View>
         </View>
       </View>

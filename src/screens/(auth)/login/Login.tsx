@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, ImageBackground, Pressable, SafeAreaView, Text, TextInput, View } from 'react-native'
+import { Image, ImageBackground, Pressable, SafeAreaView, Text, TextInput, View, StatusBar } from 'react-native'
 import BackPageButton from '../../../components/buttons/backPageButton'
 import ButtonTwo from '../../../components/buttons/buttonTwo'
 import styled from 'styled-components/native'
@@ -47,10 +47,11 @@ const Login = () => {
     }
 
     return (
-        <SafeAreaView className='bg-white h-[100vh] flex justify-between'>
+        <SafeAreaView style={{ flex: 1 }} className='bg-white justify-between'>
+            <StatusBar translucent backgroundColor={'transparent'} />
             <StyledScrollView className='h-full bg-white flex'>
                 <View>
-                    <ImageBackground className='h-[33vh] px-[2vh] pt-[4vh]' source={require("../../../assets/authBgImage.png")}>
+                    <ImageBackground className='h-[28vh] px-[2vh] pt-[6vh]' source={require("../../../assets/authBgImage.png")}>
                         <View className='flex flex-col items-start'>
                             <BackPageButton />
                             <Text className='text-[#fff] text-[37px] mt-4'>LogIn</Text>

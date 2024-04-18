@@ -44,7 +44,7 @@ const RegisterWithEmail: React.FC = () => {
 
     return (
         <SafeAreaView style={{ flex: 1 }} className='bg-white h-[100vh] flex justify-between'>
-            <ImageBackground className='h-[30vh] px-[2vh] pt-[5vh]' source={require("../../../assets/authBgImage.png")}>
+            <ImageBackground className='h-[28vh] px-[2vh] pt-[6vh]' source={require("../../../assets/authBgImage.png")}>
                 <StatusBar translucent backgroundColor={'transparent'} />
                 <View className='flex flex-col items-start'>
                     <BackPageButton />

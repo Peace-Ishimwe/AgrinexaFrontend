@@ -18,6 +18,7 @@ import Login from '../screens/(auth)/login/Login';
 import AddAddress from '../screens/address/AddAddress';
 import ContactUs from '../screens/contactUs/ContactUs';
 import TabNavigator from './TabNavigator';
+import Weather from '../screens/weather/Weather';
 import { getData } from '../utils/storage';
 
 const SplashImage = () => (
@@ -49,7 +50,7 @@ const RootNavigator = () => {
   }
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName={isLoggedIn ? 'main' : 'registerwithemail'} screenOptions={{ headerShown: false }}>
+      <stack.Navigator initialRouteName={isLoggedIn ? 'main' : 'main'} screenOptions={{ headerShown: false }}>
         {isLoggedIn ? (
           <>
             <stack.Screen name="main" component={TabNavigator} />
@@ -69,6 +70,7 @@ const RootNavigator = () => {
             <stack.Screen name='addaddress' component={AddAddress} />
             <stack.Screen name='completedSuccessVerified' component={CompletedSuccesVerified} />
             <stack.Screen name='contactUs' component={ContactUs} />
+        <stack.Screen name='weather' component={Weather} />
           </>
         )}
       </stack.Navigator>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, ImageBackground, Pressable, SafeAreaView, Text, TextInput, View } from 'react-native'
+import { Image, ImageBackground, Pressable, SafeAreaView, Text, TextInput, View , StatusBar } from 'react-native'
 import BackPageButton from '../../../components/buttons/backPageButton'
 import ButtonTwo from '../../../components/buttons/buttonTwo'
 import { useLinkTo } from '@react-navigation/native'
@@ -9,9 +9,10 @@ const ResetPassword = () => {
     const linkTo = useLinkTo();
 
     return (
-        <SafeAreaView className='bg-white h-[100vh] flex justify-between'>
+        <SafeAreaView style={{flex: 1}} className='bg-white h-[100vh] flex justify-between'>
+            <StatusBar translucent backgroundColor={'transparent'} />
                 <View>
-                    <ImageBackground className='h-[33vh] px-[2vh] pt-[4vh]' source={require("../../../assets/authBgImage.png")}>
+                    <ImageBackground className='h-[28vh] px-[2vh] pt-[6vh]' source={require("../../../assets/authBgImage.png")}>
                         <View className='flex flex-col items-start'>
                             <BackPageButton />
                             <Text className='text-[#fff] text-[37px] mt-4'>Reset Password</Text>
