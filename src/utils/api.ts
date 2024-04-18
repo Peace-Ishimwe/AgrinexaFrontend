@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getData } from './storage';
 
 const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
 const commonHeaders = {
@@ -19,7 +19,8 @@ const authorizedAxiosInstance: AxiosInstance = axios.create({
 
 authorizedAxiosInstance.interceptors.request.use(
   async (config) => {
-    const token = await AsyncStorage.getItem('token');
+    const token =await  getData('token');
+    console.log(token)
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
