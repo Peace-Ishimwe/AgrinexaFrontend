@@ -11,7 +11,6 @@ import { authorizedAPI } from "../../utils/api";
 import { Image } from "react-native";
 import { useLinkTo } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 const Dashboard = () => {
     const pageRef = useRef<PagerView | null>(null);
     const [currentPage, setCurrentPage] = useState(0);
@@ -21,14 +20,12 @@ const Dashboard = () => {
     const [page, setPage] = useState<{ fields: any[] } | null>(null);
     console.log(page)
     const [loading, setLoading] = useState(true);
-    const linkTo = useLinkTo();
-
+    const linkTo = useLinkTo();``
     const handlePageChange = (pageNumber: number) => {
         if (pageNumber >= 0 && pageNumber <= 2) {
             setCurrentPage(pageNumber);
         }
     };
-
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
@@ -42,7 +39,6 @@ const Dashboard = () => {
         };
         fetchDashboardData();
     }, []);
-
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -54,7 +50,6 @@ const Dashboard = () => {
         };
         fetchUserData();
     }, []);
-
     const goToNextPage = () => {
         if (currentPage < 2) {
             handlePageChange(currentPage + 1);

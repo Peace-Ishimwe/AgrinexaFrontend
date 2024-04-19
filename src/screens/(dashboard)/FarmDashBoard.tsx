@@ -108,13 +108,13 @@ const FarmDashboard = () => {
                         }}
                     >
                         <View className="w-[31%]">
-                            <StatusCard icon={<FontAwesome5 name="temperature-high" size={28} color="#0DFF4D" />} iconName='Temperature' />
+                            <StatusCard icon={<FontAwesome5 name="temperature-high" size={28} color="#0DFF4D" />} iconName='Temperature'  value={selectedField?.temperature}/>
                         </View>
                         <View className="w-[31%]">
-                            <StatusCard icon={<Entypo name="drop" size={28} color="#0DFF4D" />} iconName='Moisture' />
+                            <StatusCard icon={<Entypo name="drop" size={28} color="#0DFF4D" />} iconName='Moisture' value={selectedField?.moisture} />
                         </View>
                         <View className="w-[31%]">
-                            <StatusCard icon={<MaterialIcons name="waves" size={28} color="#0DFF4D" />} iconName='Humidity' />
+                            <StatusCard icon={<MaterialIcons name="waves" size={28} color="#0DFF4D" />} iconName='Humidity'  value={selectedField?.humidity}/>
                         </View>
                     </View>
                     <View
