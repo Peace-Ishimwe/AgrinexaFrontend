@@ -7,7 +7,7 @@ interface Params {
 
 const forecastEndpoint = (params: Params): string => `https://api.weatherapi.com/v1/forecast.json?key=${process.env.EXPO_PUBLIC_WEATHER_API_KEY}&q=${params.cityName}&days=${params.days}&aqi=no&alerts=no`;
 
-const locationsEndpoint = (params: Params): string => `https://api.weatherapi.com/v1/search.json?key=5e52b7dee1b246b386952505241804&q=${params.cityName}
+const locationsEndpoint = (params: Params): string => `https://api.weatherapi.com/v1/search.json?key=${process.env.EXPO_PUBLIC_WEATHER_API_KEY}&q=${params.cityName}
 `;
 
 const apiCall = async (endpoint: string): Promise<any> => {
