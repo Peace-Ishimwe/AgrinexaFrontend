@@ -3,11 +3,11 @@ import { Image, ImageBackground, Pressable, SafeAreaView, Text, TextInput, View,
 import BackPageButton from '../../../components/buttons/backPageButton'
 import ButtonTwo from '../../../components/buttons/buttonTwo'
 import styled from 'styled-components/native'
-import { useLinkTo } from '@react-navigation/native'
+import { useLinkTo, useNavigation } from '@react-navigation/native'
 import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
-import axios from 'axios'
 import { unauthorizedAPI } from '../../../utils/api'
 import { storeData } from '../../../utils/storage'
+
 
 const StyledScrollView = styled.ScrollView.attrs(() => ({
     contentContainerStyle: {
@@ -15,32 +15,31 @@ const StyledScrollView = styled.ScrollView.attrs(() => ({
     },
 }))``;
 
-
 interface FormData {
     email: string;
     password: string;
 }
 const Login = () => {
     const linkTo = useLinkTo();
-    const[loading,setLoading] = useState(false)
+    const navigation = useNavigation()
+    const [loading, setLoading] = useState(false)
     const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm<FormData>();
     const onSubmit = async (data: FormData) => {
         setLoading(true)
         try {
-          const response = await unauthorizedAPI.post(`/auth/login`, data);
-          const { access_token, refresh_token,user } = response.data;
-          await Promise.all([
-            storeData("token", access_token),
-            storeData("token2", refresh_token) , 
-            storeData("user", user)  
-          ]);
-      
-          linkTo("/main");
+            console.log(data)
+            const response = await unauthorizedAPI.post(`/auth/login`, data);
+            const { access_token, refresh_token, user } = response.data;
+            await Promise.all([
+                storeData("token", access_token),
+                storeData("token2", refresh_token),
+                storeData("user", user)
+            ]);
         } catch (error) {
-          console.error('Error posting data:', error);
+            console.error('Error posting data:', error);
         }
         setLoading(false);
-      };
+    };
 
     const onError: SubmitErrorHandler<FormData> = (errors, e) => {
         return console.log(errors)
@@ -64,9 +63,9 @@ const Login = () => {
                             <Text aria-label="Label for Username" className='text-base text-textMainColor font-medium' nativeID="email">E-mail</Text>
                             <Controller
                                 control={control}
-                                render={({ field: {onChange, value} }) => (
+                                render={({ field: { onChange, value } }) => (
                                     <TextInput keyboardType='email-address'
-                                        aria-labelledby="email" className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl' placeholder='peaceishimwem@gmail.com' 
+                                        aria-labelledby="email" className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl' placeholder='peaceishimwem@gmail.com'
                                         onChangeText={value => onChange(value)}
                                         value={value}
                                     />
@@ -93,13 +92,13 @@ const Login = () => {
                                 rules={{ required: 'You must enter your password' }}
                             />
                         </View>
-                        <View className='mt-10'>
-                            <ButtonTwo name='SIGN UP' onPress={handleSubmit(onSubmit)} loading={loading} />
+                        <View style={{}} className='mt-[40px]'>
+                            <ButtonTwo name='LOG IN' onPress={handleSubmit(onSubmit)} loading={loading} />
                         </View>
-                        <View className='mt-6 flex flex-row items-center justify-center'>
+                        <View style={{ display: "flex", flexDirection: "row" }} className='mt-6 items-center justify-center'>
                             <Text className='text-center text-textMainColor text-[18px]'>Don't have an account?
                             </Text>
-                            <Pressable onPress={() => linkTo("/registerwithphone")}>
+                            <Pressable onPress={() => linkTo("/registerwithemail")}>
                                 <Text style={{ color: '#34A853', fontSize: 18 }} className='text-mainColor  ml-2 text-[18px]'>Signup</Text>
                             </Pressable>
                         </View>

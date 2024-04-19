@@ -50,13 +50,14 @@ const RootNavigator = () => {
   }
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName={isLoggedIn ? 'main' : 'main'} screenOptions={{ headerShown: false }}>
+      <stack.Navigator initialRouteName={isLoggedIn ? 'main' : 'welcome'} screenOptions={{ headerShown: false }}>
         {isLoggedIn ? (
-          <>
+          <stack.Group>
             <stack.Screen name="main" component={TabNavigator} />
-          </>
+            <stack.Screen name='weather' component={Weather} />
+          </stack.Group>
         ) : (
-          <>
+          <stack.Group>
             <stack.Screen name="welcome" component={Welcome} />
             <stack.Screen name="onBoarding" component={OnBoarding} />
             <stack.Screen name="personalize" component={PersonalizeExperience} />
@@ -69,8 +70,7 @@ const RootNavigator = () => {
             <stack.Screen name='addaddress' component={AddAddress} />
             <stack.Screen name='completedSuccessVerified' component={CompletedSuccesVerified} />
             <stack.Screen name='contactUs' component={ContactUs} />
-        <stack.Screen name='weather' component={Weather} />
-          </>
+          </stack.Group>
         )}
       </stack.Navigator>
     </NavigationContainer>

@@ -4,7 +4,6 @@ import { useForm, Controller, SubmitErrorHandler } from 'react-hook-form';
 import { useLinkTo } from '@react-navigation/native';
 import BackPageButton from '../../../components/buttons/backPageButton';
 import ButtonTwo from '../../../components/buttons/buttonTwo';
-import axios from 'axios';
 import { storeData } from '../../../utils/storage';
 import { unauthorizedAPI } from '../../../utils/api';
 
@@ -28,7 +27,7 @@ const RegisterWithEmail: React.FC = () => {
             storeData("token2", refresh_token) , 
             storeData("user", user)  
           ]);
-      
+    
           linkTo("/addaddress");
         } catch (error) {
           console.error('Error posting data:', error);

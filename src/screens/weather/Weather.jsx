@@ -176,7 +176,7 @@ const Weather = () => {
                   </View>
                   <View className='w-6/12'>
                     {/* Weather image */}
-                    <View style={{display: "flex"}} className='mr-[21px] flex items-center'>
+                    <View style={{ display: "flex" }} className='mr-[21px] flex items-center'>
                       <Image
                         source={weatherImages[current?.condition?.text] || { uri: "https:" + current?.condition?.icon }}
                         className='w-[71px] h-[71px]'
@@ -189,26 +189,28 @@ const Weather = () => {
                 </View>
               </SafeAreaView>
             </ImageBackground>
-            {/* Stats */}
-            <View className='mt-[12px]' style={{ marginHorizontal: 16 }}>
-              <View style={{ flexDirection: 'row', justifyContent: "space-between" }} className='w-full'>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {/* Stats */}
+              <View className='mt-[12px]' style={{ marginHorizontal: 16 }}>
+                <View style={{ flexDirection: 'row', justifyContent: "space-between" }} className='w-full'>
 
-                <StatsCard icon={<Feather name="wind" size={24} color="black" />} name={"Wind speed"} value={current?.wind_kph + "km/h"} />
-                <StatsCard icon={<Feather name="cloud-rain" size={24} color="black" />} name={"Precipitation"} value={current?.precip_mm + "mm"} />
+                  <StatsCard icon={<Feather name="wind" size={24} color="black" />} name={"Wind speed"} value={current?.wind_kph + "km/h"} />
+                  <StatsCard icon={<Feather name="cloud-rain" size={24} color="black" />} name={"Precipitation"} value={current?.precip_mm + "mm"} />
 
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: 16 }} className='w-full'>
+                  <StatsCard icon={<MaterialIcons name="waves" size={24} color="black" />} name={"Pressure"} value={current?.pressure_mb + "mb"} />
+                  <StatsCard icon={<Feather name="sun" size={24} color="black" />} name={"UV Index"} value={current?.uv} />
+                </View>
               </View>
-              <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: 16 }} className='w-full'>
-                <StatsCard icon={<MaterialIcons name="waves" size={24} color="black" />} name={"Pressure"} value={current?.pressure_mb + "mb"} />
-                <StatsCard icon={<Feather name="sun" size={24} color="black" />} name={"UV Index"} value={current?.uv} />
+              {/* forecast for next days */}
+              <ForecastNextDaysSection weather={weather} />
+              {/* sun rise and sun set */}
+              <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: 0, marginBottom: 340 }} className='w-full px-4'>
+                <StatsCard icon={<Feather name="sunrise" size={24} color="black" />} name={"Sun rise"} value={weather?.forecast?.forecastday[0]?.astro?.sunrise} />
+                <StatsCard icon={<Feather name="sunset" size={24} color="black" />} name={"Sun set"} value={weather?.forecast?.forecastday[0]?.astro?.sunset} />
               </View>
-            </View>
-            {/* forecast for next days */}
-            <ForecastNextDaysSection weather={weather} />
-            {/* sun rise and sun set */}
-            <View style={{ flexDirection: 'row', justifyContent: "space-between", marginTop: 0 }} className='w-full px-4'>
-              <StatsCard icon={<Feather name="sunrise" size={24} color="black" />} name={"Sun rise"} value={weather?.forecast?.forecastday[0]?.astro?.sunrise} />
-              <StatsCard icon={<Feather name="sunset" size={24} color="black" />} name={"Sun set"} value={weather?.forecast?.forecastday[0]?.astro?.sunset} />
-            </View>
+            </ScrollView>
           </View>
         )
       }

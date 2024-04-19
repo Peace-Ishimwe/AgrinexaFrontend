@@ -9,7 +9,7 @@ import Slide2 from "./slides/Slide2";
 import Slide3 from "./slides/Slide3";
 import StatusCard from "./cards/StatusCard";
 import InfoCard from "./cards/InfoCard";
-import { getData } from "../../utils/storage";
+import { deleteData, getData } from "../../utils/storage";
 import { authorizedAPI } from "../../utils/api";
 import { Image } from "react-native";
 import { useLinkTo } from "@react-navigation/native";
@@ -76,9 +76,15 @@ const Dashboard = () => {
         <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium">
           Hello, {user?.name} 🌿
         </Text>
-        <View className="p-2 rounded-full bg-[#F3F9F6]">
+        <Pressable onPress={() => {
+          deleteData("token")
+          deleteData("token2")
+          deleteData("user")
+          linkTo("/welcome")
+          
+        }} className="p-2 rounded-full bg-[#F3F9F6]">
           <Ionicons name="settings" size={28} color="#0DFF4D" />
-        </View>
+        </Pressable>
       </View>
       <PagerView style={{ flex: 1 }} initialPage={0} ref={pageRef}>
         <View key={1}>
@@ -93,22 +99,22 @@ const Dashboard = () => {
       </PagerView>
       <ScrollView style={{ maxHeight: "53%" }} className="mx-[-2vh]">
         {loading ? (
-          <View className="flex items-center justify-center h-[100px]">
+          <View style={{ display: "flex" }} className="items-center justify-center h-[100px]">
             <Text className="text-gray-600 text-xl">Loading...</Text>
           </View>
         ) : page?.fields.length === 0 ? (
-          <View className="flex items-center justify-center h-[100px]">
+          <View style={{ display: "flex" }} className="items-center justify-center h-[100px]">
             <Text className="text-gray-600 text-xl">No Fields So Far</Text>
           </View>
         ) : (
           <View className="flex flex-row gap-3 flex-wrap justify-between p-5">
             {page?.fields.map((field, i) => (
               <Pressable key={i} onPress={() => linkTo(`/farm/${field.id}`)} className="w-[45%] mb-5 shadow rounded-lg bg-white py-4 flex flex-col items-center gap-5 ">
-                  <Image
-                    source={require("../../assets/field.png")}
-                    style={{ width: 100, height: 100 }}
-                  />
-                  <Text>{field.name}</Text>
+                <Image
+                  source={require("../../assets/field.png")}
+                  style={{ width: 100, height: 100 }}
+                />
+                <Text>{field.name}</Text>
               </Pressable>
             ))}
           </View>

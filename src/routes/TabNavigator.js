@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 
 const HomeStack = () => {
     return (
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Navigator initialRouteName='home' screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="home" component={Home} />
                 <Stack.Screen name="dashboard" component={Dashboard} />
             </Stack.Navigator>
@@ -23,7 +23,7 @@ const HomeStack = () => {
 
 const screenOptions = {
     tabBarShowLabel: false,
-    headerShown: false,
+    // headerShown: false,
     tabBarStyle: {
         position: 'absolute',
         backgroundColor: '#fff',
@@ -40,7 +40,7 @@ const screenOptions = {
 
 const TabNavigator = () => {
     return (
-        <Tab.Navigator initialRouteName='search' screenOptions={screenOptions}>
+        <Tab.Navigator initialRouteName='homestack' screenOptions={screenOptions}>
             <Tab.Screen
                 name="homestack"
                 component={HomeStack}
