@@ -1,12 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { ImageBackground, SafeAreaView, Text, TextInput, View, StyleSheet, StatusBar } from 'react-native'
-import BackPageButton from '../../components/buttons/backPageButton'
-import ButtonTwo from '../../components/buttons/buttonTwo'
-import styled from 'styled-components/native'
+import React, { useState, useRef, useEffect } from 'react';
+import { ImageBackground, SafeAreaView, Text, TextInput, View, StatusBar, StyleSheet } from 'react-native';
+import BackPageButton from '../../components/buttons/backPageButton';
+import ButtonTwo from '../../components/buttons/buttonTwo';
+import styled from 'styled-components/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Dimensions } from 'react-native';
-const { width } = Dimensions.get('window').width;
 import SelectDropdown from 'react-native-select-dropdown';
+
+const { width } = Dimensions.get('window');
 
 const StyledScrollView = styled.ScrollView.attrs(() => ({
     contentContainerStyle: {
@@ -14,13 +15,16 @@ const StyledScrollView = styled.ScrollView.attrs(() => ({
     },
 }))``;
 
-const AddAddress = () => {
-    const [countries, setCountries] = useState([]);
-    const [cities, setCities] = useState([]);
+interface Country {
+    title: string;
+    cities: { title: string }[];
+}
 
-    const citiesDropdownRef = useRef();
+const AddAddress: React.FC = () => {
+    const [countries, setCountries] = useState<Country[]>([]);
+    const [cities, setCities] = useState<{ title: string }[]>([]);
+    const citiesDropdownRef = useRef<SelectDropdown>(null);
 
-    
     useEffect(() => {
         setTimeout(() => {
             setCountries([
@@ -29,6 +33,7 @@ const AddAddress = () => {
             ]);
         }, 1000);
     }, []);
+
     return (
         <SafeAreaView className='bg-white h-[100vh] flex justify-between'>
             <StatusBar translucent backgroundColor={'transparent'} />
@@ -55,23 +60,16 @@ const AddAddress = () => {
                                 data={countries}
                                 search={true}
                                 onSelect={(selectedItem, index) => {
-                                    console.log(selectedItem, index);
-                                    citiesDropdownRef.current.reset();
+                                    citiesDropdownRef.current?.reset();
                                     setCities([]);
                                     setCities(selectedItem.cities);
                                 }}
                                 defaultButtonText={'Select country'}
-                                buttonTextAfterSelection={(selectedItem, index) => {
-                                    return selectedItem.title;
-                                }}
-                                rowTextForSelection={(item, index) => {
-                                    return item.title;
-                                }}
+                                buttonTextAfterSelection={(selectedItem, index) => selectedItem.title}
+                                rowTextForSelection={(item, index) => item.title}
                                 buttonStyle={styles.dropdown1BtnStyle}
                                 buttonTextStyle={styles.dropdown1BtnTxtStyle}
-                                renderDropdownIcon={isOpened => {
-                                    return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#34A853'} size={16} />;
-                                }}
+                                renderDropdownIcon={isOpened => <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#34A853'} size={16} />}
                                 dropdownIconPosition={'right'}
                                 dropdownStyle={styles.dropdown1DropdownStyle}
                                 rowStyle={styles.dropdown1RowStyle}
@@ -88,17 +86,11 @@ const AddAddress = () => {
                                     console.log(selectedItem, index);
                                 }}
                                 defaultButtonText={'Select city'}
-                                buttonTextAfterSelection={(selectedItem, index) => {
-                                    return selectedItem.title;
-                                }}
-                                rowTextForSelection={(item, index) => {
-                                    return item.title;
-                                }}
+                                buttonTextAfterSelection={(selectedItem, index) => selectedItem.title}
+                                rowTextForSelection={(item, index) => item.title}
                                 buttonStyle={styles.dropdown2BtnStyle}
                                 buttonTextStyle={styles.dropdown2BtnTxtStyle}
-                                renderDropdownIcon={isOpened => {
-                                    return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#34A853'} size={16} />;
-                                }}
+                                renderDropdownIcon={isOpened => <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#34A853'} size={16} />}
                                 dropdownIconPosition={'right'}
                                 dropdownStyle={styles.dropdown2DropdownStyle}
                                 rowStyle={styles.dropdown2RowStyle}
@@ -110,17 +102,16 @@ const AddAddress = () => {
                             <TextInput keyboardType='email-address' style={{ borderRadius: 10 }} aria-labelledby="email" className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl' placeholder='ex: KN 197' defaultValue='Street' />
                         </View>
                         <View className='my-10'>
-                            <ButtonTwo name='SAVE' />
+                            <ButtonTwo name='SAVE' loading={false} />
                         </View>
                     </View>
                 </View>
             </StyledScrollView>
         </SafeAreaView>
-    )
-}
+    );
+};
 
-export default AddAddress
-
+export default AddAddress;
 
 const styles = StyleSheet.create({
     shadow: {
@@ -151,7 +142,6 @@ const styles = StyleSheet.create({
 
     dropdown1BtnStyle: {
         flex: 1,
-        height: 50,
         backgroundColor: '#fff',
         borderWidth: 1,
         borderColor: '#0DFF4D',
@@ -167,7 +157,6 @@ const styles = StyleSheet.create({
     divider: { width: 12 },
     dropdown2BtnStyle: {
         flex: 1,
-        height: 50,
         backgroundColor: '#fff',
         borderWidth: 1,
         borderColor: '#0DFF4D',

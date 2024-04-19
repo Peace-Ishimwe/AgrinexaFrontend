@@ -51,7 +51,7 @@ const Login = () => {
             <StatusBar translucent backgroundColor={'transparent'} />
             <StyledScrollView className='h-full bg-white flex'>
                 <View>
-                    <ImageBackground className='h-[28vh] px-[2vh] pt-[6vh]' source={require("../../../assets/authBgImage.png")}>
+                    <ImageBackground className='h-[28vh] px-[2vh] pt-[6vh]' source={require("../../../assets/authBgImage.png")} style={{backgroundColor: "black"}}>
                         <View className='flex flex-col items-start'>
                             <BackPageButton />
                             <Text className='text-[#fff] text-[37px] mt-4'>LogIn</Text>

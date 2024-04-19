@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useLinkTo } from '@react-navigation/native';
+import { ParamListBase, RouteProp, useLinkTo } from '@react-navigation/native';
 
 import Dashboard from '../screens/(dashboard)/Dashboard';
 import Home from '../screens/home/Home';
 import Weather from '../screens/weather/Weather';
 import FarmDashBoard from '../screens/(dashboard)/FarmDashBoard';
 import { getData } from '../utils/storage';
-import { AsyncStorage } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -25,13 +24,12 @@ const HomeStack = () => {
     );
 };
 
-const screenOptions = {
+const screenOptions = ({ route }: { route: RouteProp<ParamListBase, string>; navigation: any }): BottomTabNavigationOptions => ({
     tabBarShowLabel: false,
     headerShown: false,
     tabBarStyle: {
         position: 'absolute',
         backgroundColor: '#fff',
-        position: 'absolute',
         bottom: 0,
         padding: 10,
         width: '100%',
@@ -40,26 +38,27 @@ const screenOptions = {
     },
     tabBarActiveTintColor: '#5DCCFC',
     tabBarInactiveTintColor: '#000',
-};
+});
+
 
 const TabNavigator = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const linkTo = useLinkTo()
-  
+    const linkTo = useLinkTo();
+
     useEffect(() => {
-      const checkLoginStatus = async () => {
-        try {
-          const token = await getData("token");
-          if(!token) linkTo("/login");
-        } catch (error) {
-          console.error('Error checking login status:', error);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-      checkLoginStatus();
+        const checkLoginStatus = async () => {
+            try {
+                const token = await getData("token");
+                if(!token) linkTo("/login");
+            } catch (error) {
+                console.error('Error checking login status:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        checkLoginStatus();
     }, []);
+
     return (
         <Tab.Navigator initialRouteName='homestack' screenOptions={screenOptions}>
             <Tab.Screen
@@ -96,7 +95,6 @@ const TabNavigator = () => {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View
-                            className='top-[-20] bg-white p-4 rounded-full'
                             style={{
                                 position: "absolute",
                                 alignItems: 'center', justifyContent: 'center', shadowColor: "#000",

@@ -62,8 +62,8 @@ const Home = () => {
                     <View style={{ position: "absolute" }} className='w-[10px] h-[10px] rounded-full bg-[#0DFF4D] right-0'></View>
                 </View>
             </View>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{ marginTop: 48 }} className='w-full relative'>
+            <ScrollView style={{marginTop: 24}} showsVerticalScrollIndicator={false}>
+                <View style={{}} className='w-full relative'>
                     <Image source={require('../../assets/Home/Group481825.jpg')} className='rounded-2xl w-[100%]' />
                     <View className='absolute'>
                         <Text className='text-[20px] font-medium text-[#FF0000]'>Alert!</Text>

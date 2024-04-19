@@ -22,21 +22,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingLeft: 9,
     paddingVertical: 9,
-    minWidth: 120,
-    width: '100%',
+    minWidth: 105,
+    width: "100%",
     borderRadius: 8,
     shadowColor: '#0C9559',
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.13,
     shadowRadius: 24,
-    elevation: 12,
+    elevation: 12
   },
   iconContainer: {
     marginBottom: 3,
   },
   title: {
     color: '#9796A1',
-    fontSize: 18,
+    fontSize: 14,
     marginTop: 6
   },
   value: {

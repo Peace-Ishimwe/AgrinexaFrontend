@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { SafeAreaView, Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Entypo, Ionicons } from '@expo/vector-icons';
 import PagerView from 'react-native-pager-view';
 import { withExpoSnack } from 'nativewind';
@@ -53,8 +54,8 @@ const FarmDashboard = () => {
     }, []);
 
     return (
-        <SafeAreaView className="px-[2vh] bg-[#F5FDFB] h-[100vh]">
-            <View className="h-[15vh] pt-[3vh] flex flex-row items-center justify-between">
+        <SafeAreaView className="px-[2vh] bg-[#F5FDFB]">
+            <View style={{ flexDirection: "row" }} className="items-center justify-between mt-[12px]">
                 <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium">
                     {selectedField?.name} 🌿
                 </Text>
@@ -62,21 +63,23 @@ const FarmDashboard = () => {
                     <Ionicons name="settings" size={28} color="#0DFF4D" />
                 </View>
             </View>
-            <PagerView style={{ flex: 1 }} initialPage={0} ref={pageRef}>
-                <View key={1}>
-                    <Slide1 next={goToNextPage} />
+            <ScrollView style={{}} className='mx-[-2vh]'>
+                <View className='h-[270px] mx-[2vh] mt-[20px]'>
+                    <PagerView style={{ flex: 1 }} initialPage={0} ref={pageRef}>
+                        <View key={1}>
+                            <Slide1 next={goToNextPage} />
+                        </View>
+                        <View key={2}>
+                            <Slide2 next={goToNextPage} back={goToPreviousPage} />
+                        </View>
+                        <View key={3}>
+                            <Slide3 back={goToPreviousPage} />
+                        </View>
+                    </PagerView>
                 </View>
-                <View key={2}>
-                    <Slide2 next={goToNextPage} back={goToPreviousPage} />
-                </View>
-                <View key={3}>
-                    <Slide3 back={goToPreviousPage} />
-                </View>
-            </PagerView>
-            <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium text-center">
-                {selectedField?.name}
-            </Text>
-            <ScrollView style={{ maxHeight: '53%' }} className='mx-[-2vh]'>
+                <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium text-center">
+                    {selectedField?.name}
+                </Text>
                 <View className="mt-5 px-[2vh]">
                     <View
                         className=""
@@ -108,29 +111,29 @@ const FarmDashboard = () => {
                         }}
                     >
                         <View className="w-[31%]">
-                            <StatusCard icon={<FontAwesome5 name="temperature-high" size={28} color="#0DFF4D" />} iconName='Temperature'  value={selectedField?.temperature}/>
+                            <StatusCard icon={<FontAwesome5 name="temperature-high" size={28} color="#0DFF4D" />} iconName='Temperature' value={selectedField?.temperature} />
                         </View>
                         <View className="w-[31%]">
                             <StatusCard icon={<Entypo name="drop" size={28} color="#0DFF4D" />} iconName='Moisture' value={selectedField?.moisture} />
                         </View>
                         <View className="w-[31%]">
-                            <StatusCard icon={<MaterialIcons name="waves" size={28} color="#0DFF4D" />} iconName='Humidity'  value={selectedField?.humidity}/>
+                            <StatusCard icon={<MaterialIcons name="waves" size={28} color="#0DFF4D" />} iconName='Humidity' value={selectedField?.humidity} />
                         </View>
                     </View>
                     <View
-                        className="mb-28"
+                        className="mb-[160px]"
                         style={{
                             display: 'flex',
                             flexDirection: 'row',
                             justifyContent: 'space-between',
                             alignItems: 'stretch',
-                            marginTop: 12
+                            marginTop: 12,
                         }}
                     >
-                        <View className="w-8/12">
+                        <View className="w-[56%]">
                             <InfoCard />
                         </View>
-                        <View className="w-[31%]">
+                        <View className="w-[40%]">
                             <StatusCard icon={<MaterialIcons name="sensors" size={28} color="#0DFF4D" />} iconName='Sensor status' value='ON' />
                         </View>
                     </View>
