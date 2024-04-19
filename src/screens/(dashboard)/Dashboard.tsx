@@ -76,12 +76,19 @@ const Dashboard = () => {
         <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium">
           Hello, {user?.name} 🌿
         </Text>
+<<<<<<< HEAD
         <Pressable onPress={() => {
           deleteData("token")
           deleteData("token2")
           deleteData("user")
           linkTo("/welcome")
           
+=======
+        <Pressable onPress={()=>{
+          deleteData("token")
+          deleteData("token2")
+          deleteData("user")
+>>>>>>> dfafb96337dd8e40b80a4c0d562d9f69a188fd1c
         }} className="p-2 rounded-full bg-[#F3F9F6]">
           <Ionicons name="settings" size={28} color="#0DFF4D" />
         </Pressable>
