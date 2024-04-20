@@ -10,6 +10,7 @@ import Home from '../screens/home/Home';
 import Weather from '../screens/weather/Weather';
 import FarmDashBoard from '../screens/(dashboard)/FarmDashBoard';
 import { getData } from '../utils/storage';
+import UserProfile from '../screens/profile/UserProfile';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -127,7 +128,7 @@ const TabNavigator = () => {
             />
             <Tab.Screen
                 name="account"
-                component={Dashboard}
+                component={UserProfile}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>

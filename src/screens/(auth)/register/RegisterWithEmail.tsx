@@ -15,27 +15,27 @@ interface FormData {
 
 const RegisterWithEmail: React.FC = () => {
     const linkTo = useLinkTo();
-    const [loading,setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm<FormData>();
     const onSubmit = async (data: FormData) => {
         setLoading(true)
         try {
-          const response = await unauthorizedAPI.post(`/auth/register`, data);
-          const { access_token, refresh_token,user } = response.data;
-          await Promise.all([
-            storeData("token", access_token),
-            storeData("token2", refresh_token) , 
-            storeData("user", user)  
-          ]);
-    
-          linkTo("/addaddress");
+            const response = await unauthorizedAPI.post(`/auth/register`, data);
+            const { access_token, refresh_token, user } = response.data;
+            await Promise.all([
+                storeData("token", access_token),
+                storeData("token2", refresh_token),
+                storeData("user", user)
+            ]);
+
+            linkTo("/addaddress");
         } catch (error) {
-          console.error('Error posting data:', error);
+            console.error('Error posting data:', error);
         }
-      
+
         setLoading(false);
-      };
-      
+    };
+
 
     const onError: SubmitErrorHandler<FormData> = (errors, e) => {
         return console.log(errors)
@@ -48,7 +48,7 @@ const RegisterWithEmail: React.FC = () => {
                 <View className='flex flex-col items-start'>
                     <BackPageButton />
                     <Text className='text-[#fff] text-[37px] mt-4'>Sign Up</Text>
-                    <Text className='mt-3 text-[#fff] text-lg'>Fill in your credentials down there{"\n"}to create an account😊</Text>
+                    <Text className='mt-3 text-[#fff] text-lg'>Fill in your credentials down there{"\n"}to create an account</Text>
                 </View>
             </ImageBackground>
             <ScrollView>
@@ -74,9 +74,9 @@ const RegisterWithEmail: React.FC = () => {
                             <Text aria-label="Label for Username" className='text-base text-textMainColor font-medium' nativeID="email">E-mail</Text>
                             <Controller
                                 control={control}
-                                render={({ field: {onChange, value} }) => (
+                                render={({ field: { onChange, value } }) => (
                                     <TextInput keyboardType='email-address'
-                                        aria-labelledby="email" className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl' placeholder='peaceishimwem@gmail.com' 
+                                        aria-labelledby="email" className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl' placeholder='peaceishimwem@gmail.com'
                                         onChangeText={value => onChange(value)}
                                         value={value}
                                     />

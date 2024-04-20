@@ -49,60 +49,58 @@ const Login = () => {
     return (
         <SafeAreaView style={{ flex: 1 }} className='bg-white justify-between'>
             <StatusBar translucent backgroundColor={'transparent'} />
+            <ImageBackground className='h-[28vh] px-[2vh] pt-[6vh]' source={require("../../../assets/authBgImage.png")} style={{ backgroundColor: "black" }}>
+                <View className='flex flex-col items-start'>
+                    <BackPageButton />
+                    <Text className='text-[#fff] text-[37px] mt-4'>LogIn</Text>
+                    <Text className='mt-3 text-[#fff] text-lg'>Fill in your credentials down there{"\n"}to enter your account!</Text>
+                </View>
+            </ImageBackground>
             <StyledScrollView className='h-full bg-white flex'>
-                <View>
-                    <ImageBackground className='h-[28vh] px-[2vh] pt-[6vh]' source={require("../../../assets/authBgImage.png")} style={{backgroundColor: "black"}}>
-                        <View className='flex flex-col items-start'>
-                            <BackPageButton />
-                            <Text className='text-[#fff] text-[37px] mt-4'>LogIn</Text>
-                            <Text className='mt-3 text-[#fff] text-lg'>Fill in your credentials down there{"\n"}to enter your account!</Text>
-                        </View>
-                    </ImageBackground>
-                    <View className='mt-4 px-[2vh]'>
-                        <Text className='text-subMainColor text-[28px] font-semibold'>AgriNexa!</Text>
-                        <View className='mt-5'>
-                            <Text aria-label="Label for Username" className='text-base text-textMainColor font-medium' nativeID="email">E-mail</Text>
-                            <Controller
-                                control={control}
-                                render={({ field: { onChange, value } }) => (
-                                    <TextInput keyboardType='email-address'
-                                        aria-labelledby="email" className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl' placeholder='peaceishimwem@gmail.com'
-                                        onChangeText={value => onChange(value)}
-                                        value={value}
-                                    />
-                                )}
-                                name='email'
-                                rules={{ required: 'You must enter your email', pattern: { value: /^\S+@\S+$/i, message: 'Enter a valid email address' } }}
-                            />
-                        </View>
-                        <View className='mt-5'>
-                            <Text aria-label="Label for Username" className='text-base text-textMainColor font-medium' nativeID="password">Password</Text>
-                            <Controller
-                                control={control}
-                                render={({ field: { onChange, value } }) => (
-                                    <TextInput
-                                        placeholder="* * * * * * * * "
-                                        className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl'
-                                        secureTextEntry={true}
-                                        aria-accessibilityLabelledBy={"password"}
-                                        onChangeText={value => onChange(value)}
-                                        value={value}
-                                    />
-                                )}
-                                name="password"
-                                rules={{ required: 'You must enter your password' }}
-                            />
-                        </View>
-                        <View style={{}} className='mt-[40px]'>
-                            <ButtonTwo name='LOG IN' onPress={handleSubmit(onSubmit)} loading={loading} />
-                        </View>
-                        <View style={{ display: "flex", flexDirection: "row" }} className='mt-6 items-center justify-center'>
-                            <Text className='text-center text-textMainColor text-[18px]'>Don't have an account?
-                            </Text>
-                            <Pressable onPress={() => linkTo("/registerwithemail")}>
-                                <Text style={{ color: '#34A853', fontSize: 18 }} className='text-mainColor  ml-2 text-[18px]'>Signup</Text>
-                            </Pressable>
-                        </View>
+                <View className='mt-4 px-[2vh]'>
+                    <Text className='text-subMainColor text-[28px] font-semibold'>AgriNexa!</Text>
+                    <View className='mt-5'>
+                        <Text aria-label="Label for Username" className='text-base text-textMainColor font-medium' nativeID="email">E-mail</Text>
+                        <Controller
+                            control={control}
+                            render={({ field: { onChange, value } }) => (
+                                <TextInput keyboardType='email-address'
+                                    aria-labelledby="email" className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl' placeholder='peaceishimwem@gmail.com'
+                                    onChangeText={value => onChange(value)}
+                                    value={value}
+                                />
+                            )}
+                            name='email'
+                            rules={{ required: 'You must enter your email', pattern: { value: /^\S+@\S+$/i, message: 'Enter a valid email address' } }}
+                        />
+                    </View>
+                    <View className='mt-5'>
+                        <Text aria-label="Label for Username" className='text-base text-textMainColor font-medium' nativeID="password">Password</Text>
+                        <Controller
+                            control={control}
+                            render={({ field: { onChange, value } }) => (
+                                <TextInput
+                                    placeholder="* * * * * * * * "
+                                    className='border-[1px] bg-white mt-3 border-subMainColor p-4 text-xl'
+                                    secureTextEntry={true}
+                                    aria-accessibilityLabelledBy={"password"}
+                                    onChangeText={value => onChange(value)}
+                                    value={value}
+                                />
+                            )}
+                            name="password"
+                            rules={{ required: 'You must enter your password' }}
+                        />
+                    </View>
+                    <View style={{}} className='mt-[40px]'>
+                        <ButtonTwo name='LOG IN' onPress={handleSubmit(onSubmit)} loading={loading} />
+                    </View>
+                    <View style={{ display: "flex", flexDirection: "row" }} className='mt-6 items-center justify-center'>
+                        <Text className='text-center text-textMainColor text-[18px]'>Don't have an account?
+                        </Text>
+                        <Pressable onPress={() => linkTo("/registerwithemail")}>
+                            <Text style={{ color: '#34A853', fontSize: 18 }} className='text-mainColor  ml-2 text-[18px]'>Signup</Text>
+                        </Pressable>
                     </View>
                 </View>
                 <View className='py-4'>

@@ -22,6 +22,7 @@ import Weather from '../screens/weather/Weather';
 import { getData } from '../utils/storage';
 import FarmDashBoard from '../screens/(dashboard)/FarmDashBoard';
 import DiseaseDetect from '../screens/diseaseDetect/DiseaseDetect';
+import UserProfile from '../screens/profile/UserProfile';
 
 const SplashImage = () => (
   <View className='w-screen h-screen'>
@@ -69,6 +70,7 @@ const RootNavigator = () => {
             <stack.Screen name='addaddress' component={AddAddress} />
             <stack.Screen name='completedSuccessVerified' component={CompletedSuccesVerified} />
             <stack.Screen name='contactUs' component={ContactUs} />
+            <stack.Screen name='userprofile' component={UserProfile} />
       </stack.Navigator>
     </NavigationContainer>
   );
