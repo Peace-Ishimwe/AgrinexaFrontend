@@ -4,15 +4,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import PagerView from "react-native-pager-view";
 import { withExpoSnack } from "nativewind";
-import Slide1 from "./slides/Slide1";
-import Slide2 from "./slides/Slide2";
-import Slide3 from "./slides/Slide3";
 import { deleteData, getData } from "../../utils/storage";
 import { authorizedAPI } from "../../utils/api";
 import { Image } from "react-native";
 import { useLinkTo } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MainShadow } from "../../assets/styles/shadow";
+import PagerViewComponent from "./PagerViewComponent";
+
 const Dashboard = () => {
     const pageRef = useRef<PagerView | null>(null);
     const [currentPage, setCurrentPage] = useState(0);
@@ -83,19 +82,9 @@ const Dashboard = () => {
                     <Ionicons name="settings" size={28} color="#0DFF4D" />
                 </Pressable>
             </View>
-            <ScrollView style={{}} className="mx-[-2vh] mt-[12px]">
-                <View className='h-[270px] mx-[2vh]'>
-                    <PagerView style={{ flex: 1 }} initialPage={0} ref={pageRef}>
-                        <View key={1}>
-                            <Slide1 next={goToNextPage} />
-                        </View>
-                        <View key={2}>
-                            <Slide2 next={goToNextPage} back={goToPreviousPage} />
-                        </View>
-                        <View key={3}>
-                            <Slide3 back={goToPreviousPage} />
-                        </View>
-                    </PagerView>
+            <ScrollView style={{}} className="mt-[12px]">
+                <View className='h-[270px]'>
+                    <PagerViewComponent />
                 </View>
                 {loading ? (
                     <View style={{ display: "flex" }} className="items-center justify-center h-[100px]">

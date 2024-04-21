@@ -44,13 +44,13 @@ const Welcome = () => {
                 hidden={hidden}
             />
             <SafeAreaView style={{flex: 1}}>
-                <ScrollView style={{minHeight: "90%"}} showsVerticalScrollIndicator={false}>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={{flexDirection: "row"}} className='justify-end items-end mt-2'>
                         <Pressable onPress={() => linkTo("/onBoarding")} className='bg-white px-[16] py-[8] rounded-full'>
                             <Text className='text-mainColor font-semibold'>skip</Text>
                         </Pressable>
                     </View>
-                    <View style={{flex: 1, flexDirection: "column"}} className='mt-12 h-[32vh] justify-between px-[10px]'>
+                    <View style={{flex: 1, flexDirection: "column"}} className='mt-12 h-[280px] justify-between px-[10px]'>
                         <View className=''>
                             <Text className='text-[36px] font-semibold text-white'>Welcome to {"\n"}<Text className='text-subMainColor text-[46px]'>AgriNexa</Text> </Text>
                         </View>

@@ -4,24 +4,24 @@ import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ParamListBase, RouteProp, useLinkTo } from '@react-navigation/native';
-
 import Dashboard from '../screens/(dashboard)/Dashboard';
 import Home from '../screens/home/Home';
 import Weather from '../screens/weather/Weather';
 import FarmDashBoard from '../screens/(dashboard)/FarmDashBoard';
 import { getData } from '../utils/storage';
 import UserProfile from '../screens/profile/UserProfile';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const HomeStack = () => {
     return (
-            <Stack.Navigator initialRouteName='home' screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="home" component={Home} />
-                <Stack.Screen name="dashboard" component={Dashboard} />
-                <Stack.Screen name="farm" component={FarmDashBoard} />
-            </Stack.Navigator>
+        <Stack.Navigator initialRouteName='farm' screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="farm" component={FarmDashBoard} />
+            <Stack.Screen name="home" component={Home} />
+            <Stack.Screen name="dashboard" component={Dashboard} />
+        </Stack.Navigator>
     );
 };
 
@@ -50,7 +50,7 @@ const TabNavigator = () => {
         const checkLoginStatus = async () => {
             try {
                 const token = await getData("token");
-                if(!token) linkTo("/login");
+                if (!token) linkTo("/login");
             } catch (error) {
                 console.error('Error checking login status:', error);
             } finally {
@@ -61,86 +61,92 @@ const TabNavigator = () => {
     }, []);
 
     return (
-        <Tab.Navigator initialRouteName='homestack' screenOptions={screenOptions}>
-            <Tab.Screen
-                name="homestack"
-                component={HomeStack}
-                options={{
-                    tabBarIcon: ({ focused }) => (
-                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            <Feather name="home" size={28} color={focused ? '#5DCCFC' : '#000'} />
-                            <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
-                                Home
-                            </Text>
-                        </View>
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="search"
-                component={Weather}
-                options={{
-                    tabBarIcon: ({ focused }) => (
-                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            <MaterialCommunityIcons name="google-analytics" size={28} color={focused ? '#5DCCFC' : '#000'} />
-                            <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
-                                Analysis
-                            </Text>
-                        </View>
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="scan"
-                component={Dashboard}
-                options={{
-                    tabBarIcon: ({ focused }) => (
-                        <View
-                            style={{
-                                position: "absolute",
-                                alignItems: 'center', justifyContent: 'center', shadowColor: "#000",
-                                shadowOffset: {
-                                    width: 0,
-                                    height: 3,
-                                },
-                                shadowOpacity: 0.29,
-                                shadowRadius: 4.65,
-                                elevation: 7
-                            }}>
-                            <Ionicons name="alarm-outline" size={42} color={focused ? '#5DCCFC' : '#000'} />
-                        </View>
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="like"
-                component={Dashboard}
-                options={{
-                    tabBarIcon: ({ focused }) => (
-                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            <Ionicons name="settings-outline" size={28} color={focused ? '#5DCCFC' : '#000'} />
-                            <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
-                                Settings
-                            </Text>
-                        </View>
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="account"
-                component={UserProfile}
-                options={{
-                    tabBarIcon: ({ focused }) => (
-                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            <Feather name="user" size={28} color={focused ? '#5DCCFC' : '#000'} />
-                            <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
-                                Profile
-                            </Text>
-                        </View>
-                    ),
-                }}
-            />
-        </Tab.Navigator>
+        <BottomSheetModalProvider>
+            <Tab.Navigator initialRouteName='homestack' screenOptions={screenOptions}>
+                <Tab.Screen
+                    name="homestack"
+                    component={HomeStack}
+                    options={{
+                        tabBarIcon: ({ focused }) => (
+                            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                                <Feather name="home" size={28} color={focused ? '#5DCCFC' : '#000'} />
+                                <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
+                                    Home
+                                </Text>
+                            </View>
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="search"
+                    component={Weather}
+                    options={{
+                        tabBarIcon: ({ focused }) => (
+                            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                                <MaterialCommunityIcons name="google-analytics" size={28} color={focused ? '#5DCCFC' : '#000'} />
+                                <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
+                                    Analysis
+                                </Text>
+                            </View>
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="scan"
+                    component={Dashboard}
+                    options={{
+                        tabBarIcon: ({ focused }) => (
+                            <View
+                                style={{
+                                    position: "absolute",
+                                    alignItems: 'center', justifyContent: 'center', shadowColor: "#000",
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: 3,
+                                    },
+                                    shadowOpacity: 0.29,
+                                    shadowRadius: 4.65,
+                                    elevation: 7,
+                                    top: -20,
+                                    backgroundColor: "#fff",
+                                    padding: 16,
+                                    borderRadius: 50,
+                                }}>
+                                <Ionicons name="alarm-outline" size={42} color={focused ? '#5DCCFC' : '#000'} />
+                            </View>
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="like"
+                    component={Dashboard}
+                    options={{
+                        tabBarIcon: ({ focused }) => (
+                            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                                <Ionicons name="settings-outline" size={28} color={focused ? '#5DCCFC' : '#000'} />
+                                <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
+                                    Settings
+                                </Text>
+                            </View>
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="account"
+                    component={UserProfile}
+                    options={{
+                        tabBarIcon: ({ focused }) => (
+                            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                                <Feather name="user" size={28} color={focused ? '#5DCCFC' : '#000'} />
+                                <Text style={{ fontSize: 16, color: focused ? '#5DCCFC' : '#000' }}>
+                                    Profile
+                                </Text>
+                            </View>
+                        ),
+                    }}
+                />
+            </Tab.Navigator>
+        </BottomSheetModalProvider>
     );
 };
 

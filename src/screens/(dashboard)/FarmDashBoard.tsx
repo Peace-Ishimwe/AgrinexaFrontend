@@ -1,40 +1,21 @@
+import "react-native-gesture-handler";
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Entypo, Ionicons } from '@expo/vector-icons';
-import PagerView from 'react-native-pager-view';
 import { withExpoSnack } from 'nativewind';
-import Slide1 from './slides/Slide1';
-import Slide2 from './slides/Slide2';
-import Slide3 from './slides/Slide3';
 import StatusCard from './cards/StatusCard';
 import InfoCard from './cards/InfoCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
+import PagerViewComponent from './PagerViewComponent';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { StyleSheet } from "react-native";
+import SensorSheet from "../../components/sheets/SensorSheet";
+import BottomSheet, { BottomSheetModal, useBottomSheetModal } from "@gorhom/bottom-sheet";
 
 const FarmDashboard = () => {
-    const pageRef = useRef<PagerView | null>(null);
-    const [currentPage, setCurrentPage] = useState(0);
-    const handlePageChange = (pageNumber: number) => {
-        if (pageNumber >= 0 && pageNumber <= 2) {
-            setCurrentPage(pageNumber);
-        }
-    };
-    const goToNextPage = () => {
-        if (currentPage < 2) {
-            handlePageChange(currentPage + 1);
-            pageRef.current?.setPage(currentPage + 1);
-        }
-    };
-    const goToPreviousPage = () => {
-        if (currentPage > 0) {
-            handlePageChange(currentPage - 1);
-            pageRef.current?.setPage(currentPage - 1);
-        }
-    };
-
     const [selectedField, setSelectedField] = useState<any>(null);
-    console.log(selectedField)
     useEffect(() => {
         const retrieveSelectedField = async () => {
             try {
@@ -52,94 +33,102 @@ const FarmDashboard = () => {
         return () => {
         };
     }, []);
+    // Sensor sheet handlers
+    const bottomSheetRef = useRef<BottomSheet>(null)
+    const handleClosePress = () => bottomSheetRef.current?.close();
+    const handleOpenPress = () => {
+        bottomSheetRef.current?.expand();
+        bottomSheetRef.current?.snapToIndex(0)
+    }
+    const handleCollapsePress = () => bottomSheetRef.current?.collapse();
 
     return (
-        <SafeAreaView className="px-[2vh] bg-[#F5FDFB]">
-            <View style={{ flexDirection: "row" }} className="items-center justify-between mt-[12px]">
-                <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium">
-                    {selectedField?.name} 🌿
-                </Text>
-                <View className="p-2 rounded-full bg-[#F3F9F6]">
-                    <Ionicons name="settings" size={28} color="#0DFF4D" />
-                </View>
-            </View>
-            <ScrollView style={{}} className='mx-[-2vh]'>
-                <View className='h-[270px] mx-[2vh] mt-[20px]'>
-                    <PagerView style={{ flex: 1 }} initialPage={0} ref={pageRef}>
-                        <View key={1}>
-                            <Slide1 next={goToNextPage} />
-                        </View>
-                        <View key={2}>
-                            <Slide2 next={goToNextPage} back={goToPreviousPage} />
-                        </View>
-                        <View key={3}>
-                            <Slide3 back={goToPreviousPage} />
-                        </View>
-                    </PagerView>
-                </View>
-                <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium text-center">
-                    {selectedField?.name}
-                </Text>
-                <View className="mt-5 px-[2vh]">
-                    <View
-                        className=""
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            flexWrap: 'wrap',
-                            justifyContent: 'space-between',
-                        }}
-                    >
-                        <View className="w-[31%]">
-                            <StatusCard icon={<MaterialCommunityIcons name="longitude" size={28} color="#0DFF4D" />} iconName='Longitude' value={selectedField?.long} />
-                        </View>
-                        <View className="w-[31%]">
-                            <StatusCard icon={<MaterialCommunityIcons name="latitude" size={28} color="#0DFF4D" />} iconName='Latitude' value={selectedField?.lat} />
-                        </View>
-                        <View className="w-[31%]">
-                            <StatusCard icon={<MaterialIcons name="photo-size-select-large" size={28} color="#0DFF4D" />} iconName='Farm size' value={selectedField?.size} />
-                        </View>
-                    </View>
-                    <View
-                        className=""
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            flexWrap: 'wrap',
-                            justifyContent: 'space-between',
-                            marginTop: 12
-                        }}
-                    >
-                        <View className="w-[31%]">
-                            <StatusCard icon={<FontAwesome5 name="temperature-high" size={28} color="#0DFF4D" />} iconName='Temperature' value={selectedField?.temperature} />
-                        </View>
-                        <View className="w-[31%]">
-                            <StatusCard icon={<Entypo name="drop" size={28} color="#0DFF4D" />} iconName='Moisture' value={selectedField?.moisture} />
-                        </View>
-                        <View className="w-[31%]">
-                            <StatusCard icon={<MaterialIcons name="waves" size={28} color="#0DFF4D" />} iconName='Humidity' value={selectedField?.humidity} />
-                        </View>
-                    </View>
-                    <View
-                        className="mb-[160px]"
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            alignItems: 'stretch',
-                            marginTop: 12,
-                        }}
-                    >
-                        <View className="w-[56%]">
-                            <InfoCard />
-                        </View>
-                        <View className="w-[40%]">
-                            <StatusCard icon={<MaterialIcons name="sensors" size={28} color="#0DFF4D" />} iconName='Sensor status' value='ON' />
-                        </View>
+        <GestureHandlerRootView style={styles.container}>
+            <SafeAreaView style={{ backgroundColor: "#F5FDFB" }} className="bg-[#F5FDFB]">
+                <View style={{ flexDirection: "row" }} className="items-center justify-between mt-[12px] px-[2vh]">
+                    <Text className="text-[#111111] text-[21px] max-w-7/12 font-medium">
+                        {selectedField?.name} 🌿
+                    </Text>
+                    <View className="p-2 rounded-full bg-[#F3F9F6]">
+                        <Ionicons name="settings" size={28} color="#0DFF4D" />
                     </View>
                 </View>
-            </ScrollView>
-        </SafeAreaView>
+                <ScrollView style={{}} className='' showsVerticalScrollIndicator={false}>
+                    <View className='h-[270px] mt-[20px] px-[2vh]'>
+                        <PagerViewComponent />
+                    </View>
+                    <View className="mt-5 px-[2vh]">
+                        <View
+                            className=""
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                flexWrap: 'wrap',
+                                justifyContent: 'space-between',
+                            }}
+                        >
+                            <View className="w-[31%]">
+                                <StatusCard icon={<MaterialCommunityIcons name="longitude" size={28} color="#0DFF4D" />} iconName='Longitude' value={selectedField?.long} />
+                            </View>
+                            <View className="w-[31%]">
+                                <StatusCard icon={<MaterialCommunityIcons name="latitude" size={28} color="#0DFF4D" />} iconName='Latitude' value={selectedField?.lat} />
+                            </View>
+                            <View className="w-[31%]">
+                                <StatusCard icon={<MaterialIcons name="photo-size-select-large" size={28} color="#0DFF4D" />} iconName='Farm size' value={selectedField?.size} />
+                            </View>
+                        </View>
+                        <View
+                            className=""
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                flexWrap: 'wrap',
+                                justifyContent: 'space-between',
+                                marginTop: 12
+                            }}
+                        >
+                            <View className="w-[31%]">
+                                <StatusCard icon={<FontAwesome5 name="temperature-high" size={28} color="#0DFF4D" />} iconName='Temperature' value={selectedField?.temperature} />
+                            </View>
+                            <View className="w-[31%]">
+                                <StatusCard icon={<Entypo name="drop" size={28} color="#0DFF4D" />} iconName='Moisture' value={selectedField?.moisture} />
+                            </View>
+                            <View className="w-[31%]">
+                                <StatusCard icon={<MaterialIcons name="waves" size={28} color="#0DFF4D" />} iconName='Humidity' value={selectedField?.humidity} />
+                            </View>
+                        </View>
+                        <View
+                            className="mb-[170px]"
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                alignItems: 'stretch',
+                                marginTop: 12,
+                            }}
+                        >
+                            <View className="w-[56%]">
+                                <InfoCard />
+                            </View>
+                            <Pressable onPress={handleOpenPress} style={{ width: '40%' }}>
+                                <StatusCard
+                                    icon={<MaterialIcons name="sensors" size={28} color="#0DFF4D" />}
+                                    iconName="Sensor status"
+                                    value="ON"
+                                />
+                            </Pressable>
+                        </View>
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+            <SensorSheet ref={bottomSheetRef} title="So cool much sheet" />
+        </GestureHandlerRootView>
     );
 };
 export default withExpoSnack(FarmDashboard);
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+});

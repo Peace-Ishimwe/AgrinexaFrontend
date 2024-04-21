@@ -54,23 +54,23 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       <stack.Navigator initialRouteName={isLoggedIn ? 'main' : 'welcome'} screenOptions={{ headerShown: false }}>
-            <stack.Screen name="main" component={TabNavigator} />
-            <stack.Screen name="farm" component={FarmDashBoard} />
-            <stack.Screen name='weather' component={Weather} />
-            <stack.Screen name='diseasedetect' component={DiseaseDetect} />
-            <stack.Screen name="welcome" component={Welcome} />
-            <stack.Screen name="onBoarding" component={OnBoarding} />
-            <stack.Screen name="personalize" component={PersonalizeExperience} />
-            <stack.Screen name='completedSuccess' component={CompletedSuccess} />
-            <stack.Screen name='registerwithphone' component={RegisterWithPhone} />
-            <stack.Screen name='registerwithemail' component={RegisterWithEmail} />
-            <stack.Screen name='verificationCode' component={VerificationCode} />
-            <stack.Screen name='resetpassword' component={ResetPassword} />
-            <stack.Screen name='login' component={Login} />
-            <stack.Screen name='addaddress' component={AddAddress} />
-            <stack.Screen name='completedSuccessVerified' component={CompletedSuccesVerified} />
-            <stack.Screen name='contactUs' component={ContactUs} />
-            <stack.Screen name='userprofile' component={UserProfile} />
+        <stack.Screen name="main" component={TabNavigator} />
+        <stack.Screen name="farm" component={FarmDashBoard} />
+        <stack.Screen name='weather' component={Weather} />
+        <stack.Screen name='diseasedetect' component={DiseaseDetect} />
+        <stack.Screen name="welcome" component={Welcome} />
+        <stack.Screen name="onBoarding" component={OnBoarding} />
+        <stack.Screen name="personalize" component={PersonalizeExperience} />
+        <stack.Screen name='completedSuccess' component={CompletedSuccess} />
+        <stack.Screen name='registerwithphone' component={RegisterWithPhone} />
+        <stack.Screen name='registerwithemail' component={RegisterWithEmail} />
+        <stack.Screen name='verificationCode' component={VerificationCode} />
+        <stack.Screen name='resetpassword' component={ResetPassword} />
+        <stack.Screen name='login' component={Login} />
+        <stack.Screen name='addaddress' component={AddAddress} />
+        <stack.Screen name='completedSuccessVerified' component={CompletedSuccesVerified} />
+        <stack.Screen name='contactUs' component={ContactUs} />
+        <stack.Screen name='userprofile' component={UserProfile} />
       </stack.Navigator>
     </NavigationContainer>
   );
