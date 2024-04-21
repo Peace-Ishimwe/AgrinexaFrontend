@@ -3,10 +3,12 @@ import { Image, ImageBackground, Pressable, SafeAreaView, Text, TextInput, View,
 import BackPageButton from '../../../components/buttons/backPageButton'
 import ButtonTwo from '../../../components/buttons/buttonTwo'
 import styled from 'styled-components/native'
-import { useLinkTo, useNavigation } from '@react-navigation/native'
+import { useLinkTo } from '@react-navigation/native'
 import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
 import { unauthorizedAPI } from '../../../utils/api'
 import { storeData } from '../../../utils/storage'
+import { useAuth } from '../../../context/AuthContext'
+import { useRouter } from 'expo-router';
 
 
 const StyledScrollView = styled.ScrollView.attrs(() => ({
@@ -21,9 +23,11 @@ interface FormData {
 }
 const Login = () => {
     const linkTo = useLinkTo();
-    const navigation = useNavigation()
+    const router = useRouter()
     const [loading, setLoading] = useState(false)
     const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm<FormData>();
+    const { login } = useAuth();
+
     const onSubmit = async (data: FormData) => {
         setLoading(true)
         try {
@@ -35,7 +39,10 @@ const Login = () => {
                 storeData("token2", refresh_token),
                 storeData("user", user)
             ]);
-            linkTo("/main")
+            // Set the authenticated user in AuthContext
+            login(user);
+            // Redirect to the main page after login
+            router.replace('main');
         } catch (error) {
             console.error('Error posting data:', error);
         }

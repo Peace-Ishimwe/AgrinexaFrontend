@@ -1,47 +1,15 @@
 import React, { useState } from 'react'
-import { ImageBackground, Pressable, View, Text, Image, StatusBar, StatusBarStyle, ScrollView } from 'react-native'
+import { ImageBackground, Pressable, View, Text, Image, StatusBar, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLinkTo } from '@react-navigation/native'
-const STYLES = ['default', 'dark-content', 'light-content'] as const;
-const TRANSITIONS = ['fade', 'slide', 'none'] as const;
 const Welcome = () => {
     const linkTo = useLinkTo();
-    const [hidden, setHidden] = useState(false);
-    const [statusBarStyle, setStatusBarStyle] = useState<StatusBarStyle>(
-        STYLES[0],
-    );
-    const [statusBarTransition, setStatusBarTransition] = useState<
-        'fade' | 'slide' | 'none'
-    >(TRANSITIONS[0]);
-
-    const changeStatusBarVisibility = () => setHidden(!hidden);
-
-    const changeStatusBarStyle = () => {
-        const styleId = STYLES.indexOf(statusBarStyle) + 1;
-        if (styleId === STYLES.length) {
-            setStatusBarStyle(STYLES[0]);
-        } else {
-            setStatusBarStyle(STYLES[styleId]);
-        }
-    };
-
-    const changeStatusBarTransition = () => {
-        const transition = TRANSITIONS.indexOf(statusBarTransition) + 1;
-        if (transition === TRANSITIONS.length) {
-            setStatusBarTransition(TRANSITIONS[0]);
-        } else {
-            setStatusBarTransition(TRANSITIONS[transition]);
-        }
-    };
     return (
         <ImageBackground source={require("../../assets/Welcome.png")} style={{ flex: 1 }} className='px-[2vh]'>
             <StatusBar
                 animated={true}
-                barStyle={statusBarStyle}
-                showHideTransition={statusBarTransition}
                 translucent
                 backgroundColor="transparent"
-                hidden={hidden}
             />
             <SafeAreaView style={{flex: 1}}>
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -50,7 +18,7 @@ const Welcome = () => {
                             <Text className='text-mainColor font-semibold'>skip</Text>
                         </Pressable>
                     </View>
-                    <View style={{flex: 1, flexDirection: "column"}} className='mt-12 h-[280px] justify-between px-[10px]'>
+                    <View style={{flex: 1, flexDirection: "column"}} className='mt-12 h-[210px] justify-between px-[10px]'>
                         <View className=''>
                             <Text className='text-[36px] font-semibold text-white'>Welcome to {"\n"}<Text className='text-subMainColor text-[46px]'>AgriNexa</Text> </Text>
                         </View>

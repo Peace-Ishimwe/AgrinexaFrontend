@@ -1,26 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { SafeAreaView, Text, View, ScrollView, Image, Pressable, Dimensions, ViewStyle } from 'react-native';
+import { SafeAreaView, Text, View, ScrollView, Image, Pressable, ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { withExpoSnack, styled } from 'nativewind';
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+import { windowHeight, windowWidth } from '../../utils/constants';
 import { MainShadow } from '../../assets/styles/shadow';
 import { useLinkTo } from '@react-navigation/native';
 import { getData } from '../../utils/storage';
-
-
-const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour >= 5 && hour < 12) {
-        return 'Good Morning';
-    } else if (hour >= 12 && hour < 18) {
-        return 'Good Afternoon';
-    } else {
-        return 'Good Evening';
-    }
-};
-
-const StyledView = styled(View)
+import { getGreeting } from '../../utils/constants';
+import { useDrawerContext } from '../../context/DrawerContext';
 
 const Home = () => {
     const greeting = getGreeting();
@@ -45,24 +32,24 @@ const Home = () => {
         };
         fetchUserData();
     }, []);
-
+    const { setOpen, open } = useDrawerContext();
     return (
-        <SafeAreaView className="px-[2vh] bg-[#FFF] h-[100vh]">
+        <SafeAreaView className="px-[2vh] bg-[#FFF]">
             <View className="pt-[8vh] flex flex-row items-center justify-between">
                 <View>
                     <Text className="text-[#90A5B4] text-[16px] max-w-7/12 font-medium">
                         {greeting},
                     </Text>
                     <Text className="text-[#111111] text-[21px] max-w-7/12 font-semibold">
-                    {user?.name} 🌿
+                        {user?.name} 🌿
                     </Text>
                 </View>
-                <View className="p-2 rounded-full bg-[#F3F9F6] relative">
+                <Pressable className="p-2 rounded-full bg-[#F3F9F6] relative" onPress={() => setOpen(!open)}>
                     <Ionicons name="notifications" size={20} color="black" />
                     <View style={{ position: "absolute" }} className='w-[10px] h-[10px] rounded-full bg-[#0DFF4D] right-0'></View>
-                </View>
+                </Pressable>
             </View>
-            <ScrollView style={{marginTop: 24}} showsVerticalScrollIndicator={false}>
+            <ScrollView style={{ marginTop: 24 }} showsVerticalScrollIndicator={false}>
                 <View style={{}} className='w-full relative'>
                     <Image source={require('../../assets/Home/Group481825.jpg')} className='rounded-2xl w-[100%]' />
                     <View className='absolute'>
@@ -102,7 +89,7 @@ const Home = () => {
                 </View>
                 <View style={{ marginTop: 48, display: "flex" }} className='items-center justify-center px-[35]'>
                     <Pressable
-                        onPress={() => linkTo("/dashboard")}
+                        onPress={() => linkTo("/Dashboard")}
                         style={{
                             backgroundColor: "#34A853",
                             paddingVertical: 20,
@@ -123,8 +110,8 @@ const Home = () => {
                     </Pressable>
 
                 </View>
-                <Text style={{ width: 220, textAlign: "center", color: "#90A5B4", fontWeight: "500", fontSize: 14, marginTop: 12, marginBottom: 120 }} className='mx-auto'>
-                    You got 50% of today’s goal, keep focus on your health!
+                <Text style={{ width: 220, textAlign: "center", color: "#90A5B4", fontWeight: "500", fontSize: 14, marginTop: 12, marginBottom: 240 }} className='mx-auto'>
+                    You got 50% of today's goal, keep focus on your health!
                 </Text>
             </ScrollView>
         </SafeAreaView>

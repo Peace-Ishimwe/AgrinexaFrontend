@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Image, View, StyleSheet } from 'react-native';
+import { Image, View } from 'react-native';
+import { useAuth } from '../context/AuthContext';
 
-const stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
 import Welcome from '../screens/welcome/Welcome';
 import OnBoarding from '../screens/onBoarding/OnBoarding';
@@ -17,13 +18,7 @@ import ResetPassword from '../screens/(auth)/reset-password/ResetPassword';
 import Login from '../screens/(auth)/login/Login';
 import AddAddress from '../screens/address/AddAddress';
 import ContactUs from '../screens/contactUs/ContactUs';
-import TabNavigator from './TabNavigator';
-import Weather from '../screens/weather/Weather';
-import { getData } from '../utils/storage';
-import FarmDashBoard from '../screens/(dashboard)/FarmDashBoard';
-import DiseaseDetect from '../screens/diseaseDetect/DiseaseDetect';
-import UserProfile from '../screens/profile/UserProfile';
-import HomeSheet from '../components/sheets/sheet';
+import DrawerNavigator from './DrawerNavigator';
 
 const SplashImage = () => (
   <View className='w-screen h-screen'>
@@ -32,47 +27,60 @@ const SplashImage = () => (
 );
 
 const RootNavigator = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const { isAuthenticated } = useAuth()
+
 
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const token = await getData("token");
-        setIsLoggedIn(!!token);
+        setIsLoggedIn(isAuthenticated)
       } catch (error) {
         console.error('Error checking login status:', error);
       } finally {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);          
+        }, 100);
       }
     };
     checkLoginStatus();
-  }, []);
+  }, [isAuthenticated]);
 
   if (isLoading) {
     return <SplashImage />;
   }
+
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName={isLoggedIn ? 'main' : 'welcome'} screenOptions={{ headerShown: false }}>
-        <stack.Screen name="main" component={TabNavigator} />
-        <stack.Screen name='weather' component={Weather} />
-        <stack.Screen name='diseasedetect' component={DiseaseDetect} />
-        <stack.Screen name="welcome" component={Welcome} />
-        <stack.Screen name="onBoarding" component={OnBoarding} />
-        <stack.Screen name="personalize" component={PersonalizeExperience} />
-        <stack.Screen name='completedSuccess' component={CompletedSuccess} />
-        <stack.Screen name='registerwithphone' component={RegisterWithPhone} />
-        <stack.Screen name='registerwithemail' component={RegisterWithEmail} />
-        <stack.Screen name='verificationCode' component={VerificationCode} />
-        <stack.Screen name='resetpassword' component={ResetPassword} />
-        <stack.Screen name='login' component={Login} />
-        <stack.Screen name='addaddress' component={AddAddress} />
-        <stack.Screen name='completedSuccessVerified' component={CompletedSuccesVerified} />
-        <stack.Screen name='contactUs' component={ContactUs} />
-        <stack.Screen name='userprofile' component={UserProfile} />
-        <stack.Screen name='homeSheet' component={HomeSheet} />
-      </stack.Navigator>
+      <Stack.Navigator
+        initialRouteName={isLoggedIn ? 'main' : 'welcome'} screenOptions={{ headerShown: false }}
+      >
+        {
+          isLoggedIn ? (
+            <Stack.Group>
+              <Stack.Screen name='main' component={DrawerNavigator} />
+              <Stack.Screen name='addaddress' component={AddAddress} />
+            </Stack.Group>
+          ) : (
+            <Stack.Group>
+              <Stack.Screen name='welcome' component={Welcome} />
+              <Stack.Screen name='contactUs' component={ContactUs} />
+              <Stack.Screen name='login' component={Login} />
+              <Stack.Screen name='registerwithphone' component={RegisterWithPhone} />
+              <Stack.Screen name='registerwithemail' component={RegisterWithEmail} />
+            </Stack.Group>
+          )
+        }
+        <Stack.Group>
+          <Stack.Screen name="onBoarding" component={OnBoarding} />
+          <Stack.Screen name="personalize" component={PersonalizeExperience} />
+          <Stack.Screen name='completedSuccess' component={CompletedSuccess} />
+          <Stack.Screen name='verificationCode' component={VerificationCode} />
+          <Stack.Screen name='resetpassword' component={ResetPassword} />
+          <Stack.Screen name='completedSuccessVerified' component={CompletedSuccesVerified} />
+        </Stack.Group>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

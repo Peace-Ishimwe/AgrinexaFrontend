@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { View } from "react-native";
-import Slide from "./slides/Slide";
+import Slide from "./_comp/Slide";
 import PagerView from "react-native-pager-view";
 
 const PagerViewComponent = () => {

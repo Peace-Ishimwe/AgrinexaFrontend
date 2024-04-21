@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { HumidityIcon } from '../../../assets/icons/icons';
+import { FontAwesome5, FontAwesome6 } from '@expo/vector-icons';
 
 const InfoCard = () => {
   return (
@@ -8,7 +9,7 @@ const InfoCard = () => {
       <Text style={styles.title}>Nutrient Level</Text>
       <View style={styles.row}>
         <View style={styles.iconContainer}>
-          <HumidityIcon />
+          <FontAwesome6 name="plant-wilt" size={21} color="#0DFF4D" />
         </View>
         <View>
           <Text style={styles.text}>5 grams left</Text>
@@ -16,7 +17,7 @@ const InfoCard = () => {
       </View>
       <View style={styles.row}>
         <View style={styles.iconContainer}>
-          <HumidityIcon />
+        <FontAwesome5 name="balance-scale" size={21} color="#0DFF4D" />
         </View>
         <View>
           <Text style={styles.text}>5 grams left</Text>
@@ -42,18 +43,17 @@ const styles = StyleSheet.create({
   title: {
     color: '#9796A1',
     fontSize: 16,
-    marginBottom: 9
+    marginBottom: 7
   },
   row: {
     flexDirection: 'row',
-    marginTop: 2,
+    marginTop: 8,
+    alignItems: "flex-end",
+    gap: 8
   },
   iconContainer: {
-    marginBottom: 1,
   },
   text: {
-    marginTop: 1,
-    marginLeft: 2,
     color: '#06492C',
     fontWeight: 'bold',
     fontSize: 18,

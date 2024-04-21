@@ -18,10 +18,10 @@ const Stack = createNativeStackNavigator();
 
 const HomeStack = () => {
     return (
-        <Stack.Navigator initialRouteName='farm' screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="farm" component={FarmDashBoard} />
-            <Stack.Screen name="home" component={Home} />
-            <Stack.Screen name="dashboard" component={Dashboard} />
+        <Stack.Navigator initialRouteName='Homepage' screenOptions={{ headerShown: false}}>
+            <Stack.Screen name="Homepage" component={Home} />
+            <Stack.Screen name="Dashboard" component={Dashboard} />
+            <Stack.Screen name="Farm" component={FarmDashBoard} />
         </Stack.Navigator>
     );
 };
@@ -64,9 +64,9 @@ const TabNavigator = () => {
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
             <BottomSheetModalProvider>
-                <Tab.Navigator initialRouteName='homestack' screenOptions={screenOptions}>
+                <Tab.Navigator initialRouteName='Homestack' screenOptions={screenOptions}>
                     <Tab.Screen
-                        name="homestack"
+                        name="Homestack"
                         component={HomeStack}
                         options={{
                             tabBarIcon: ({ focused }) => (
@@ -80,7 +80,7 @@ const TabNavigator = () => {
                         }}
                     />
                     <Tab.Screen
-                        name="search"
+                        name="weather"
                         component={Weather}
                         options={{
                             tabBarIcon: ({ focused }) => (
@@ -94,7 +94,7 @@ const TabNavigator = () => {
                         }}
                     />
                     <Tab.Screen
-                        name="scan"
+                        name="Scan"
                         component={Dashboard}
                         options={{
                             tabBarIcon: ({ focused }) => (
@@ -120,7 +120,7 @@ const TabNavigator = () => {
                         }}
                     />
                     <Tab.Screen
-                        name="like"
+                        name="Settings"
                         component={Dashboard}
                         options={{
                             tabBarIcon: ({ focused }) => (
@@ -134,7 +134,7 @@ const TabNavigator = () => {
                         }}
                     />
                     <Tab.Screen
-                        name="account"
+                        name="Account"
                         component={UserProfile}
                         options={{
                             tabBarIcon: ({ focused }) => (

@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
 import { Dimensions } from 'react-native';
@@ -10,7 +10,15 @@ type Ref = BottomSheetModal
 
 const SensorSheet = forwardRef<Ref>((props, ref) => {
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const [switchLabel, setSwitchLabel] = useState(isEnabled ? "ON" : "OFF");
+  const toggleSwitch = () => { setIsEnabled(previousState => !previousState) };
+  useEffect(() => {
+    if (isEnabled) {
+      setSwitchLabel("ON")
+    } else {
+      setSwitchLabel("OFF")
+    }
+  }, [isEnabled])
   const snapPoints = useMemo(() => ["25%", "40%", "75%"], [])
 
   const renderBackdrop = useCallback(
@@ -44,19 +52,27 @@ const SensorSheet = forwardRef<Ref>((props, ref) => {
     >
       <View style={{ paddingHorizontal: WindowWidth * 5 / 100 }} className='px-[]'>
         <Text className='text-[18px] text-[#111111] font-semibold text-center mt-[20px]'>Sensor Status</Text>
-        <View style={{ borderTopWidth: 2, borderBottomWidth: 2, flexDirection: "row" }} className='border-[#06492C]/10 mt-[20px] py-[20px] justify-between'>
+        <View style={{ borderTopWidth: 2, borderBottomWidth: 2, flexDirection: "row", alignItems: "center" }} className='border-[#06492C]/10 mt-[20px] py-[20px] justify-between'>
           <Text className='text-[18px] text-[#06492C] font-semibold'>Sensors</Text>
           <ToggleSwitch
-            isOn={false}
-            onColor="green"
-            offColor="red"
-            label="Example label"
+            isOn={isEnabled}
+            onColor="#0DFF4D"
+            offColor="#34A853"
+            label={switchLabel}
             labelStyle={{ color: "black", fontWeight: "900" }}
-            size="large"
-            onToggle={isOn => console.log("changed to : ", isOn)}
+            size="medium"
+            onToggle={toggleSwitch}
           />
         </View>
+        <View style={{ borderBottomWidth: 2, flexDirection: "row", alignItems: "center" }} className='border-[#06492C]/10 py-[20px] justify-between'>
+          <Text className='text-[18px] text-[#06492C] font-semibold'>Automatic Settings</Text>
+          <Text className=' text-[#06492C]/[69] font-semibold'>Off at Sunset</Text>
+        </View>
+        <Pressable>
+          <Text className='text-[18px] text-center text-[#0C9359] font-semibold mt-[28px]'>Go to Settings</Text>
+        </Pressable>
       </View>
+
     </BottomSheetModal>
   )
 })
