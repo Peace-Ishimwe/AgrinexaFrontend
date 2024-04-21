@@ -23,6 +23,7 @@ import { getData } from '../utils/storage';
 import FarmDashBoard from '../screens/(dashboard)/FarmDashBoard';
 import DiseaseDetect from '../screens/diseaseDetect/DiseaseDetect';
 import UserProfile from '../screens/profile/UserProfile';
+import HomeSheet from '../components/sheets/sheet';
 
 const SplashImage = () => (
   <View className='w-screen h-screen'>
@@ -55,7 +56,6 @@ const RootNavigator = () => {
     <NavigationContainer>
       <stack.Navigator initialRouteName={isLoggedIn ? 'main' : 'welcome'} screenOptions={{ headerShown: false }}>
         <stack.Screen name="main" component={TabNavigator} />
-        <stack.Screen name="farm" component={FarmDashBoard} />
         <stack.Screen name='weather' component={Weather} />
         <stack.Screen name='diseasedetect' component={DiseaseDetect} />
         <stack.Screen name="welcome" component={Welcome} />
@@ -71,6 +71,7 @@ const RootNavigator = () => {
         <stack.Screen name='completedSuccessVerified' component={CompletedSuccesVerified} />
         <stack.Screen name='contactUs' component={ContactUs} />
         <stack.Screen name='userprofile' component={UserProfile} />
+        <stack.Screen name='homeSheet' component={HomeSheet} />
       </stack.Navigator>
     </NavigationContainer>
   );

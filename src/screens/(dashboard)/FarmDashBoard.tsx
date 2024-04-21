@@ -34,12 +34,12 @@ const FarmDashboard = () => {
         };
     }, []);
     // Sensor sheet handlers
-    const bottomSheetRef = useRef<BottomSheet>(null)
+    const bottomSheetRef = useRef<BottomSheetModal>(null)
     const handleClosePress = () => bottomSheetRef.current?.close();
     const handleOpenPress = () => {
-        bottomSheetRef.current?.expand();
+        bottomSheetRef.current?.present()
         bottomSheetRef.current?.snapToIndex(0)
-    }
+    };
     const handleCollapsePress = () => bottomSheetRef.current?.collapse();
 
     return (
@@ -121,7 +121,7 @@ const FarmDashboard = () => {
                     </View>
                 </ScrollView>
             </SafeAreaView>
-            <SensorSheet ref={bottomSheetRef} title="So cool much sheet" />
+            <SensorSheet ref={bottomSheetRef} />
         </GestureHandlerRootView>
     );
 };
