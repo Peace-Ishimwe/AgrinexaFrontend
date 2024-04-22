@@ -38,7 +38,7 @@ const CustomDrawerContent = () => {
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView
-                contentContainerStyle={{ backgroundColor: '#8200d6' }}
+                contentContainerStyle={{ backgroundColor: '#34A853' }}
             >
                 <View
                     style={{ padding: 20 }}
