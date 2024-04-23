@@ -1,7 +1,8 @@
 // AuthContext.ts
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { deleteData, getData, storeData } from '../utils/storage';
+import { getData, storeData } from '../utils/storage';
+import { useRouter } from 'expo-router';
 
 // Define the shape of the user object
 interface User {
@@ -22,13 +23,14 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue>({
   user: null,
   isAuthenticated: false,
-  login: () => {},
-  logout: () => {},
+  login: () => { },
+  logout: () => { },
 });
 
 // Create a provider component for AuthContext
 const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const router = useRouter()
 
   // Simulate checking if a user is already logged in
   useEffect(() => {
@@ -42,7 +44,6 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
         console.error('Failed to fetch user from AsyncStorage', error);
       }
     };
-
     fetchUser();
   }, []);
 
@@ -59,6 +60,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     try {
       setUser(null);
       await AsyncStorage.clear();
+      router.replace("/welcome")
     } catch (error) {
       console.error('Failed to remove user from AsyncStorage', error);
     }

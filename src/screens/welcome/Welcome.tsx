@@ -5,7 +5,7 @@ import { useLinkTo } from '@react-navigation/native'
 const Welcome = () => {
     const linkTo = useLinkTo();
     return (
-        <ImageBackground source={require("../../assets/Welcome.png")} style={{ flex: 1 }} className='px-[2vh]'>
+        <ImageBackground source={require("../../assets/Welcome.png")} style={{ flex: 1, backgroundColor: "#40513C" }} className='px-[2vh]'>
             <StatusBar
                 animated={true}
                 translucent

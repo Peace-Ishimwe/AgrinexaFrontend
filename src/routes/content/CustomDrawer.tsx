@@ -4,7 +4,7 @@ import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useLinkTo, useNavigation, useRoute } from '@react-navigation/native';
-import { getActiveRouteState , getCurrentRouteName, RouteName } from '../../utils/constants';
+import { getCurrentRouteName, RouteName } from '../../utils/constants';
 import { Drawer } from 'react-native-drawer-layout';
 import { useDrawerContext } from '../../context/DrawerContext';
 import { useAuth } from '../../context/AuthContext';
@@ -92,7 +92,7 @@ const CustomDrawerContent = () => {
                 </View>
             </DrawerContentScrollView>
             <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: '#ccc' }}>
-                <TouchableOpacity onPress={() => { }} style={{ paddingVertical: 15 }}>
+                <TouchableOpacity onPress={logout} style={{ paddingVertical: 15 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: "#34A853", width: 117, height: 43, borderRadius: 50, paddingLeft: 8 }}>
                         <View className='p-[4px] bg-white rounded-full'>
                             <Ionicons name="power-sharp" color={"#34A853"} size={20} />
