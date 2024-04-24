@@ -74,6 +74,7 @@ const Dashboard = () => {
                             <Pressable key={i}
                                 onPress={async () => {
                                     await AsyncStorage.setItem('selectedField', JSON.stringify(field));
+                                    console.log(field)
                                     linkTo("/Farm");
                                 }}
                                 style={{ flexDirection: "column", alignItems: "center", ...MainShadow }} className="rounded-lg bg-white p-[16px] items-center">

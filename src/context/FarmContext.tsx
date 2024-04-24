@@ -21,6 +21,7 @@ const FarmProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
             try {
                 const savedFieldJSON = await AsyncStorage.getItem('selectedField');
                 if (savedFieldJSON) {
+                    console.log(savedFieldJSON)
                     const savedField = JSON.parse(savedFieldJSON);
                     setSelectedField(savedField);
                 }

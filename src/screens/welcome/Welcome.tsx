@@ -51,7 +51,7 @@ const Welcome = () => {
                     </View>
                     <View className='my-[30px] flex flex-row justify-center items-center'>
                         <Text className='text-center text-base text-white font-semibold'>Already have an account?</Text>
-                        <Pressable>
+                        <Pressable onPress={()=> linkTo("/login")}>
                             <Text className='text-base ml-3 underline text-white'>
                                 SignIn
                             </Text>

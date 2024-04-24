@@ -10,7 +10,7 @@ import { useDrawerContext } from '../../context/DrawerContext';
 import { useAuth } from '../../context/AuthContext';
 
 const screens = [
-    { name: 'My Farms', icon: 'document-text', screen: "Farm" },
+    { name: 'My Farms', icon: 'document-text', screen: "Dashboard" },
     { name: 'My Profile', icon: 'person-sharp', screen: "UserProfile" },
     { name: 'Assets Address', icon: 'location-sharp', screen: "Farm" },
     { name: 'Payment Methods', icon: 'card-sharp', screen: "Scan" },
@@ -50,7 +50,7 @@ const CustomDrawerContent = () => {
                             marginBottom: 5,
                         }}
                     >
-                        John Doe
+                        Peace Ishimwe
                     </Text>
                     <View style={{ flexDirection: 'row' }}>
                         <Text
@@ -59,9 +59,8 @@ const CustomDrawerContent = () => {
                                 marginRight: 5,
                             }}
                         >
-                            280 Coins
+                            peaceishimwem@gmail.com
                         </Text>
-                        <FontAwesome5 name="coins" size={14} color="#fff" />
                     </View>
                 </View>
                 <View style={{ flex: 1, backgroundColor: '#fff', paddingTop: 10 }}>
