@@ -3,8 +3,8 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { useLinkTo, useNavigation, useRoute } from '@react-navigation/native';
-import { getCurrentRouteName, RouteName } from '../../utils/constants';
+import { useLinkTo } from '@react-navigation/native';
+import { RouteName } from '../../utils/constants';
 import { Drawer } from 'react-native-drawer-layout';
 import { useDrawerContext } from '../../context/DrawerContext';
 import { useAuth } from '../../context/AuthContext';
@@ -19,10 +19,6 @@ const screens = [
 
 const CustomDrawerContent = () => {
     const linkTo = useLinkTo()
-    const route = useRoute()
-    const navigation = useNavigation()
-    const activeRoute = getCurrentRouteName(navigation.getState());
-    console.log(activeRoute)
     const currentRouteName = RouteName()
 
     useEffect(() => {

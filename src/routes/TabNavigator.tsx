@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ParamListBase, RouteProp, useLinkTo } from '@react-navigation/native';
 import Dashboard from '../screens/(dashboard)/Dashboard';
 import Home from '../screens/home/Home';
@@ -12,19 +11,9 @@ import { getData } from '../utils/storage';
 import UserProfile from '../screens/profile/UserProfile';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { MainShadow } from '../assets/styles/shadow';
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
-
-const HomeStack = () => {
-    return (
-        <Stack.Navigator initialRouteName='Homepage' screenOptions={{ headerShown: false}}>
-            <Stack.Screen name="Homepage" component={Home} />
-            <Stack.Screen name="Dashboard" component={Dashboard} />
-            <Stack.Screen name="Farm" component={FarmDashBoard} />
-        </Stack.Navigator>
-    );
-};
 
 const screenOptions = ({ route }: { route: RouteProp<ParamListBase, string>; navigation: any }): BottomTabNavigationOptions => ({
     tabBarShowLabel: false,
@@ -66,8 +55,8 @@ const TabNavigator = () => {
             <BottomSheetModalProvider>
                 <Tab.Navigator initialRouteName='Homestack' screenOptions={screenOptions}>
                     <Tab.Screen
-                        name="Homestack"
-                        component={HomeStack}
+                        name="Homepage"
+                        component={Home}
                         options={{
                             tabBarIcon: ({ focused }) => (
                                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -101,18 +90,13 @@ const TabNavigator = () => {
                                 <View
                                     style={{
                                         position: "absolute",
-                                        alignItems: 'center', justifyContent: 'center', shadowColor: "#000",
-                                        shadowOffset: {
-                                            width: 0,
-                                            height: 3,
-                                        },
-                                        shadowOpacity: 0.29,
-                                        shadowRadius: 4.65,
-                                        elevation: 7,
+                                        alignItems: 'center', 
+                                        justifyContent: 'center', 
                                         top: -20,
-                                        backgroundColor: "#fff",
-                                        padding: 16,
+                                        width: 72,
+                                        height: 72,
                                         borderRadius: 50,
+                                        ...MainShadow
                                     }}>
                                     <Ionicons name="alarm-outline" size={42} color={focused ? '#5DCCFC' : '#000'} />
                                 </View>
@@ -144,7 +128,21 @@ const TabNavigator = () => {
                                         Profile
                                     </Text>
                                 </View>
-                            ),
+                            ), 
+                        }}
+                    />
+                    <Tab.Screen
+                        name="Dashboard"
+                        component={Dashboard}
+                        options={{ 
+                            tabBarButton: () => null,
+                        }}
+                    />
+                    <Tab.Screen
+                        name="Farm"
+                        component={FarmDashBoard}
+                        options={{ 
+                            tabBarButton: () => null,
                         }}
                     />
                 </Tab.Navigator>
