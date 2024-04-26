@@ -11,31 +11,9 @@ const SplashImage = () => (
 );
 
 export default function TabOneScreen() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const { isAuthenticated } = useAuth()
-
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        setIsLoggedIn(isAuthenticated)
-      } catch (error) {
-        console.error('Error checking login status:', error);
-      } finally {
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 100);
-      }
-    };
-    checkLoginStatus();
-  }, [isAuthenticated]);
-
-  if (isLoading) {
-    return <SplashImage />;
-  }
-
-  if (!isLoggedIn) {
-    return <Redirect href="/Welcome" />;
+  if (!isAuthenticated) {
+    return <Redirect href="/(public)/Welcome" />;
   } else {
     return <Redirect href="/(tabs)/Home" />;
   }

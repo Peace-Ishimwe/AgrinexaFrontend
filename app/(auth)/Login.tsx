@@ -22,10 +22,9 @@ interface FormData {
     password: string;
 }
 const Login = () => {
-    const linkTo = useLinkTo();
     const router = useRouter()
     const [loading, setLoading] = useState(false)
-    const { handleSubmit, control, formState: { errors } } = useForm<FormData>();
+    const { handleSubmit, control } = useForm<FormData>();
     const { login } = useAuth();
 
     const onSubmit = async (data: FormData) => {
@@ -34,11 +33,10 @@ const Login = () => {
             const response = await unauthorizedAPI.post(`/auth/login`, data);
             const { access_token, refresh_token, user } = response.data;
             await Promise.all([
-                storeData("token", access_token),
-                storeData("token2", refresh_token),
+                storeData("refresh_token", refresh_token),
                 storeData("user", user)
             ]);
-            login(user);
+            login(access_token);
             router.replace('/(tabs)/Home');
         } catch (error) {
             console.error('Error posting data:', error);
@@ -53,7 +51,7 @@ const Login = () => {
     return (
         <SafeAreaView style={{ flex: 1 }} className='bg-white justify-between'>
             <StatusBar translucent backgroundColor={'transparent'} barStyle={"light-content"} />
-            <ImageBackground className='h-[28vh] px-[2vh] pt-[6vh]' source={require("../../assets/images/authBgImage.png")} style={{ backgroundColor: "black" }}>
+            <ImageBackground className='px-[2vh] pb-[2vh] pt-[6vh]' source={require("../../assets/images/authBgImage.png")} style={{ backgroundColor: "black" }}>
                 <View className='flex flex-col items-start'>
                     <BackPageButton />
                     <Text className='text-[#fff] text-[37px] mt-4'>LogIn</Text>
@@ -96,13 +94,13 @@ const Login = () => {
                             rules={{ required: 'You must enter your password' }}
                         />
                     </View>
-                    <View style={{}} className='mt-[40px]'>
+                    <View style={{flexDirection: "row", justifyContent: "center"}} className='mt-[40px]'>
                         <ButtonTwo name='LOG IN' onPress={handleSubmit(onSubmit)} loading={loading} />
                     </View>
                     <View style={{ display: "flex", flexDirection: "row" }} className='mt-6 items-center justify-center'>
                         <Text className='text-center text-textMainColor text-[18px]'>Don't have an account?
                         </Text>
-                        <Pressable onPress={() => linkTo("/RegisterWithEmail")}>
+                        <Pressable onPress={() => router.push("/RegisterWithEmail")}>
                             <Text style={{ color: '#34A853', fontSize: 18 }} className='text-mainColor  ml-2 text-[18px]'>Signup</Text>
                         </Pressable>
                     </View>

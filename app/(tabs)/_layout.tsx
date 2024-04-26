@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
-import { ParamListBase, RouteProp, useLinkTo } from '@react-navigation/native';
-import { Tabs } from 'expo-router';
+import { ParamListBase, RouteProp } from '@react-navigation/native';
+import { Redirect, Tabs, useRouter } from 'expo-router';
 import { getData } from '@/utils/storage';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { MainShadow } from '@/assets/styles/shadow';
 import { DrawerNavigatorProvider } from '@/context/DrawerContext';
 import CustomDrawer from '@/container/CustomDrawer';
+import { useAuth } from '@/context/AuthContext';
 
 
 const screenOptions = ({ route }: { route: RouteProp<ParamListBase, string>; navigation: any }): BottomTabNavigationOptions => ({
@@ -30,25 +31,11 @@ const screenOptions = ({ route }: { route: RouteProp<ParamListBase, string>; nav
 
 
 const TabLayout = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const linkTo = useLinkTo();
-
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const token = await getData("token");
-        if (!token) linkTo("/Login");
-      } catch (error) {
-        console.error('Error checking login status:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    checkLoginStatus();
-  }, []);
-
+  const { isAuthenticated } = useAuth()
+  if (!isAuthenticated) {
+    return <Redirect href={"/Welcome"} />
+  }
   return (
-
     <DrawerNavigatorProvider>
       <CustomDrawer>
         <GestureHandlerRootView style={{ flex: 1 }}>

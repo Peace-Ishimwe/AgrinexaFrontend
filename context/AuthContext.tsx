@@ -30,15 +30,18 @@ const AuthContext = createContext<AuthContextValue>({
 // Create a provider component for AuthContext
 const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [token ,setToken] = useState<string>();
   const router = useRouter()
 
   // Simulate checking if a user is already logged in
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const savedUser = await getData('authUser');
+        const access_token = await getData('access_token');
+        setToken(access_token);
+        const savedUser = await getData('user');
         if (savedUser) {
-          setUser(JSON.parse(savedUser));
+          setUser(savedUser);
         }
       } catch (error) {
         console.error('Failed to fetch user from AsyncStorage', error);
@@ -46,11 +49,12 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     };
     fetchUser();
   }, []);
+  
 
   const login = async (user: User) => {
     try {
       setUser(user);
-      await storeData('authUser', JSON.stringify(user));
+      await storeData('access_token', JSON.stringify(user));
     } catch (error) {
       console.error('Failed to save user to AsyncStorage', error);
     }
@@ -67,7 +71,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated: !!token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

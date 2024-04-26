@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { SafeAreaView, Text, View, ScrollView, Image, Pressable, ViewStyle } from 'react-native';
+import { SafeAreaView, Text, View, ScrollView, Image, Pressable, ViewStyle, StatusBar } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { withExpoSnack, styled } from 'nativewind';
 import { windowHeight, windowWidth } from '@/utils/constants';

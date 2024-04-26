@@ -9,7 +9,7 @@ interface buttonProps{
 
 const ButtonTwo : React.FC<buttonProps> = ({ onPress , name,loading }) => {
   return (
-    <View className='flex items-center justify-center px-[35]'>
+    <View className='flex items-center justify-center px-[35px] w-full'>
       <Pressable onPress={onPress} className='bg-mainColor py-[20px] w-10/12 max-w-[280px] rounded-full'>
       {loading ? (
             <ActivityIndicator color="#fff" size="small" />

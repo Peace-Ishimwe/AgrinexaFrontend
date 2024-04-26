@@ -3,16 +3,16 @@ import { ImageBackground, Pressable, View, Text, Image, StatusBar, ScrollView } 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLinkTo } from '@react-navigation/native'
 import { useAuth } from '@/context/AuthContext';
-import { Redirect } from 'expo-router';
+import { Redirect, useRouter } from 'expo-router';
 
 const Welcome = () => {
-    const linkTo = useLinkTo();
+    const router = useRouter();
     const { isAuthenticated } = useAuth()
     if (isAuthenticated) {
-        <Redirect href={"/Home"} />
+        <Redirect href={"/(tabs)/Home"} />
     }
     return (
-        <ImageBackground source={require("../assets/images/Welcome.png")} style={{ flex: 1, backgroundColor: "#40513C" }} className='px-[2vh]'>
+        <ImageBackground source={require("../../assets/images/Welcome.png")} style={{ flex: 1, backgroundColor: "#40513C" }} className='px-[2vh]'>
             <StatusBar
                 animated={true}
                 barStyle={"light-content"}
@@ -22,7 +22,7 @@ const Welcome = () => {
             <SafeAreaView style={{ flex: 1 }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={{ flexDirection: "row" }} className='justify-end items-end mt-2'>
-                        <Pressable onPress={() => linkTo("/OnBoarding")} className='bg-white px-[16] py-[8] rounded-full'>
+                        <Pressable onPress={() => router.push("/(tabs)/Home")} className='bg-white px-[16] py-[8] rounded-full'>
                             <Text className='text-mainColor font-semibold'>skip</Text>
                         </Pressable>
                     </View>
@@ -41,25 +41,25 @@ const Welcome = () => {
                     </View>
                     <View className='mt-[32px] flex flex-row justify-center gap-x-6'>
                         <Pressable className='bg-white flex rounded-full flex-row items-center px-[16px] py-[10px]'>
-                            <Image source={require("../assets/images/facebookIcon.png")} />
+                            <Image source={require("../../assets/images/facebookIcon.png")} />
                             <Text className='mx-3 text-[16px]'>Facebook</Text>
                         </Pressable>
                         <Pressable className='bg-white flex rounded-full flex-row items-center px-[10px] py-[7px]'>
-                            <Image source={require("../assets/images/googleIcon.png")} />
+                            <Image source={require("../../assets/images/googleIcon.png")} />
                             <Text className='mx-6 text-[16px]'>Google</Text>
                         </Pressable>
                     </View>
                     <View className='mt-[20px] flex flex-col justify-center'>
-                        <Pressable onPress={() => { linkTo("/RegisterWithEmail") }} className='rounded-full border-[1px] mb-4 border-[#fff] py-3 flex items-center bg-[#ffffff35]'>
+                        <Pressable onPress={() => { router.push("/(auth)/RegisterWithEmail") }} className='rounded-full border-[1px] mb-4 border-[#fff] py-3 flex items-center bg-[#ffffff35]'>
                             <Text className='text-[#fff] text-base'>Start with Email</Text>
                         </Pressable>
-                        <Pressable onPress={() => linkTo("/RegisterWithPhone")} className='rounded-full border-[1px] border-[#fff] py-3 flex items-center bg-[#ffffff35]'>
+                        <Pressable onPress={() => router.push("/(auth)/RegisterWithPhone")} className='rounded-full border-[1px] border-[#fff] py-3 flex items-center bg-[#ffffff35]'>
                             <Text className='text-[#fff] text-base'>Start with Phone</Text>
                         </Pressable>
                     </View>
                     <View className='my-[30px] flex flex-row justify-center items-center'>
                         <Text className='text-center text-base text-white font-semibold'>Already have an account?</Text>
-                        <Pressable onPress={() => linkTo("/Login")}>
+                        <Pressable onPress={() => router.push("/(auth)/Login")}>
                             <Text className='text-base ml-3 underline text-white'>
                                 SignIn
                             </Text>

@@ -12,13 +12,14 @@ import styles, {
   DEFAULT_CELL_BG_COLOR,
   NOT_EMPTY_CELL_BG_COLOR,
 } from './styles';
+import { useRouter } from 'expo-router';
 
 const { Value, Text: AnimatedText } = Animated;
 
 const CELL_COUNT = 4;
 
 const VerificationCode: React.FC = () => {
-  const linkTo = useLinkTo();
+  const router = useRouter()
   const [value, setValue] = useState('');
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -115,7 +116,7 @@ const VerificationCode: React.FC = () => {
             <Text className='text-center text-textMainColor text-[18px]'>Didn't recieve the code<Text className='text-mainColor'>  Please resend</Text></Text>
           </View>
           <View className='mt-10'>
-            <ButtonTwo onPress={() => linkTo("/completedSuccessVerified")} name='SEND' loading={false} />
+            <ButtonTwo onPress={() => router.push("/public/CompletedSuccesVerified")} name='SEND' loading={false} />
           </View>
         </View>
       </View>

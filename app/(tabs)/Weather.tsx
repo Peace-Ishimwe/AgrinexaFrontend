@@ -1,9 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Image, Text, View, TextInput, TouchableOpacity, ScrollView, StyleSheet, ImageBackground } from 'react-native';
-import { theme } from '../../theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AntDesign, Feather, FontAwesome5, MaterialIcons, Entypo } from '@expo/vector-icons';
+import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { debounce } from "lodash";
 import { fetchLocations, fetchWeatherForecast } from '@/api/weather';
 import { weatherImages } from '../../constants';

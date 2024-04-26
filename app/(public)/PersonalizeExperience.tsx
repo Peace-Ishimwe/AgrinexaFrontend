@@ -14,7 +14,7 @@ const PersonalizeExperience = () => {
     return (
         <SafeAreaView className='bg-white h-[100vh] flex justify-between'>
             <View>
-                <ImageBackground className='h-[90] w-full flex justify-center' source={require('../assets/images/onBoarding/bgImageTop.png')}>
+                <ImageBackground className='h-[90] w-full flex justify-center' source={require('../../assets/images/onBoarding/bgImageTop.png')}>
                     <View className='px-[25px] flex flex-row'>
                         <BackPageButton />
                     </View>
@@ -35,7 +35,7 @@ const PersonalizeExperience = () => {
                     </View>
                 </View>
             </View>
-            <ButtonOne name='CONTINUE' onPress={() => router.push("/CompletedSuccess")} />
+            <ButtonOne name='CONTINUE' onPress={() => router.push("/(public)/CompletedSuccesVerified")} />
         </SafeAreaView>
     )
 }
