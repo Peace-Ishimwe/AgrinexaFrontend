@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
-import { Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { ParamListBase, RouteProp } from '@react-navigation/native';
 import { Redirect, Tabs, useRouter } from 'expo-router';
-import { getData } from '@/utils/storage';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { MainShadow } from '@/assets/styles/shadow';
@@ -29,10 +28,20 @@ const screenOptions = ({ route }: { route: RouteProp<ParamListBase, string>; nav
   tabBarInactiveTintColor: '#000',
 });
 
+const AuthLoadingScreen = () => {
+  // Loading screen while determining authentication state
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <ActivityIndicator size="large" color="#34A853" />
+    </View>
+  );
+};
 
 const TabLayout = () => {
-  const { isAuthenticated } = useAuth()
-  if (!isAuthenticated) {
+  const { isAuthenticated , isLoading } = useAuth()
+  if(isLoading){
+    return <AuthLoadingScreen />;
+  }else if (!isAuthenticated) {
     return <Redirect href={"/Welcome"} />
   }
   return (
@@ -40,7 +49,7 @@ const TabLayout = () => {
       <CustomDrawer>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <BottomSheetModalProvider>
-            <Tabs initialRouteName='Home' screenOptions={screenOptions}>
+            <Tabs initialRouteName='UserProfile' screenOptions={screenOptions}>
               <Tabs.Screen
                 name="Home"
                 options={{
@@ -110,7 +119,7 @@ const TabLayout = () => {
                         Profile
                       </Text>
                     </View>
-                  ),
+                  )
                 }}
               />
               <Tabs.Screen

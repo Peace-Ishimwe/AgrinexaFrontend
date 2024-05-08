@@ -21,7 +21,7 @@ interface Field {
 const FarmDashboard = () => {
     const [selectedField, setSelectField] = useState<Field | undefined>();
     const { FarmId } = useLocalSearchParams();
-
+    
     const [isFetching, setIsFetching] = useState(true);
     const bottomSheetRef = useRef<BottomSheetModal>(null);
     const handleOpenPress = () => {
@@ -33,14 +33,14 @@ const FarmDashboard = () => {
         const fetchData = async () => {
             try {
                 setIsFetching(true);
-                const response = await authorizedAPI.post(`/fields/${FarmId}`);
+                const response = await authorizedAPI.get(`/fields/${FarmId}`);
                 console.log(response)
                 setSelectField(response?.data);
+                setIsFetching(false);
             } catch (error) {
                 console.log(error);
             }
         };
-
         fetchData();
     }, [FarmId]);
 

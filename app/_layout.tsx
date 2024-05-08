@@ -21,10 +21,9 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 function RootLayoutNav() {
-  const { isAuthenticated } = useAuth()
   return (
     <ContextProviders >
-      <Stack initialRouteName={isAuthenticated ? '(tabs)' : '(public)'} screenOptions={{ headerShown: false }}>
+      <Stack initialRouteName='(tabs)' screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name='(public)' />
         <Stack.Screen name='(auth)' />

@@ -1,77 +1,92 @@
-// AuthContext.ts
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getData, storeData } from '../utils/storage';
 import { useRouter } from 'expo-router';
 
 // Define the shape of the user object
 interface User {
-  id: string;
   name: string;
   email: string;
+  phone: string;
+  role: string;
 }
 
 // Define the context value interface
 interface AuthContextValue {
   user: User | null;
+  token: string | null;
   isAuthenticated: boolean;
-  login: (user: User) => void;
+  isLoading: boolean;  // Added isLoading flag
+  login: (access_token: string, refresh_token: string, user: User) => void;
   logout: () => void;
 }
 
-// Create a default context with default values
+// Create a default context with initial values
 const AuthContext = createContext<AuthContextValue>({
   user: null,
+  token: null,
   isAuthenticated: false,
-  login: () => { },
-  logout: () => { },
+  isLoading: true,  // Start with a loading state
+  login: () => {},
+  logout: () => {},
 });
 
 // Create a provider component for AuthContext
 const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [token ,setToken] = useState<string>();
-  const router = useRouter()
+  const [token, setToken] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);  // Loading state
+  const router = useRouter();
 
-  // Simulate checking if a user is already logged in
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchAuthData = async () => {
       try {
-        const access_token = await getData('access_token');
-        setToken(access_token);
-        const savedUser = await getData('user');
-        if (savedUser) {
-          setUser(savedUser);
+        const storedToken = await AsyncStorage.getItem('access_token');
+        const savedUser = await AsyncStorage.getItem('user');
+        if (storedToken && savedUser) {
+          setToken(storedToken);
+          setUser(JSON.parse(savedUser));
         }
       } catch (error) {
-        console.error('Failed to fetch user from AsyncStorage', error);
+        console.error('Failed to fetch data from AsyncStorage', error);
+      } finally {
+        setIsLoading(false);  // Authentication check complete
       }
     };
-    fetchUser();
-  }, []);
-  
 
-  const login = async (user: User) => {
+    fetchAuthData();
+  }, []);
+
+  useEffect(() => {
+    setIsAuthenticated(!!token);
+  }, [token]);
+
+  const login = async (access_token: string, refresh_token: string, user: User) => {
     try {
       setUser(user);
-      await storeData('access_token', JSON.stringify(user));
+      setToken(access_token);
+      await AsyncStorage.setItem('access_token', access_token);
+      await AsyncStorage.setItem('refresh_token', refresh_token);
+      await AsyncStorage.setItem('user', JSON.stringify(user));
     } catch (error) {
-      console.error('Failed to save user to AsyncStorage', error);
+      console.error('Failed to save data to AsyncStorage', error);
     }
   };
 
   const logout = async () => {
     try {
-      setUser(null);
       await AsyncStorage.clear();
-      router.replace("/Welcome")
+      setUser(null);
+      setToken(null);
+      setIsAuthenticated(false);
+      router.replace('/Welcome');  // Redirect to the Welcome page
     } catch (error) {
-      console.error('Failed to remove user from AsyncStorage', error);
+      console.error('Failed to clear AsyncStorage', error);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, isAuthenticated, isLoading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

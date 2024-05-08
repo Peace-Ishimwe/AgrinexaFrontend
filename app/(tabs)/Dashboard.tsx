@@ -11,9 +11,10 @@ import PagerViewComponent from "@/components/Tabs/PagerViewComponent";
 import { ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import { windowWidth } from "@/utils/constants";
+import { useAuth } from "@/context/AuthContext";
 
 const Dashboard = () => {
-    const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+    const { user } = useAuth()
     const [page, setPage] = useState<{ fields: any[] } | null>(null);
 
     const [loading, setLoading] = useState(true);
@@ -30,17 +31,6 @@ const Dashboard = () => {
             }
         };
         fetchDashboardData();
-    }, []);
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const user = await getData("user");
-                setUser(user);
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
-        };
-        fetchUserData();
     }, []);
 
     return (

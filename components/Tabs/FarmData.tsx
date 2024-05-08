@@ -10,7 +10,6 @@ interface props {
     handlOnPress: () => void;
 }
 
-
 const FarmData: React.FC<props> = ({ handlOnPress }) => {
     const { selectedField } = useFarmContext();
     return (

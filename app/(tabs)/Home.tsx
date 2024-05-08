@@ -7,6 +7,7 @@ import { MainShadow } from '@/assets/styles/shadow';
 import { useLinkTo } from '@react-navigation/native';
 import { getGreeting } from '@/utils/constants';
 import { useDrawerContext } from '@/context/DrawerContext';
+import { useAuth } from '@/context/AuthContext';
 
 const Home = () => {
     const greeting = getGreeting();
@@ -17,9 +18,7 @@ const Home = () => {
     const combinedStyles: ViewStyle = { ...MainShadow, ...additionalStyles };
 
     const linkTo = useLinkTo()
-    const [user, setUser] = useState<{ name: string; email: string } | null>(
-        null
-    );
+    const { user } = useAuth()
     const { setOpen, open } = useDrawerContext();
     return (
         <SafeAreaView className="px-[2vh] bg-[#FFF]">

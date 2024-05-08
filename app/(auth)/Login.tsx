@@ -3,7 +3,6 @@ import { Image, ImageBackground, Pressable, SafeAreaView, Text, TextInput, View,
 import BackPageButton from '@/components/buttons/backPageButton'
 import ButtonTwo from '@/components/buttons/buttonTwo'
 import styled from 'styled-components/native'
-import { useLinkTo } from '@react-navigation/native'
 import { Controller, SubmitErrorHandler, useForm } from 'react-hook-form'
 import { unauthorizedAPI } from '@/utils/api'
 import { storeData } from '@/utils/storage'
@@ -32,11 +31,7 @@ const Login = () => {
         try {
             const response = await unauthorizedAPI.post(`/auth/login`, data);
             const { access_token, refresh_token, user } = response.data;
-            await Promise.all([
-                storeData("refresh_token", refresh_token),
-                storeData("user", user)
-            ]);
-            login(access_token);
+            login(access_token, refresh_token, user);
             router.replace('/(tabs)/Home');
         } catch (error) {
             console.error('Error posting data:', error);

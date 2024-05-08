@@ -1,7 +1,6 @@
 import React from 'react'
 import { ImageBackground, Pressable, View, Text, Image, StatusBar, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useLinkTo } from '@react-navigation/native'
 import { useAuth } from '@/context/AuthContext';
 import { Redirect, useRouter } from 'expo-router';
 
@@ -22,7 +21,7 @@ const Welcome = () => {
             <SafeAreaView style={{ flex: 1 }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={{ flexDirection: "row" }} className='justify-end items-end mt-2'>
-                        <Pressable onPress={() => router.push("/(tabs)/Home")} className='bg-white px-[16] py-[8] rounded-full'>
+                        <Pressable onPress={() => router.push("/OnBoarding")} className='bg-white px-[16] py-[8] rounded-full'>
                             <Text className='text-mainColor font-semibold'>skip</Text>
                         </Pressable>
                     </View>
